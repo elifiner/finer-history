@@ -122,6 +122,17 @@ class EventCard extends StatelessWidget {
                 ],
               ),
             ),
+            // Drag handle indicator (bottom right) for draggable cards
+            if (!isPlaced)
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: Icon(
+                  Icons.drag_handle,
+                  color: colorScheme.onSurface.withValues(alpha: 0.4),
+                  size: 20,
+                ),
+              ),
           ],
         ),
       ),
