@@ -42,10 +42,12 @@ class EventCard extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         child: Stack(
           children: [
+            // Year badge (for placed cards) or Place button (for preview cards)
+            // Both positioned at the same location
             if (isPlaced && (isCorrect || isIncorrect))
               Positioned(
-                top: 8,
-                right: 8,
+                top: 0,
+                right: 0,
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
@@ -62,81 +64,60 @@ class EventCard extends StatelessWidget {
                   ),
                 ),
               ),
-            if (!isPlaced && !isPreview)
-              Positioned(
-                top: 8,
-                right: 8,
-                child: Icon(
-                  Icons.drag_indicator,
-                  size: 16,
-                  color: Colors.grey[600],
-                ),
-              ),
             if (!isPlaced && isPreview && onPlace != null)
               Positioned(
-                top: 8,
-                right: 8,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // Drag indicator for preview cards
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: Icon(
-                        Icons.drag_indicator,
-                        size: 16,
-                        color: Colors.grey[600],
+                top: 0,
+                right: 0,
+                child: GestureDetector(
+                  onTap: () {
+                    HapticFeedback.lightImpact();
+                    onPlace?.call();
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: const Text(
+                      'Place here',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
                       ),
                     ),
-                    // Place button
-                    GestureDetector(
-                      onTap: () {
-                        HapticFeedback.lightImpact();
-                        onPlace?.call();
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: const Text(
-                          'Place here',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  event.title,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: isPlaced ? Colors.white : Colors.black87,
+            // Content with padding on the right to avoid overlap with button/year
+            Padding(
+              padding: const EdgeInsets.only(right: 90),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    event.title,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: isPlaced ? Colors.white : Colors.black87,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  event.description,
-                  style: TextStyle(
-                    fontSize: 13,
-                    height: 1.4,
-                    color: isPlaced ? Colors.white.withValues(alpha: 0.9) : Colors.black87,
+                  const SizedBox(height: 6),
+                  Text(
+                    event.description,
+                    style: TextStyle(
+                      fontSize: 13,
+                      height: 1.4,
+                      color: isPlaced ? Colors.white.withValues(alpha: 0.9) : Colors.black87,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
