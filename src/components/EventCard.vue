@@ -75,10 +75,10 @@ const handleDragEnd = (e) => {
 <style scoped>
 .event-card {
   background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 10px 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  margin: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   position: relative;
   cursor: grab;
@@ -124,14 +124,14 @@ const handleDragEnd = (e) => {
 
 .year-badge {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 8px;
   background: #666;
   color: #fff;
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 4px 8px;
+  border-radius: 4px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .year-badge.correct-badge {
@@ -150,15 +150,15 @@ const handleDragEnd = (e) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .place-btn {
   background: #4CAF50;
   color: #fff;
-  padding: 8px 16px;
-  font-size: 14px;
-  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 4px;
 }
 
 .place-btn:hover {
@@ -166,19 +166,20 @@ const handleDragEnd = (e) => {
 }
 
 .card-content {
-  margin-top: 10px;
+  margin-top: 6px;
 }
 
 .card-title {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   color: inherit;
+  line-height: 1.3;
 }
 
 .card-description {
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.4;
   color: inherit;
   opacity: 0.9;
 }

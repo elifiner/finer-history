@@ -107,17 +107,17 @@ const handlePlaceClick = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0;
+  padding: 8px 0;
 }
 
 .timeline-marker {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
   color: #8b6914;
-  margin: 10px 0;
-  padding: 8px 16px;
+  margin: 4px 0;
+  padding: 4px 12px;
   background: #e8e8e8;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .timeline-wrapper {
@@ -131,7 +131,7 @@ const handlePlaceClick = () => {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  width: 4px;
+  width: 3px;
   top: 0;
   bottom: 0;
   background: linear-gradient(to bottom, #8b6914, #d4a574, #8b6914);
@@ -148,7 +148,7 @@ const handlePlaceClick = () => {
 
 .timeline-item {
   width: 100%;
-  margin: 10px 0;
+  margin: 0;
 }
 
 .preview-item {
@@ -167,20 +167,27 @@ const handlePlaceClick = () => {
 }
 
 .drop-zone {
-  min-height: 60px;
-  margin: 10px 0;
+  min-height: 8px;
+  margin: 0;
   border: 2px dashed transparent;
-  border-radius: 8px;
-  transition: all 0.2s;
+  border-radius: 6px;
+  transition: all 0.25s ease-out;
 }
 
 .drop-zone.drag-over {
+  min-height: 60px;
+  margin: 8px 0;
   border-color: #4CAF50;
-  background: rgba(76, 175, 80, 0.1);
+  background: rgba(76, 175, 80, 0.08);
 }
 
 .drop-zone.bottom {
-  min-height: 80px;
+  min-height: 8px;
+}
+
+.drop-zone.bottom.drag-over {
+  min-height: 50px;
+  margin: 8px 0;
 }
 </style>
 

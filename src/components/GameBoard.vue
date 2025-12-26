@@ -223,8 +223,8 @@ const placeEvent = (position) => {
   width: 100%;
   height: 100%;
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  padding: 20px;
+  border-radius: 0;
+  padding: 12px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -241,36 +241,36 @@ const placeEvent = (position) => {
 
 .game-header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   flex-shrink: 0;
 }
 
 .game-title {
-  font-size: 36px;
+  font-size: 22px;
   font-weight: bold;
   color: #333;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .game-info {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  font-size: 18px;
+  gap: 12px;
+  font-size: 14px;
   color: #666;
 }
 
 .round-info,
 .points-info {
-  padding: 8px 16px;
+  padding: 4px 12px;
   background: #e8e8e8;
-  border-radius: 8px;
+  border-radius: 6px;
   font-weight: 600;
 }
 
 .unplaced-section {
-  margin-bottom: 15px;
-  padding: 0 20px;
+  margin-bottom: 10px;
+  padding: 0 12px;
   flex-shrink: 0;
 }
 
@@ -303,23 +303,23 @@ const placeEvent = (position) => {
 
 @media (max-width: 768px) {
   .game-title {
-    font-size: 24px;
-    margin-bottom: 8px;
+    font-size: 20px;
+    margin-bottom: 4px;
   }
   
   .game-header {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
   
   .game-info {
     flex-direction: column;
-    gap: 8px;
-    font-size: 16px;
+    gap: 6px;
+    font-size: 13px;
   }
   
   .unplaced-section {
-    padding: 0 10px;
-    margin-bottom: 10px;
+    padding: 0 8px;
+    margin-bottom: 8px;
   }
 }
 </style>
