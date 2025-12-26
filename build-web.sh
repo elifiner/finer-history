@@ -17,14 +17,23 @@ echo ""
 echo "Web build complete!"
 echo "Output directory: build/web"
 echo ""
-echo "To deploy to Cloudflare Pages:"
-echo "1. Install Wrangler CLI: npm install -g wrangler"
-echo "2. Login: wrangler login"
-echo "3. Deploy: wrangler pages deploy build/web --project-name=finer-history"
-echo ""
-echo "Or use Cloudflare Pages dashboard:"
-echo "1. Go to Cloudflare Dashboard > Pages"
-echo "2. Connect your Git repository or upload build/web folder"
-echo "3. Set build command: flutter build web --release"
-echo "4. Set build output directory: build/web"
+
+# Deploy to Cloudflare Pages
+echo "Deploying to Cloudflare Pages..."
+if command -v wrangler &> /dev/null; then
+    wrangler pages deploy build/web --project-name=finer-history
+    if [ $? -eq 0 ]; then
+        echo ""
+        echo "Deployment complete!"
+    else
+        echo ""
+        echo "Deployment failed. Make sure you're logged in: wrangler login"
+        exit 1
+    fi
+else
+    echo "Wrangler CLI not found. Install it with: npm install -g wrangler"
+    echo "Then login with: wrangler login"
+    echo "And deploy manually with: wrangler pages deploy build/web --project-name=finer-history"
+    exit 1
+fi
 
