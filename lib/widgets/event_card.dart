@@ -28,12 +28,15 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    
     Widget cardContent = Card(
       elevation: isPreview ? 4 : 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
         side: BorderSide(
-          color: _getBorderColor(),
+          color: _getBorderColor(colorScheme),
           width: isPlaced ? 3 : 2,
         ),
       ),
@@ -51,7 +54,7 @@ class EventCard extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: _getBadgeColor(),
+                    color: _getBadgeColor(colorScheme),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
@@ -78,10 +81,10 @@ class EventCard extends StatelessWidget {
                       horizontal: 12,
                       vertical: 6,
                     ),
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
+                  decoration: BoxDecoration(
+                    color: colorScheme.primary,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
                     child: const Text(
                       'Place here',
                       style: TextStyle(
@@ -162,15 +165,15 @@ class EventCard extends StatelessWidget {
     return cardContent;
   }
 
-  Color _getBorderColor() {
+  Color _getBorderColor(ColorScheme colorScheme) {
     if (isPlaced) {
       if (isCorrect && !event.wasIncorrect) {
-        return Colors.green;
+        return colorScheme.primary;
       } else if (isIncorrect || event.wasIncorrect) {
-        return Colors.red;
+        return colorScheme.error;
       }
     } else if (isPreview) {
-      return Colors.green;
+      return colorScheme.primary;
     }
     return const Color(0xFFD4A574);
   }
@@ -184,13 +187,13 @@ class EventCard extends StatelessWidget {
     return const Color(0xFFF0E6D2);
   }
 
-  Color _getBadgeColor() {
+  Color _getBadgeColor(ColorScheme colorScheme) {
     if (isCorrect && !event.wasIncorrect) {
-      return Colors.green;
+      return colorScheme.primary;
     } else if (isIncorrect || event.wasIncorrect) {
-      return Colors.red;
+      return colorScheme.error;
     }
-    return Colors.grey;
+    return colorScheme.surfaceContainerHighest;
   }
 }
 

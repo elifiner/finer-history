@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/game_provider.dart';
 import '../models/game_state.dart';
+import '../models/history_topic.dart';
 import '../widgets/timeline_widget.dart';
 import '../widgets/event_card.dart';
 import '../widgets/score_summary.dart';
@@ -31,20 +32,26 @@ class GameScreen extends StatelessWidget {
         }
 
         return Scaffold(
-          backgroundColor: const Color(0xFFF5F5F5),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          drawer: _buildDrawer(context, gameProvider),
           body: SafeArea(
             child: Column(
               children: [
                 // Header
-                _buildHeader(context, state),
+                _buildHeader(context, state, gameProvider),
                 // Unplaced event section
-                if (state.unplacedEvent != null && state.draggedPosition == null)
+                if (state.unplacedEvent != null &&
+                    state.draggedPosition == null)
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 10,
+                    ),
                     child: EventCard(
                       event: state.unplacedEvent!,
                       isPlaced: false,
-                      isSliding: state.slidingEventId == state.unplacedEvent!.id,
+                      isSliding:
+                          state.slidingEventId == state.unplacedEvent!.id,
                       onDragStart: () {},
                       onDragEnd: () {},
                     ),
@@ -81,137 +88,285 @@ class GameScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader(BuildContext context, GameState state) {
+  Widget _buildHeader(
+    BuildContext context,
+    GameState state,
+    GameProvider gameProvider,
+  ) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Container(
       padding: const EdgeInsets.all(12),
       child: Column(
         children: [
-          // Top row: Points, Title, Round
+          // Top row: Hamburger, Points, Title, Round
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // Hamburger menu icon
+              Builder(
+                builder: (builderContext) => IconButton(
+                  icon: Icon(Icons.menu, color: colorScheme.onSurface),
+                  onPressed: () {
+                    Scaffold.of(builderContext).openDrawer();
+                  },
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                ),
+              ),
+              const SizedBox(width: 8),
               // Points box
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
                   '${state.totalPoints} Points',
-                  style: const TextStyle(
+                  style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w600,
-                    fontSize: 14,
-                    color: Colors.black87,
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ),
               const Spacer(),
-              // Title
-              const Text(
-                'Finer History',
-                style: TextStyle(
-                  fontSize: 22,
+              // Title (current topic name)
+              Text(
+                gameProvider.currentTopic.displayName,
+                style: theme.textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+                  color: colorScheme.onSurface,
                 ),
               ),
               const Spacer(),
               // Round box
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
                   'Round ${state.currentRound}',
-                  style: const TextStyle(
+                  style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w600,
-                    fontSize: 14,
-                    color: Colors.black87,
+                    color: colorScheme.onSurface,
                   ),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 8),
-          // Progress boxes
+          // Progress boxes - aligned with title by matching row structure
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              10,
-              (index) => Container(
-                width: 20,
-                height: 20,
-                margin: const EdgeInsets.symmetric(horizontal: 2),
-                decoration: BoxDecoration(
-                  color: _getProgressColor(state.roundProgress[index]),
-                  border: Border.all(
-                    color: _getProgressBorderColor(state.roundProgress[index]),
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Center(
-                  child: _getProgressIcon(state.roundProgress[index]),
+            children: [
+              // Match left side: hamburger + spacing + points box
+              Builder(
+                builder: (builderContext) => IconButton(
+                  icon: Icon(Icons.menu, color: Colors.transparent),
+                  onPressed: () {},
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
                 ),
               ),
-            ),
+              const SizedBox(width: 8),
+              Opacity(
+                opacity: 0,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    '${state.totalPoints} Points',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.onSurface,
+                    ),
+                  ),
+                ),
+              ),
+              const Spacer(),
+              // Progress boxes centered where title is
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: List.generate(
+                  10,
+                  (index) => Container(
+                    width: 20,
+                    height: 20,
+                    margin: const EdgeInsets.symmetric(horizontal: 2),
+                    decoration: BoxDecoration(
+                      color: _getProgressColor(
+                        state.roundProgress[index],
+                        colorScheme,
+                      ),
+                      border: Border.all(
+                        color: _getProgressBorderColor(
+                          state.roundProgress[index],
+                          colorScheme,
+                        ),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child:
+                        _getProgressIcon(
+                          state.roundProgress[index],
+                          colorScheme,
+                        ) ??
+                        const SizedBox(),
+                  ),
+                ),
+              ),
+              const Spacer(),
+              // Match right side: round box
+              Opacity(
+                opacity: 0,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    'Round ${state.currentRound}',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.onSurface,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 
-  Color _getProgressColor(RoundProgressStatus? status) {
+  Color _getProgressColor(
+    RoundProgressStatus? status,
+    ColorScheme colorScheme,
+  ) {
     switch (status) {
       case RoundProgressStatus.correct:
-        return Colors.green;
+        return colorScheme.primary;
       case RoundProgressStatus.incorrect:
-        return Colors.red;
+        return colorScheme.error;
       case RoundProgressStatus.pending:
       default:
-        return Colors.grey[100]!;
+        return colorScheme.surfaceContainerHighest;
     }
   }
 
-  Color _getProgressBorderColor(RoundProgressStatus? status) {
+  Color _getProgressBorderColor(
+    RoundProgressStatus? status,
+    ColorScheme colorScheme,
+  ) {
     switch (status) {
       case RoundProgressStatus.correct:
-        return Colors.green;
+        return colorScheme.primary;
       case RoundProgressStatus.incorrect:
-        return Colors.red;
+        return colorScheme.error;
       case RoundProgressStatus.pending:
       default:
-        return Colors.grey[300]!;
+        return colorScheme.outline;
     }
   }
 
-  Widget? _getProgressIcon(RoundProgressStatus? status) {
+  Widget? _getProgressIcon(
+    RoundProgressStatus? status,
+    ColorScheme colorScheme,
+  ) {
     switch (status) {
       case RoundProgressStatus.correct:
-        return const Text(
-          '✓',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-          ),
-        );
+        return Icon(Icons.check, color: colorScheme.onPrimary, size: 14);
       case RoundProgressStatus.incorrect:
-        return const Text(
-          '✗',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-          ),
-        );
+        return Icon(Icons.close, color: colorScheme.onError, size: 14);
       case RoundProgressStatus.pending:
       default:
         return null;
     }
   }
-}
 
+  Widget _buildDrawer(BuildContext context, GameProvider gameProvider) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(
+            decoration: BoxDecoration(color: colorScheme.primary),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  'Finer History',
+                  style: theme.textTheme.headlineMedium?.copyWith(
+                    color: colorScheme.onPrimary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Select a History Topic',
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: colorScheme.onPrimary.withValues(alpha: 0.7),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ...HistoryTopic.values.map((topic) {
+            final isSelected = gameProvider.currentTopic == topic;
+            return ListTile(
+              leading: Icon(
+                isSelected ? Icons.check_circle : Icons.circle_outlined,
+                color: isSelected
+                    ? colorScheme.primary
+                    : theme.listTileTheme.iconColor ??
+                          colorScheme.onSurfaceVariant,
+              ),
+              title: Text(
+                topic.displayName,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                  color: isSelected
+                      ? colorScheme.primary
+                      : theme.listTileTheme.textColor ?? colorScheme.onSurface,
+                ),
+              ),
+              selected: isSelected,
+              selectedTileColor: colorScheme.primaryContainer.withValues(
+                alpha: 0.3,
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                gameProvider.switchTopic(topic);
+              },
+            );
+          }),
+        ],
+      ),
+    );
+  }
+}

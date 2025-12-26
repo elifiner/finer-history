@@ -1,0 +1,143 @@
+[
+  {
+    "year": -753,
+    "title": "Founding of Rome",
+    "description": "According to Roman legend, Romulus founds the city of Rome on the Palatine Hill."
+  },
+  {
+    "year": -509,
+    "title": "Roman Republic Established",
+    "description": "The Roman monarchy is overthrown and the Roman Republic is established, ending the rule of kings."
+  },
+  {
+    "year": -390,
+    "title": "Sack of Rome by Gauls",
+    "description": "The Gauls, led by Brennus, sack Rome, marking one of the city's greatest early defeats."
+  },
+  {
+    "year": -264,
+    "title": "First Punic War Begins",
+    "description": "Rome and Carthage begin the First Punic War over control of Sicily, marking Rome's expansion beyond Italy."
+  },
+  {
+    "year": -218,
+    "title": "Hannibal Crosses the Alps",
+    "description": "Carthaginian general Hannibal leads his army across the Alps to invade Italy during the Second Punic War."
+  },
+  {
+    "year": -146,
+    "title": "Carthage Destroyed",
+    "description": "Rome completely destroys Carthage at the end of the Third Punic War, eliminating its greatest rival."
+  },
+  {
+    "year": -73,
+    "title": "Spartacus Revolt",
+    "description": "Spartacus leads a major slave revolt against the Roman Republic, one of the largest slave uprisings in history."
+  },
+  {
+    "year": -60,
+    "title": "First Triumvirate",
+    "description": "Julius Caesar, Pompey, and Crassus form a political alliance known as the First Triumvirate."
+  },
+  {
+    "year": -49,
+    "title": "Caesar Crosses the Rubicon",
+    "description": "Julius Caesar crosses the Rubicon River with his army, starting a civil war and defying the Senate."
+  },
+  {
+    "year": -44,
+    "title": "Assassination of Julius Caesar",
+    "description": "Julius Caesar is assassinated on the Ides of March by a group of senators led by Brutus and Cassius."
+  },
+  {
+    "year": -31,
+    "title": "Battle of Actium",
+    "description": "Octavian defeats Mark Antony and Cleopatra at the Battle of Actium, securing his position as sole ruler."
+  },
+  {
+    "year": -27,
+    "title": "Augustus Becomes Emperor",
+    "description": "Octavian is granted the title Augustus, marking the end of the Roman Republic and the beginning of the Roman Empire."
+  },
+  {
+    "year": 64,
+    "title": "Great Fire of Rome",
+    "description": "A devastating fire destroys much of Rome, and Emperor Nero is accused of starting it to clear land for his palace."
+  },
+  {
+    "year": 79,
+    "title": "Eruption of Mount Vesuvius",
+    "description": "Mount Vesuvius erupts, destroying the cities of Pompeii and Herculaneum and preserving them for posterity."
+  },
+  {
+    "year": 80,
+    "title": "Colosseum Completed",
+    "description": "The Flavian Amphitheatre, known as the Colosseum, is completed and opened for gladiatorial games."
+  },
+  {
+    "year": 96,
+    "title": "Nerva Adopts Trajan",
+    "description": "Emperor Nerva adopts Trajan as his successor, beginning the era of the Five Good Emperors."
+  },
+  {
+    "year": 117,
+    "title": "Roman Empire Reaches Maximum Extent",
+    "description": "Under Trajan, the Roman Empire reaches its greatest territorial extent, stretching from Britain to Mesopotamia."
+  },
+  {
+    "year": 180,
+    "title": "Death of Marcus Aurelius",
+    "description": "Marcus Aurelius dies, ending the era of the Five Good Emperors and beginning a period of instability."
+  },
+  {
+    "year": 212,
+    "title": "Edict of Caracalla",
+    "description": "Emperor Caracalla grants Roman citizenship to all free inhabitants of the empire."
+  },
+  {
+    "year": 284,
+    "title": "Diocletian Becomes Emperor",
+    "description": "Diocletian becomes emperor and institutes major reforms, including the division of the empire into East and West."
+  },
+  {
+    "year": 313,
+    "title": "Edict of Milan",
+    "description": "Emperors Constantine and Licinius issue the Edict of Milan, legalizing Christianity throughout the Roman Empire."
+  },
+  {
+    "year": 330,
+    "title": "Constantinople Founded",
+    "description": "Emperor Constantine establishes Constantinople as the new capital of the Roman Empire, shifting power to the East."
+  },
+  {
+    "year": 380,
+    "title": "Christianity Becomes State Religion",
+    "description": "Emperor Theodosius I makes Christianity the official state religion of the Roman Empire."
+  },
+  {
+    "year": 395,
+    "title": "Final Division of the Empire",
+    "description": "Upon the death of Theodosius I, the Roman Empire is permanently divided into Eastern and Western halves."
+  },
+  {
+    "year": 410,
+    "title": "Sack of Rome by Visigoths",
+    "description": "The Visigoths, led by Alaric, sack Rome, the first time the city has been captured in 800 years."
+  },
+  {
+    "year": 455,
+    "title": "Sack of Rome by Vandals",
+    "description": "The Vandals sack Rome, further weakening the Western Roman Empire."
+  },
+  {
+    "year": 476,
+    "title": "Fall of Western Roman Empire",
+    "description": "Romulus Augustulus, the last Western Roman Emperor, is deposed by Odoacer, marking the end of the Western Roman Empire."
+  },
+  {
+    "year": 1453,
+    "title": "Fall of Constantinople",
+    "description": "The Ottoman Empire captures Constantinople, marking the end of the Eastern Roman (Byzantine) Empire."
+  }
+]
+

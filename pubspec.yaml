@@ -60,7 +60,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/data/events.json
+    - assets/data/israel.json
+    - assets/data/us.json
+    - assets/data/rome.json
+    - assets/data/greece.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

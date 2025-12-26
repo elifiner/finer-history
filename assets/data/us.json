@@ -1,0 +1,173 @@
+[
+  {
+    "year": 1776,
+    "title": "Declaration of Independence",
+    "description": "The Continental Congress adopts the Declaration of Independence, declaring the thirteen American colonies independent from Great Britain."
+  },
+  {
+    "year": 1787,
+    "title": "Constitutional Convention",
+    "description": "Delegates meet in Philadelphia to draft the United States Constitution, creating the framework for American government."
+  },
+  {
+    "year": 1789,
+    "title": "George Washington Inaugurated",
+    "description": "George Washington becomes the first President of the United States, establishing the executive branch of government."
+  },
+  {
+    "year": 1803,
+    "title": "Louisiana Purchase",
+    "description": "The United States purchases the Louisiana Territory from France, doubling the size of the nation."
+  },
+  {
+    "year": 1812,
+    "title": "War of 1812 Begins",
+    "description": "The United States declares war on Great Britain, fighting over maritime rights and territorial expansion."
+  },
+  {
+    "year": 1820,
+    "title": "Missouri Compromise",
+    "description": "Congress passes legislation admitting Missouri as a slave state and Maine as a free state, maintaining the balance of power."
+  },
+  {
+    "year": 1846,
+    "title": "Mexican-American War Begins",
+    "description": "The United States declares war on Mexico over territorial disputes, resulting in significant territorial gains."
+  },
+  {
+    "year": 1848,
+    "title": "Gold Rush Begins",
+    "description": "Gold is discovered at Sutter's Mill in California, triggering a massive migration westward."
+  },
+  {
+    "year": 1861,
+    "title": "Civil War Begins",
+    "description": "Confederate forces fire on Fort Sumter, marking the beginning of the American Civil War."
+  },
+  {
+    "year": 1863,
+    "title": "Emancipation Proclamation",
+    "description": "President Abraham Lincoln issues the Emancipation Proclamation, declaring all slaves in Confederate states to be free."
+  },
+  {
+    "year": 1865,
+    "title": "Civil War Ends",
+    "description": "General Robert E. Lee surrenders at Appomattox Court House, ending the Civil War."
+  },
+  {
+    "year": 1865,
+    "title": "Lincoln Assassinated",
+    "description": "President Abraham Lincoln is assassinated by John Wilkes Booth at Ford's Theatre in Washington, D.C."
+  },
+  {
+    "year": 1869,
+    "title": "Transcontinental Railroad Completed",
+    "description": "The first transcontinental railroad is completed, connecting the eastern and western United States."
+  },
+  {
+    "year": 1898,
+    "title": "Spanish-American War",
+    "description": "The United States declares war on Spain, resulting in American control of Puerto Rico, Guam, and the Philippines."
+  },
+  {
+    "year": 1917,
+    "title": "US Enters World War I",
+    "description": "The United States declares war on Germany, entering World War I on the side of the Allies."
+  },
+  {
+    "year": 1920,
+    "title": "Women's Suffrage",
+    "description": "The 19th Amendment is ratified, granting women the right to vote nationwide."
+  },
+  {
+    "year": 1929,
+    "title": "Stock Market Crash",
+    "description": "The Wall Street Crash of 1929 triggers the Great Depression, the worst economic downturn in American history."
+  },
+  {
+    "year": 1941,
+    "title": "Pearl Harbor Attack",
+    "description": "Japan launches a surprise attack on Pearl Harbor, bringing the United States into World War II."
+  },
+  {
+    "year": 1945,
+    "title": "Atomic Bombs Dropped",
+    "description": "The United States drops atomic bombs on Hiroshima and Nagasaki, leading to Japan's surrender and the end of World War II."
+  },
+  {
+    "year": 1950,
+    "title": "Korean War Begins",
+    "description": "The United States enters the Korean War to support South Korea against North Korean and Chinese forces."
+  },
+  {
+    "year": 1954,
+    "title": "Brown v. Board of Education",
+    "description": "The Supreme Court rules that racial segregation in public schools is unconstitutional."
+  },
+  {
+    "year": 1963,
+    "title": "March on Washington",
+    "description": "Martin Luther King Jr. delivers his 'I Have a Dream' speech at the March on Washington for Jobs and Freedom."
+  },
+  {
+    "year": 1963,
+    "title": "Kennedy Assassinated",
+    "description": "President John F. Kennedy is assassinated in Dallas, Texas, shocking the nation."
+  },
+  {
+    "year": 1964,
+    "title": "Civil Rights Act",
+    "description": "President Lyndon B. Johnson signs the Civil Rights Act, prohibiting discrimination based on race, color, religion, sex, or national origin."
+  },
+  {
+    "year": 1965,
+    "title": "Voting Rights Act",
+    "description": "Congress passes the Voting Rights Act, eliminating barriers that prevented African Americans from voting."
+  },
+  {
+    "year": 1969,
+    "title": "Apollo 11 Moon Landing",
+    "description": "Neil Armstrong becomes the first human to walk on the moon, achieving a major milestone in the space race."
+  },
+  {
+    "year": 1974,
+    "title": "Watergate Scandal",
+    "description": "President Richard Nixon resigns following the Watergate scandal, the only U.S. president to do so."
+  },
+  {
+    "year": 1989,
+    "title": "Berlin Wall Falls",
+    "description": "The Berlin Wall falls, symbolizing the end of the Cold War and the reunification of Germany."
+  },
+  {
+    "year": 1991,
+    "title": "Gulf War",
+    "description": "The United States leads a coalition to liberate Kuwait from Iraqi occupation."
+  },
+  {
+    "year": 2001,
+    "title": "September 11 Attacks",
+    "description": "Terrorist attacks on the World Trade Center and Pentagon kill nearly 3,000 people, changing American foreign policy."
+  },
+  {
+    "year": 2008,
+    "title": "Financial Crisis",
+    "description": "The collapse of Lehman Brothers triggers a global financial crisis and the Great Recession."
+  },
+  {
+    "year": 2009,
+    "title": "Barack Obama Inaugurated",
+    "description": "Barack Obama becomes the first African American president of the United States."
+  },
+  {
+    "year": 2020,
+    "title": "COVID-19 Pandemic",
+    "description": "The COVID-19 pandemic reaches the United States, leading to widespread lockdowns and economic disruption."
+  },
+  {
+    "year": 2021,
+    "title": "Capitol Riot",
+    "description": "Supporters of President Trump storm the U.S. Capitol in an attempt to overturn the 2020 election results."
+  }
+]
+

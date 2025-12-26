@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import '../models/event.dart';
 import '../models/game_state.dart';
+import '../models/history_topic.dart';
 
 class GameProvider extends ChangeNotifier {
   GameState _state = GameState(
@@ -10,12 +11,19 @@ class GameProvider extends ChangeNotifier {
     roundProgress: List.filled(10, RoundProgressStatus.pending),
   );
 
+  HistoryTopic _currentTopic = HistoryTopic.israel;
+
   GameState get state => _state;
+  HistoryTopic get currentTopic => _currentTopic;
 
   Future<void> initialize() async {
+    await loadTopic(_currentTopic);
+  }
+
+  Future<void> loadTopic(HistoryTopic topic) async {
     try {
       final String jsonString =
-          await rootBundle.loadString('assets/data/events.json');
+          await rootBundle.loadString(topic.assetPath);
       final List<dynamic> jsonList = json.decode(jsonString) as List<dynamic>;
       
       final List<Event> events = jsonList
@@ -29,6 +37,14 @@ class GameProvider extends ChangeNotifier {
     } catch (e) {
       debugPrint('Error loading events: $e');
     }
+  }
+
+  Future<void> switchTopic(HistoryTopic topic) async {
+    if (_currentTopic == topic) return;
+    
+    _currentTopic = topic;
+    await loadTopic(topic);
+    notifyListeners();
   }
 
   void startNewGame() {

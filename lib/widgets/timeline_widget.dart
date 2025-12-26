@@ -33,6 +33,9 @@ class _TimelineWidgetState extends State<TimelineWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    
     return Column(
       children: [
         // BEFORE marker
@@ -80,9 +83,9 @@ class _TimelineWidgetState extends State<TimelineWidget> {
               // Timeline items
               ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                itemCount: _buildTimelineItems().length,
+                itemCount: _buildTimelineItems(colorScheme).length,
                 itemBuilder: (context, index) {
-                  return _buildTimelineItems()[index];
+                  return _buildTimelineItems(colorScheme)[index];
                 },
               ),
             ],
@@ -109,7 +112,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
     );
   }
 
-  List<Widget> _buildTimelineItems() {
+  List<Widget> _buildTimelineItems(ColorScheme colorScheme) {
     final List<Widget> items = [];
 
     // Show preview at top if no events placed yet
@@ -117,7 +120,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
         widget.placedEvents.isEmpty && 
         widget.previewPosition == null) {
       items.add(_buildPreviewItem());
-      items.add(_buildDropZone(null));
+      items.add(_buildDropZone(null, colorScheme));
       return items;
     }
 
@@ -131,7 +134,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
       }
 
       // Drop zone before this position
-      items.add(_buildDropZone(i));
+      items.add(_buildDropZone(i, colorScheme));
 
       // Placed event at this position
       if (i < widget.placedEvents.length) {
@@ -144,7 +147,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
         widget.placedEvents.isNotEmpty && 
         widget.previewPosition == null) {
       items.add(_buildPreviewItem());
-      items.add(_buildDropZone(null));
+      items.add(_buildDropZone(null, colorScheme));
     }
 
     return items;
@@ -184,7 +187,7 @@ class _TimelineWidgetState extends State<TimelineWidget> {
     );
   }
 
-  Widget _buildDropZone(int? index) {
+  Widget _buildDropZone(int? index, ColorScheme colorScheme) {
     final bool isDragOver = _dragOverIndex == index;
     
     return DragTarget<Event>(
@@ -213,10 +216,10 @@ class _TimelineWidgetState extends State<TimelineWidget> {
           margin: isDragOver ? const EdgeInsets.symmetric(vertical: 12) : EdgeInsets.zero,
           decoration: BoxDecoration(
             border: isDragOver
-                ? Border.all(color: Colors.green, width: 2, style: BorderStyle.solid)
+                ? Border.all(color: colorScheme.primary, width: 2, style: BorderStyle.solid)
                 : null,
             borderRadius: BorderRadius.circular(6),
-            color: isDragOver ? Colors.green.withValues(alpha: 0.08) : Colors.transparent,
+            color: isDragOver ? colorScheme.primary.withValues(alpha: 0.08) : Colors.transparent,
           ),
         );
       },
