@@ -167,7 +167,7 @@ const handlePlaceClick = () => {
 }
 
 .drop-zone {
-  min-height: 8px;
+  min-height: 20px;
   margin: 0;
   border: 2px dashed transparent;
   border-radius: 6px;
@@ -175,19 +175,19 @@ const handlePlaceClick = () => {
 }
 
 .drop-zone.drag-over {
-  min-height: 60px;
-  margin: 8px 0;
+  min-height: 80px;
+  margin: 12px 0;
   border-color: #4CAF50;
   background: rgba(76, 175, 80, 0.08);
 }
 
 .drop-zone.bottom {
-  min-height: 8px;
+  min-height: 20px;
 }
 
 .drop-zone.bottom.drag-over {
-  min-height: 50px;
-  margin: 8px 0;
+  min-height: 70px;
+  margin: 12px 0;
 }
 </style>
 
