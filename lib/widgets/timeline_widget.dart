@@ -36,77 +36,36 @@ class _TimelineWidgetState extends State<TimelineWidget> {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     
-    return Column(
+    return Stack(
       children: [
-        // BEFORE marker
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-          margin: const EdgeInsets.symmetric(vertical: 4),
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: const Text(
-            'BEFORE',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF8B6914),
+        // Vertical timeline line - slightly shorter to be hidden behind pills
+        Positioned(
+          left: MediaQuery.of(context).size.width / 2 - 1.5,
+          top: 28, // Start below BEFORE pill
+          bottom: 28, // End above AFTER pill
+          child: Container(
+            width: 3,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  const Color(0xFF8B6914),
+                  const Color(0xFFD4A574),
+                  const Color(0xFF8B6914),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(2),
             ),
           ),
         ),
-        // Timeline content
-        Expanded(
-          child: Stack(
-            children: [
-              // Vertical timeline line
-              Positioned(
-                left: MediaQuery.of(context).size.width / 2 - 1.5,
-                top: 0,
-                bottom: 0,
-                child: Container(
-                  width: 3,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        const Color(0xFF8B6914),
-                        const Color(0xFFD4A574),
-                        const Color(0xFF8B6914),
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
-              // Timeline items
-              ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                itemCount: _buildTimelineItems(colorScheme).length,
-                itemBuilder: (context, index) {
-                  return _buildTimelineItems(colorScheme)[index];
-                },
-              ),
-            ],
-          ),
-        ),
-        // AFTER marker
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-          margin: const EdgeInsets.symmetric(vertical: 4),
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: const Text(
-            'AFTER',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF8B6914),
-            ),
-          ),
+        // Scrollable timeline content including BEFORE and AFTER
+        ListView.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+          itemCount: _buildTimelineItems(colorScheme).length,
+          itemBuilder: (context, index) {
+            return _buildTimelineItems(colorScheme)[index];
+          },
         ),
       ],
     );
@@ -115,12 +74,16 @@ class _TimelineWidgetState extends State<TimelineWidget> {
   List<Widget> _buildTimelineItems(ColorScheme colorScheme) {
     final List<Widget> items = [];
 
+    // BEFORE marker at the top
+    items.add(_buildBeforeMarker());
+
     // Show preview at top if no events placed yet
     if (widget.previewEvent != null && 
         widget.placedEvents.isEmpty && 
         widget.previewPosition == null) {
       items.add(_buildPreviewItem());
       items.add(_buildDropZone(null, colorScheme));
+      items.add(_buildAfterMarker());
       return items;
     }
 
@@ -150,7 +113,56 @@ class _TimelineWidgetState extends State<TimelineWidget> {
       items.add(_buildDropZone(null, colorScheme));
     }
 
+    // AFTER marker at the bottom
+    items.add(_buildAfterMarker());
+
     return items;
+  }
+
+  Widget _buildBeforeMarker() {
+    return Center(
+      child: Container(
+        width: 80,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        margin: const EdgeInsets.symmetric(vertical: 4),
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: const Text(
+          'BEFORE',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF8B6914),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAfterMarker() {
+    return Center(
+      child: Container(
+        width: 80,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        margin: const EdgeInsets.symmetric(vertical: 4),
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: const Text(
+          'AFTER',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF8B6914),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _buildPreviewItem() {
