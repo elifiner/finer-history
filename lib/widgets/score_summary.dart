@@ -21,9 +21,11 @@ class ScoreSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Card(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 600),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Card(
           elevation: 4,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -118,6 +120,7 @@ class ScoreSummary extends StatelessWidget {
               ],
             ),
           ),
+        ),
         ),
       ),
     );

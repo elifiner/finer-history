@@ -35,52 +35,57 @@ class GameScreen extends StatelessWidget {
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           drawer: _buildDrawer(context, gameProvider),
           body: SafeArea(
-            child: Column(
-              children: [
-                // Header
-                _buildHeader(context, state, gameProvider),
-                // Unplaced event section
-                if (state.unplacedEvent != null &&
-                    state.draggedPosition == null)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 10,
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 600),
+                child: Column(
+                  children: [
+                    // Header
+                    _buildHeader(context, state, gameProvider),
+                    // Unplaced event section
+                    if (state.unplacedEvent != null &&
+                        state.draggedPosition == null)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 10,
+                        ),
+                        child: EventCard(
+                          event: state.unplacedEvent!,
+                          isPlaced: false,
+                          isSliding:
+                              state.slidingEventId == state.unplacedEvent!.id,
+                          onDragStart: () {},
+                          onDragEnd: () {},
+                        ),
+                      ),
+                    // Timeline
+                    Expanded(
+                      child: TimelineWidget(
+                        placedEvents: state.placedEvents,
+                        previewEvent: state.draggedPosition != null
+                            ? state.unplacedEvent
+                            : null,
+                        previewPosition: state.draggedPosition,
+                        slidingEventId: state.slidingEventId,
+                        onDrop: (position) {
+                          gameProvider.setDraggedPosition(position);
+                        },
+                        onPlace: () {
+                          gameProvider.placeEvent(state.draggedPosition);
+                        },
+                        onPreviewDragStart: () {
+                          // When dragging preview, we keep the current position
+                          // The drop will update it
+                        },
+                        onPreviewDragEnd: () {
+                          // Preview drag ended - if not dropped on target, position stays the same
+                        },
+                      ),
                     ),
-                    child: EventCard(
-                      event: state.unplacedEvent!,
-                      isPlaced: false,
-                      isSliding:
-                          state.slidingEventId == state.unplacedEvent!.id,
-                      onDragStart: () {},
-                      onDragEnd: () {},
-                    ),
-                  ),
-                // Timeline
-                Expanded(
-                  child: TimelineWidget(
-                    placedEvents: state.placedEvents,
-                    previewEvent: state.draggedPosition != null
-                        ? state.unplacedEvent
-                        : null,
-                    previewPosition: state.draggedPosition,
-                    slidingEventId: state.slidingEventId,
-                    onDrop: (position) {
-                      gameProvider.setDraggedPosition(position);
-                    },
-                    onPlace: () {
-                      gameProvider.placeEvent(state.draggedPosition);
-                    },
-                    onPreviewDragStart: () {
-                      // When dragging preview, we keep the current position
-                      // The drop will update it
-                    },
-                    onPreviewDragEnd: () {
-                      // Preview drag ended - if not dropped on target, position stays the same
-                    },
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         );
