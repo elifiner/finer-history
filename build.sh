@@ -19,15 +19,15 @@ cp build/app/outputs/flutter-apk/app-release.apk "${APK_FILE}"
 
 echo "Build complete: ${APK_FILE}"
 
-# Upload to dropcli.com
+# Upload to elifiner.com via scp
 echo ""
-echo "Uploading to dropcli.com..."
-UPLOAD_URL=$(curl --progress-bar --upload-file "${APK_FILE}" "https://dropcli.com/upload")
+echo "Uploading to elifiner.com..."
+rsync --progress "${APK_FILE}" elifiner.com:/var/www/html/files/apps/history/
 
-if [ $? -eq 0 ] && [ -n "$UPLOAD_URL" ]; then
+if [ $? -eq 0 ]; then
     echo ""
     echo "Upload complete!"
-    echo "Download URL: ${UPLOAD_URL}"
+    echo "File available at: https://files.elifiner.com/apps/history/finer-history-${VERSION}.apk"
 else
     echo ""
     echo "Upload failed"
