@@ -10,13 +10,9 @@
       'preview': isPreview,
       'dragging': isDragging
     }"
-    :draggable="!isPlaced && !isPreview"
+    :draggable="!isPlaced"
     @dragstart="handleDragStart"
     @dragend="handleDragEnd"
-    @touchstart="handleTouchStart"
-    @touchmove="handleTouchMove"
-    @touchend="handleTouchEnd"
-    @touchcancel="handleTouchEnd"
   >
     <div v-if="isPlaced && (isCorrect || isIncorrect)" class="year-badge" :class="{ 
       'correct-badge': isCorrect && !event.wasIncorrect, 
@@ -45,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps({
   event: {
@@ -74,13 +70,9 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['place', 'dragstart', 'dragend', 'touchdrag'])
+const emit = defineEmits(['place', 'dragstart', 'dragend'])
 
 const isDragging = ref(false)
-const touchStartY = ref(0)
-const touchStartX = ref(0)
-const touchElement = ref(null)
-const dragThreshold = 10 // Minimum distance to start dragging
 
 const handleDragStart = (e) => {
   if (props.isPlaced || props.isPreview) return
@@ -94,79 +86,6 @@ const handleDragEnd = (e) => {
   isDragging.value = false
   emit('dragend', e)
 }
-
-const handleTouchStart = (e) => {
-  if (props.isPlaced || props.isPreview) return
-  
-  const touch = e.touches[0]
-  touchStartY.value = touch.clientY
-  touchStartX.value = touch.clientX
-  touchElement.value = e.currentTarget
-  
-  // Prevent scrolling while dragging
-  document.body.style.overflow = 'hidden'
-}
-
-const handleTouchMove = (e) => {
-  if (!touchElement.value || props.isPlaced || props.isPreview) return
-  
-  const touch = e.touches[0]
-  const deltaY = Math.abs(touch.clientY - touchStartY.value)
-  const deltaX = Math.abs(touch.clientX - touchStartX.value)
-  
-  // Start dragging if moved beyond threshold
-  if ((deltaY > dragThreshold || deltaX > dragThreshold) && !isDragging.value) {
-    isDragging.value = true
-    emit('dragstart', { type: 'touch', clientY: touch.clientY })
-    // Hide the card being dragged visually
-    if (touchElement.value) {
-      touchElement.value.style.opacity = '0.5'
-    }
-  }
-  
-  if (isDragging.value) {
-    e.preventDefault()
-    // Find element under touch point
-    const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY)
-    emit('touchdrag', {
-      clientY: touch.clientY,
-      clientX: touch.clientX,
-      element: elementBelow,
-      end: false
-    })
-  }
-}
-
-const handleTouchEnd = (e) => {
-  if (!touchElement.value) return
-  
-  document.body.style.overflow = ''
-  
-  if (isDragging.value) {
-    const touch = e.changedTouches[0]
-    const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY)
-    emit('touchdrag', {
-      clientY: touch.clientY,
-      clientX: touch.clientX,
-      element: elementBelow,
-      end: true
-    })
-    // Restore opacity
-    if (touchElement.value) {
-      touchElement.value.style.opacity = ''
-    }
-    isDragging.value = false
-    emit('dragend', { type: 'touch' })
-  }
-  
-  touchElement.value = null
-  touchStartY.value = 0
-  touchStartX.value = 0
-}
-
-onUnmounted(() => {
-  document.body.style.overflow = ''
-})
 </script>
 
 <style scoped>
@@ -179,7 +98,6 @@ onUnmounted(() => {
   transition: all 0.3s ease;
   position: relative;
   cursor: grab;
-  touch-action: none;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -205,7 +123,6 @@ onUnmounted(() => {
   color: #fff;
   cursor: default;
   margin-top: 4px;
-  touch-action: auto;
 }
 
 .event-card.dragging {

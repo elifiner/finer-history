@@ -11,6 +11,8 @@
             :is-placed="false"
             :is-preview="true"
             @place="handlePlaceClick"
+            @dragstart="handlePreviewDragStart"
+            @dragend="handlePreviewDragEnd"
           />
         </div>
         <template v-for="(event, index) in placedEvents" :key="`placed-${event.id}`">
@@ -21,6 +23,8 @@
               :is-placed="false"
               :is-preview="true"
               @place="handlePlaceClick"
+              @dragstart="handlePreviewDragStart"
+              @dragend="handlePreviewDragEnd"
             />
           </div>
           <div class="timeline-item">
@@ -48,6 +52,8 @@
             :is-placed="false"
             :is-preview="true"
             @place="handlePlaceClick"
+            @dragstart="handlePreviewDragStart"
+            @dragend="handlePreviewDragEnd"
           />
         </div>
         <div 
@@ -87,7 +93,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['drop', 'place', 'touchdrag'])
+const emit = defineEmits(['drop', 'place', 'preview-dragstart', 'preview-dragend'])
 
 const dragOverIndex = ref(null)
 
@@ -103,42 +109,12 @@ const handlePlaceClick = () => {
   emit('place', props.previewPosition)
 }
 
-const handleTouchDrag = (data) => {
-  if (data.end) {
-    // Find which drop zone the touch ended over
-    if (data.element) {
-      const dropZone = data.element.closest('.drop-zone')
-      if (dropZone) {
-        const allDropZones = Array.from(document.querySelectorAll('.drop-zone'))
-        const index = allDropZones.indexOf(dropZone)
-        if (index !== -1) {
-          const timelineItems = document.querySelectorAll('.timeline-item')
-          if (index < timelineItems.length) {
-            handleDrop(index)
-          } else {
-            handleDrop('bottom')
-          }
-        } else if (dropZone.classList.contains('bottom')) {
-          handleDrop('bottom')
-        }
-      }
-    }
-  } else {
-    // Update drag-over state
-    if (data.element) {
-      const dropZone = data.element.closest('.drop-zone')
-      if (dropZone) {
-        const allDropZones = Array.from(document.querySelectorAll('.drop-zone'))
-        const index = allDropZones.indexOf(dropZone)
-        if (index !== -1 && index < props.placedEvents.length) {
-          dragOverIndex.value = index
-        } else if (dropZone.classList.contains('bottom')) {
-          dragOverIndex.value = 'bottom'
-        }
-      }
-    }
-  }
-  emit('touchdrag', data)
+const handlePreviewDragStart = () => {
+  emit('preview-dragstart')
+}
+
+const handlePreviewDragEnd = () => {
+  emit('preview-dragend')
 }
 </script>
 
@@ -213,7 +189,6 @@ const handleTouchDrag = (data) => {
   border: 2px dashed transparent;
   border-radius: 6px;
   transition: all 0.25s ease-out;
-  touch-action: none;
   -webkit-tap-highlight-color: transparent;
 }
 
