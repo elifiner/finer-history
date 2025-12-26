@@ -4,7 +4,7 @@ set -e
 
 # Get git commit count for version
 COMMIT_COUNT=$(git rev-list --count HEAD 2>/dev/null || echo "0")
-VERSION="0.0.1-${COMMIT_COUNT}"
+VERSION="0.0.2-${COMMIT_COUNT}"
 
 # Get dependencies
 flutter pub get
