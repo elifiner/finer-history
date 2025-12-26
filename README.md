@@ -68,7 +68,7 @@ Example:
 ## Project Structure
 
 ```
-flashback/
+finer-history/
 ├── src/
 │   ├── components/
 │   │   ├── GameBoard.vue      # Main game logic
