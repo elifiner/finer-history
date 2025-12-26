@@ -5,7 +5,7 @@
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "A fun, educational history timeline game. Drag historical events to their correct chronological positions and test your knowledge across multiple history topics.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

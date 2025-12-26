@@ -1,5 +1,5 @@
 name: finer_history
-description: "A new Flutter project."
+description: "A fun, educational history timeline game. Drag historical events to their correct chronological positions and test your knowledge across multiple history topics including Israel, United States, Rome, and Greece."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
