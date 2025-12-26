@@ -170,90 +170,105 @@ class GameScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 8),
-          // Progress boxes - aligned with title by matching row structure
-          Row(
+          // Progress boxes - centered using Stack for reliable centering
+          Stack(
             children: [
-              // Match left side: hamburger + spacing + points box
-              Builder(
-                builder: (builderContext) => IconButton(
-                  icon: Icon(Icons.menu, color: Colors.transparent),
-                  onPressed: () {},
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Opacity(
-                opacity: 0,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: colorScheme.surfaceContainerHighest,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    '${state.totalPoints} Points',
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: colorScheme.onSurface,
-                    ),
-                  ),
-                ),
-              ),
-              const Spacer(),
-              // Progress boxes centered where title is
+              // Invisible row to match top row structure for alignment
               Row(
-                mainAxisSize: MainAxisSize.min,
-                children: List.generate(
-                  10,
-                  (index) => Container(
-                    width: 20,
-                    height: 20,
-                    margin: const EdgeInsets.symmetric(horizontal: 2),
-                    decoration: BoxDecoration(
-                      color: _getProgressColor(
-                        state.roundProgress[index],
-                        colorScheme,
-                      ),
-                      border: Border.all(
-                        color: _getProgressBorderColor(
-                          state.roundProgress[index],
-                          colorScheme,
-                        ),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(4),
+                children: [
+                  Builder(
+                    builder: (builderContext) => IconButton(
+                      icon: Icon(Icons.menu, color: Colors.transparent),
+                      onPressed: () {},
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
                     ),
-                    child:
-                        _getProgressIcon(
-                          state.roundProgress[index],
-                          colorScheme,
-                        ) ??
-                        const SizedBox(),
                   ),
-                ),
+                  const SizedBox(width: 8),
+                  Opacity(
+                    opacity: 0,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: colorScheme.surfaceContainerHighest,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        '${state.totalPoints} Points',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: colorScheme.onSurface,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  // Invisible title for measurement
+                  Text(
+                    gameProvider.currentTopic.displayName,
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.transparent,
+                    ),
+                  ),
+                  const Spacer(),
+                  Opacity(
+                    opacity: 0,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: colorScheme.surfaceContainerHighest,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        'Round ${state.currentRound}',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: colorScheme.onSurface,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              const Spacer(),
-              // Match right side: round box
-              Opacity(
-                opacity: 0,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: colorScheme.surfaceContainerHighest,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    'Round ${state.currentRound}',
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: colorScheme.onSurface,
+              // Progress boxes centered
+              Positioned.fill(
+                child: Center(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: List.generate(
+                      10,
+                      (index) => Container(
+                        width: 20,
+                        height: 20,
+                        margin: const EdgeInsets.symmetric(horizontal: 2),
+                        decoration: BoxDecoration(
+                          color: _getProgressColor(
+                            state.roundProgress[index],
+                            colorScheme,
+                          ),
+                          border: Border.all(
+                            color: _getProgressBorderColor(
+                              state.roundProgress[index],
+                              colorScheme,
+                            ),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child:
+                            _getProgressIcon(
+                              state.roundProgress[index],
+                              colorScheme,
+                            ) ??
+                            const SizedBox(),
+                      ),
                     ),
                   ),
                 ),
