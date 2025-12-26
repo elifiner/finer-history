@@ -13,10 +13,27 @@
     
     <div v-else class="game-content">
       <div class="game-header">
-        <h1 class="game-title">Flashback Timeline</h1>
-        <div class="game-info">
-          <span class="round-info">Round {{ currentRound }}</span>
-          <span class="points-info">{{ totalPoints }} Points</span>
+        <div class="header-top">
+          <div class="points-box">{{ totalPoints }} Points</div>
+          <h1 class="game-title">Flashback Timeline</h1>
+          <div class="round-box">Round {{ currentRound }}</div>
+        </div>
+        <div class="progress-container">
+          <div class="progress-boxes">
+            <div 
+              v-for="(status, index) in roundProgress" 
+              :key="index"
+              class="progress-box"
+              :class="{ 
+                'correct': status === 'correct', 
+                'incorrect': status === 'incorrect',
+                'pending': status === null
+              }"
+            >
+              <span v-if="status === 'correct'" class="checkmark">✓</span>
+              <span v-else-if="status === 'incorrect'" class="cross">✗</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -65,6 +82,7 @@ const showScoreSummary = ref(false)
 const draggedPosition = ref(null)
 const slidingEventId = ref(null)
 const isDragging = ref(false)
+const roundProgress = ref(Array(10).fill(null)) // Track progress for 10 events
 
 onMounted(() => {
   // Add unique IDs to events
@@ -82,6 +100,7 @@ const startNewGame = () => {
   totalPoints.value = 0
   roundCorrect.value = 0
   roundIncorrect.value = 0
+  roundProgress.value = Array(10).fill(null)
   startRound()
 }
 
@@ -89,6 +108,7 @@ const startNextRound = () => {
   currentRound.value++
   roundCorrect.value = 0
   roundIncorrect.value = 0
+  roundProgress.value = Array(10).fill(null)
   startRound()
 }
 
@@ -96,6 +116,7 @@ const startRound = () => {
   showScoreSummary.value = false
   placedEvents.value = []
   draggedPosition.value = null
+  roundProgress.value = Array(10).fill(null)
   
   // Select 10 random events
   const shuffled = [...allEvents.value].sort(() => Math.random() - 0.5)
@@ -106,6 +127,7 @@ const startRound = () => {
   firstEvent.isCorrect = true
   firstEvent.isIncorrect = false
   placedEvents.value.push(firstEvent)
+  roundProgress.value[0] = 'correct' // First event is pre-placed correctly
   
   // Set second event as unplaced
   unplacedEvent.value = roundEvents.value[1] || null
@@ -161,6 +183,9 @@ const placeEvent = (position) => {
   // Check if placement is correct
   const isCorrect = placedIndex === correctIndex
   
+  // Find the index of this event in roundEvents to update progress
+  const eventIndex = roundEvents.value.findIndex(e => e.id === eventToPlace.id)
+  
   if (isCorrect) {
     roundCorrect.value++
     totalPoints.value++
@@ -168,11 +193,19 @@ const placeEvent = (position) => {
     eventToPlace.isIncorrect = false
     // Add to placed events at the correct position
     placedEvents.value.splice(correctIndex, 0, eventToPlace)
+    // Update progress
+    if (eventIndex !== -1) {
+      roundProgress.value[eventIndex] = 'correct'
+    }
   } else {
     roundIncorrect.value++
     eventToPlace.isCorrect = false
     eventToPlace.isIncorrect = true
     eventToPlace.wasIncorrect = true // Mark that it was initially placed incorrectly
+    // Update progress
+    if (eventIndex !== -1) {
+      roundProgress.value[eventIndex] = 'incorrect'
+    }
     // Add at wrong position first for animation
     placedEvents.value.splice(placedIndex, 0, eventToPlace)
     // Trigger sliding animation for incorrect placement
@@ -240,33 +273,111 @@ const placeEvent = (position) => {
 }
 
 .game-header {
-  text-align: center;
   margin-bottom: 12px;
   flex-shrink: 0;
+  position: relative;
+}
+
+.header-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+  position: relative;
 }
 
 .game-title {
   font-size: 22px;
   font-weight: bold;
   color: #333;
+  margin: 0;
+  text-align: center;
+}
+
+.points-box {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 6px 14px;
+  background: #e8e8e8;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap;
+}
+
+.round-box {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 6px 14px;
+  background: #e8e8e8;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap;
+}
+
+.progress-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 6px;
 }
 
-.game-info {
+.progress-boxes {
   display: flex;
-  justify-content: center;
-  gap: 12px;
-  font-size: 14px;
-  color: #666;
+  gap: 4px;
+  align-items: center;
 }
 
-.round-info,
-.points-info {
-  padding: 4px 12px;
-  background: #e8e8e8;
-  border-radius: 6px;
-  font-weight: 600;
+.progress-box {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  background: #f5f5f5;
+  transition: all 0.2s;
 }
+
+.progress-box.pending {
+  background: #f5f5f5;
+  border-color: #ddd;
+}
+
+.progress-box.correct {
+  background: #4CAF50;
+  border-color: #4CAF50;
+  color: white;
+}
+
+.progress-box.incorrect {
+  background: #f44336;
+  border-color: #f44336;
+  color: white;
+}
+
+.checkmark {
+  color: white;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.cross {
+  color: white;
+  font-size: 14px;
+  line-height: 1;
+}
+
 
 .unplaced-section {
   margin-bottom: 10px;
@@ -303,18 +414,33 @@ const placeEvent = (position) => {
 
 @media (max-width: 768px) {
   .game-title {
-    font-size: 20px;
-    margin-bottom: 4px;
+    font-size: 18px;
   }
   
   .game-header {
     margin-bottom: 10px;
   }
   
-  .game-info {
-    flex-direction: column;
-    gap: 6px;
-    font-size: 13px;
+  .header-top {
+    margin-bottom: 6px;
+  }
+  
+  .points-box {
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
+  
+  .round-box {
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
+  
+  .progress-box {
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
   }
   
   .unplaced-section {

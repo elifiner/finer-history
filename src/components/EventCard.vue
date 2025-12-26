@@ -19,7 +19,17 @@
     }">
       {{ event.year }}
     </div>
-    <div v-if="!isPlaced" class="card-actions">
+    <div v-if="!isPlaced && !isPreview" class="drag-indicator">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="4" cy="4" r="1.5" fill="#666"/>
+        <circle cx="12" cy="4" r="1.5" fill="#666"/>
+        <circle cx="4" cy="8" r="1.5" fill="#666"/>
+        <circle cx="12" cy="8" r="1.5" fill="#666"/>
+        <circle cx="4" cy="12" r="1.5" fill="#666"/>
+        <circle cx="12" cy="12" r="1.5" fill="#666"/>
+      </svg>
+    </div>
+    <div v-if="!isPlaced && isPreview" class="card-actions">
       <button class="place-btn" @click="$emit('place')">Place here</button>
     </div>
     <div class="card-content">
@@ -146,9 +156,17 @@ const handleDragEnd = (e) => {
   background: #8b6914;
 }
 
+.drag-indicator {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 .card-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: 6px;
 }
@@ -166,7 +184,7 @@ const handleDragEnd = (e) => {
 }
 
 .card-content {
-  margin-top: 6px;
+  margin-top: 0;
 }
 
 .card-title {
