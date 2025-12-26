@@ -6,11 +6,21 @@ package-lock.json
 dist/
 dist-ssr/
 *.local
+build/
+.dart_tool/
+.metadata
+
+# Flutter/Dart
+*.iml
+*.ipr
+*.iws
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
 .DS_Store
 *.suo
 *.ntvs*
@@ -32,3 +42,31 @@ lerna-debug.log*
 .env.local
 .env.*.local
 
+# Android
+android/.gradle/
+android/local.properties
+android/.idea/
+android/*.iml
+android/app/build/
+
+# iOS (if added later)
+ios/
+*.mode1v3
+*.mode2v3
+*.moved-aside
+*.pbxuser
+*.perspectivev3
+**/*sync/
+.sconsign.dblite
+.tags*
+**/.vagrant/
+**/DerivedData/
+**/Pods/
+**/.symlinks/
+**/profile
+**/xcuserdata
+**/.generated/
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace

@@ -1,0 +1,225 @@
+import 'package:flutter/material.dart';
+import '../models/event.dart';
+import 'event_card.dart';
+
+class TimelineWidget extends StatefulWidget {
+  final List<Event> placedEvents;
+  final Event? previewEvent;
+  final int? previewPosition;
+  final String? slidingEventId;
+  final Function(int?) onDrop;
+  final VoidCallback? onPlace;
+  final VoidCallback? onPreviewDragStart;
+  final VoidCallback? onPreviewDragEnd;
+
+  const TimelineWidget({
+    super.key,
+    required this.placedEvents,
+    this.previewEvent,
+    this.previewPosition,
+    this.slidingEventId,
+    required this.onDrop,
+    this.onPlace,
+    this.onPreviewDragStart,
+    this.onPreviewDragEnd,
+  });
+
+  @override
+  State<TimelineWidget> createState() => _TimelineWidgetState();
+}
+
+class _TimelineWidgetState extends State<TimelineWidget> {
+  int? _dragOverIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // BEFORE marker
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+          margin: const EdgeInsets.symmetric(vertical: 4),
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: const Text(
+            'BEFORE',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF8B6914),
+            ),
+          ),
+        ),
+        // Timeline content
+        Expanded(
+          child: Stack(
+            children: [
+              // Vertical timeline line
+              Positioned(
+                left: MediaQuery.of(context).size.width / 2 - 1.5,
+                top: 0,
+                bottom: 0,
+                child: Container(
+                  width: 3,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        const Color(0xFF8B6914),
+                        const Color(0xFFD4A574),
+                        const Color(0xFF8B6914),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              // Timeline items
+              ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                itemCount: _buildTimelineItems().length,
+                itemBuilder: (context, index) {
+                  return _buildTimelineItems()[index];
+                },
+              ),
+            ],
+          ),
+        ),
+        // AFTER marker
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+          margin: const EdgeInsets.symmetric(vertical: 4),
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: const Text(
+            'AFTER',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF8B6914),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  List<Widget> _buildTimelineItems() {
+    final List<Widget> items = [];
+
+    // Show preview at top if no events placed yet
+    if (widget.previewEvent != null && 
+        widget.placedEvents.isEmpty && 
+        widget.previewPosition == null) {
+      items.add(_buildPreviewItem());
+      items.add(_buildDropZone(null));
+      return items;
+    }
+
+    // Build timeline with placed events and preview
+    for (int i = 0; i <= widget.placedEvents.length; i++) {
+      // Show preview before this position (if position is a number)
+      if (widget.previewEvent != null && 
+          widget.previewPosition != null && 
+          widget.previewPosition == i) {
+        items.add(_buildPreviewItem());
+      }
+
+      // Drop zone before this position
+      items.add(_buildDropZone(i));
+
+      // Placed event at this position
+      if (i < widget.placedEvents.length) {
+        items.add(_buildPlacedEvent(i));
+      }
+    }
+
+    // Show preview at bottom if previewPosition is null and there are placed events
+    if (widget.previewEvent != null && 
+        widget.placedEvents.isNotEmpty && 
+        widget.previewPosition == null) {
+      items.add(_buildPreviewItem());
+      items.add(_buildDropZone(null));
+    }
+
+    return items;
+  }
+
+  Widget _buildPreviewItem() {
+    if (widget.previewEvent == null) return const SizedBox.shrink();
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 4),
+      child: EventCard(
+        event: widget.previewEvent!,
+        isPlaced: false,
+        isPreview: true,
+        onPlace: widget.onPlace,
+        onDragStart: widget.onPreviewDragStart,
+        onDragEnd: widget.onPreviewDragEnd,
+      ),
+    );
+  }
+
+  Widget _buildPlacedEvent(int index) {
+    if (index < 0 || index >= widget.placedEvents.length) {
+      return const SizedBox.shrink();
+    }
+
+    final event = widget.placedEvents[index];
+    return Padding(
+      padding: const EdgeInsets.only(top: 4),
+      child: EventCard(
+        event: event,
+        isPlaced: true,
+        isCorrect: event.isCorrect,
+        isIncorrect: event.isIncorrect,
+        isSliding: widget.slidingEventId == event.id,
+      ),
+    );
+  }
+
+  Widget _buildDropZone(int? index) {
+    final bool isDragOver = _dragOverIndex == index;
+    
+    return DragTarget<Event>(
+      onWillAcceptWithDetails: (details) => true,
+      onAcceptWithDetails: (details) {
+        widget.onDrop(index);
+        setState(() {
+          _dragOverIndex = null;
+        });
+      },
+      onMove: (details) {
+        setState(() {
+          _dragOverIndex = index;
+        });
+      },
+      onLeave: (data) {
+        setState(() {
+          _dragOverIndex = null;
+        });
+      },
+      builder: (context, candidateData, rejectedData) {
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeOut,
+          height: isDragOver ? 80 : 20,
+          margin: isDragOver ? const EdgeInsets.symmetric(vertical: 12) : EdgeInsets.zero,
+          decoration: BoxDecoration(
+            border: isDragOver
+                ? Border.all(color: Colors.green, width: 2, style: BorderStyle.solid)
+                : null,
+            borderRadius: BorderRadius.circular(6),
+            color: isDragOver ? Colors.green.withValues(alpha: 0.08) : Colors.transparent,
+          ),
+        );
+      },
+    );
+  }
+}

@@ -1,47 +1,52 @@
 # Finer History
 
-A fun, educational history timeline game built with Vue.js. Players drag historical events to their correct chronological positions on a timeline.
+A fun, educational history timeline game built with Flutter. Players drag historical events to their correct chronological positions on a timeline.
 
 ## Features
 
 - **Drag and Drop**: Intuitive drag-and-drop interface for placing events
 - **Multiple Rounds**: Play multiple rounds of 10 events each
 - **Scoring System**: Track correct and incorrect placements across rounds
-- **Immediate Feedback**: Visual feedback for correct/incorrect placements
-- **Customizable Events**: Easy to replace events by editing `src/data/events.json`
+- **Immediate Feedback**: Visual feedback for correct/incorrect placements with smooth animations
+- **Customizable Events**: Easy to replace events by editing `assets/data/events.json`
+- **Cross-Platform**: Runs on Web and Android (iOS support can be added)
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
-- npm or yarn
+- Flutter SDK (3.9.2 or higher)
+- Dart SDK (included with Flutter)
 
 ### Installation
 
-1. Install dependencies:
+1. Install Flutter dependencies:
 ```bash
-npm install
+flutter pub get
 ```
 
-2. Start the development server:
+2. Run the app:
 ```bash
-npm run dev
-```
+# For web
+flutter run -d chrome
 
-3. Open your browser to the URL shown in the terminal (typically `http://localhost:5173`)
+# For Android
+flutter run
+```
 
 ### Building for Production
 
 ```bash
-npm run build
-```
+# Build for web
+flutter build web
 
-The built files will be in the `dist` directory.
+# Build for Android
+flutter build apk
+```
 
 ## Customizing Events
 
-To use your own set of historical events, edit `src/data/events.json`. Each event should have:
+To use your own set of historical events, edit `assets/data/events.json`. Each event should have:
 
 - `year`: The year the event occurred (number)
 - `title`: A short title for the event (string)
@@ -68,32 +73,36 @@ Example:
 ## Project Structure
 
 ```
-finer-history/
-├── src/
-│   ├── components/
-│   │   ├── GameBoard.vue      # Main game logic
-│   │   ├── Timeline.vue        # Timeline visualization
-│   │   ├── EventCard.vue       # Event card component
-│   │   └── ScoreSummary.vue    # Round completion screen
-│   ├── data/
-│   │   └── events.json         # Historical events data
-│   ├── styles/
-│   │   └── main.css            # Global styles
-│   ├── App.vue
-│   └── main.js
-├── index.html
-├── package.json
-└── vite.config.js
+flashback/
+├── lib/
+│   ├── models/
+│   │   ├── event.dart           # Event data model
+│   │   └── game_state.dart      # Game state model
+│   ├── providers/
+│   │   └── game_provider.dart   # Game logic and state management
+│   ├── screens/
+│   │   └── game_screen.dart     # Main game screen
+│   ├── widgets/
+│   │   ├── event_card.dart      # Event card widget
+│   │   ├── timeline_widget.dart # Timeline visualization
+│   │   └── score_summary.dart   # Round completion screen
+│   └── main.dart                # App entry point
+├── assets/
+│   └── data/
+│       └── events.json          # Historical events data
+├── android/                     # Android platform files
+├── web/                         # Web platform files
+└── pubspec.yaml                 # Flutter dependencies
 ```
 
 ## Technologies Used
 
-- Vue 3 (Composition API)
-- Vite
-- HTML5 Drag and Drop API
-- CSS3 Animations
+- Flutter (Material Design 3)
+- Provider (State Management)
+- Dart
+- Flutter Drag and Drop API
+- Flutter Animations
 
 ## License
 
 MIT
-
