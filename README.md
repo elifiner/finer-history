@@ -73,7 +73,7 @@ Example:
 ## Project Structure
 
 ```
-flashback/
+finer-history/
 ├── lib/
 │   ├── models/
 │   │   ├── event.dart           # Event data model
