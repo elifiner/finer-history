@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/event.dart';
+import '../utils/year_formatter.dart';
 
 class EventCard extends StatelessWidget {
   final Event event;
@@ -58,7 +59,7 @@ class EventCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Text(
-                    '${event.year}',
+                    YearFormatter.formatCompact(event.year),
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
