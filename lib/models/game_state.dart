@@ -15,6 +15,7 @@ class GameState {
   final int? draggedPosition;
   final String? slidingEventId;
   final List<RoundProgressStatus> roundProgress;
+  final List<Event> previousRoundIncorrectEvents;
 
   GameState({
     required this.allEvents,
@@ -29,6 +30,7 @@ class GameState {
     this.draggedPosition,
     this.slidingEventId,
     this.roundProgress = const [],
+    this.previousRoundIncorrectEvents = const [],
   });
 
   GameState copyWith({
@@ -46,6 +48,7 @@ class GameState {
     String? slidingEventId,
     bool clearSlidingEventId = false, // Flag to explicitly clear
     List<RoundProgressStatus>? roundProgress,
+    List<Event>? previousRoundIncorrectEvents,
   }) {
     return GameState(
       allEvents: allEvents ?? this.allEvents,
@@ -64,6 +67,7 @@ class GameState {
           ? null 
           : (slidingEventId ?? this.slidingEventId),
       roundProgress: roundProgress ?? this.roundProgress,
+      previousRoundIncorrectEvents: previousRoundIncorrectEvents ?? this.previousRoundIncorrectEvents,
     );
   }
 }

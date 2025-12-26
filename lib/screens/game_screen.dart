@@ -243,7 +243,7 @@ class GameScreen extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: List.generate(
-                      10,
+                      state.roundProgress.length,
                       (index) => Container(
                         width: 20,
                         height: 20,

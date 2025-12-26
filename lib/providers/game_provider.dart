@@ -55,24 +55,46 @@ class GameProvider extends ChangeNotifier {
       roundCorrect: 0,
       roundIncorrect: 0,
       roundProgress: List.filled(10, RoundProgressStatus.pending),
+      previousRoundIncorrectEvents: [],
     );
     startRound();
   }
 
   void startNextRound() {
+    // Collect events that were incorrect in the current round
+    final List<Event> incorrectEvents = [];
+    for (int i = 0; i < _state.roundEvents.length; i++) {
+      if (_state.roundProgress[i] == RoundProgressStatus.incorrect) {
+        // Find the original event from allEvents
+        final Event incorrectEvent = _state.roundEvents[i];
+        final Event originalEvent = _state.allEvents.firstWhere(
+          (e) => e.id == incorrectEvent.id,
+          orElse: () => incorrectEvent,
+        );
+        incorrectEvents.add(originalEvent);
+      }
+    }
+
     _state = _state.copyWith(
       currentRound: _state.currentRound + 1,
       roundCorrect: 0,
       roundIncorrect: 0,
-      roundProgress: List.filled(10, RoundProgressStatus.pending),
+      previousRoundIncorrectEvents: incorrectEvents,
     );
     startRound();
   }
 
   void startRound() {
-    final List<Event> shuffled = List<Event>.from(_state.allEvents)
-      ..shuffle();
-    final List<Event> roundEvents = shuffled.take(10).toList();
+    // Use incorrect events from previous round if available, otherwise use all events
+    final List<Event> sourceEvents = _state.previousRoundIncorrectEvents.isNotEmpty
+        ? _state.previousRoundIncorrectEvents
+        : _state.allEvents;
+    
+    // If we have fewer than 10 incorrect events, use all of them
+    // Otherwise, randomly select 10
+    final List<Event> shuffled = List<Event>.from(sourceEvents)..shuffle();
+    final int eventsToTake = shuffled.length < 10 ? shuffled.length : 10;
+    final List<Event> roundEvents = shuffled.take(eventsToTake).toList();
 
     // Pre-place the first event
     final Event firstEvent = roundEvents[0].copyWith(
@@ -80,7 +102,7 @@ class GameProvider extends ChangeNotifier {
       isIncorrect: false,
     );
 
-    final List<RoundProgressStatus> progress = List.filled(10, RoundProgressStatus.pending);
+    final List<RoundProgressStatus> progress = List.filled(roundEvents.length, RoundProgressStatus.pending);
     progress[0] = RoundProgressStatus.correct;
 
     _state = _state.copyWith(

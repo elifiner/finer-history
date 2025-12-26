@@ -20,107 +20,115 @@ class ScoreSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 600),
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Card(
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(40),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Round $roundNumber Complete!',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Scaffold(
+      backgroundColor: theme.scaffoldBackgroundColor,
+      body: SafeArea(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(40),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Round $roundNumber Complete!',
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: colorScheme.onSurface,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 30),
-                _buildScoreItem(
-                  context,
-                  'Correct:',
-                  correctCount.toString(),
-                  Colors.green,
-                ),
-                const SizedBox(height: 10),
-                _buildScoreItem(
-                  context,
-                  'Incorrect:',
-                  incorrectCount.toString(),
-                  Colors.red,
-                ),
-                const SizedBox(height: 20),
-                _buildScoreItem(
-                  context,
-                  'Total Points:',
-                  totalPoints.toString(),
-                  Colors.blue,
-                  isTotal: true,
-                ),
-                const SizedBox(height: 30),
-                Column(
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          onNextRound();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        child: const Text(
-                          'Next Round',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                      const SizedBox(height: 30),
+                      _buildScoreItem(
+                        context,
+                        'Correct:',
+                        correctCount.toString(),
+                        colorScheme.primary,
                       ),
-                    ),
-                    const SizedBox(height: 15),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          onNewGame();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey[600],
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        child: const Text(
-                          'New Game',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                      const SizedBox(height: 10),
+                      _buildScoreItem(
+                        context,
+                        'Incorrect:',
+                        incorrectCount.toString(),
+                        colorScheme.error,
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 20),
+                      _buildScoreItem(
+                        context,
+                        'Total Points:',
+                        totalPoints.toString(),
+                        colorScheme.secondary,
+                        isTotal: true,
+                      ),
+                      const SizedBox(height: 30),
+                      Column(
+                        children: [
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                onNextRound();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: colorScheme.primary,
+                                foregroundColor: colorScheme.onPrimary,
+                                padding: const EdgeInsets.symmetric(vertical: 12),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child: Text(
+                                'Next Round',
+                                style: theme.textTheme.bodyLarge?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: colorScheme.onPrimary,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 15),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                onNewGame();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: colorScheme.surfaceContainerHighest,
+                                foregroundColor: colorScheme.onSurface,
+                                padding: const EdgeInsets.symmetric(vertical: 12),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child: Text(
+                                'New Game',
+                                style: theme.textTheme.bodyLarge?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: colorScheme.onSurface,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
           ),
-        ),
         ),
       ),
     );
@@ -133,6 +141,8 @@ class ScoreSummary extends StatelessWidget {
     Color color, {
     bool isTotal = false,
   }) {
+    final theme = Theme.of(context);
+    
     return Container(
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
@@ -144,7 +154,7 @@ class ScoreSummary extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: theme.textTheme.bodyLarge?.copyWith(
               fontSize: isTotal ? 20 : 18,
               fontWeight: FontWeight.w600,
               color: color,
@@ -152,7 +162,7 @@ class ScoreSummary extends StatelessWidget {
           ),
           Text(
             value,
-            style: TextStyle(
+            style: theme.textTheme.bodyLarge?.copyWith(
               fontSize: isTotal ? 20 : 18,
               fontWeight: FontWeight.bold,
               color: color,
