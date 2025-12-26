@@ -87,18 +87,58 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['drop', 'place'])
+const emit = defineEmits(['drop', 'place', 'touchdrag'])
 
 const dragOverIndex = ref(null)
 
 const handleDrop = (position, event) => {
-  event.preventDefault()
+  if (event) {
+    event.preventDefault()
+  }
   dragOverIndex.value = null
   emit('drop', position)
 }
 
 const handlePlaceClick = () => {
   emit('place', props.previewPosition)
+}
+
+const handleTouchDrag = (data) => {
+  if (data.end) {
+    // Find which drop zone the touch ended over
+    if (data.element) {
+      const dropZone = data.element.closest('.drop-zone')
+      if (dropZone) {
+        const allDropZones = Array.from(document.querySelectorAll('.drop-zone'))
+        const index = allDropZones.indexOf(dropZone)
+        if (index !== -1) {
+          const timelineItems = document.querySelectorAll('.timeline-item')
+          if (index < timelineItems.length) {
+            handleDrop(index)
+          } else {
+            handleDrop('bottom')
+          }
+        } else if (dropZone.classList.contains('bottom')) {
+          handleDrop('bottom')
+        }
+      }
+    }
+  } else {
+    // Update drag-over state
+    if (data.element) {
+      const dropZone = data.element.closest('.drop-zone')
+      if (dropZone) {
+        const allDropZones = Array.from(document.querySelectorAll('.drop-zone'))
+        const index = allDropZones.indexOf(dropZone)
+        if (index !== -1 && index < props.placedEvents.length) {
+          dragOverIndex.value = index
+        } else if (dropZone.classList.contains('bottom')) {
+          dragOverIndex.value = 'bottom'
+        }
+      }
+    }
+  }
+  emit('touchdrag', data)
 }
 </script>
 
@@ -149,6 +189,7 @@ const handlePlaceClick = () => {
 .timeline-item {
   width: 100%;
   margin: 0;
+  padding-top: 4px;
 }
 
 .preview-item {
@@ -172,6 +213,8 @@ const handlePlaceClick = () => {
   border: 2px dashed transparent;
   border-radius: 6px;
   transition: all 0.25s ease-out;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .drop-zone.drag-over {

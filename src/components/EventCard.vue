@@ -7,11 +7,16 @@
       'correct': isCorrect && isPlaced,
       'incorrect': isIncorrect && isPlaced,
       'sliding': isSliding,
-      'preview': isPreview
+      'preview': isPreview,
+      'dragging': isDragging
     }"
-    :draggable="!isPlaced"
+    :draggable="!isPlaced && !isPreview"
     @dragstart="handleDragStart"
     @dragend="handleDragEnd"
+    @touchstart="handleTouchStart"
+    @touchmove="handleTouchMove"
+    @touchend="handleTouchEnd"
+    @touchcancel="handleTouchEnd"
   >
     <div v-if="isPlaced && (isCorrect || isIncorrect)" class="year-badge" :class="{ 
       'correct-badge': isCorrect && !event.wasIncorrect, 
@@ -29,7 +34,7 @@
         <circle cx="12" cy="12" r="1.5" fill="#666"/>
       </svg>
     </div>
-    <div v-if="!isPlaced && isPreview" class="card-actions">
+    <div v-if="!isPlaced && isPreview" class="place-btn-badge">
       <button class="place-btn" @click="$emit('place')">Place here</button>
     </div>
     <div class="card-content">
@@ -40,7 +45,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps({
   event: {
@@ -69,17 +74,99 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['place', 'dragstart', 'dragend'])
+const emit = defineEmits(['place', 'dragstart', 'dragend', 'touchdrag'])
+
+const isDragging = ref(false)
+const touchStartY = ref(0)
+const touchStartX = ref(0)
+const touchElement = ref(null)
+const dragThreshold = 10 // Minimum distance to start dragging
 
 const handleDragStart = (e) => {
+  if (props.isPlaced || props.isPreview) return
   e.dataTransfer.effectAllowed = 'move'
   e.dataTransfer.setData('text/plain', props.event.id)
+  isDragging.value = true
   emit('dragstart', e)
 }
 
 const handleDragEnd = (e) => {
+  isDragging.value = false
   emit('dragend', e)
 }
+
+const handleTouchStart = (e) => {
+  if (props.isPlaced || props.isPreview) return
+  
+  const touch = e.touches[0]
+  touchStartY.value = touch.clientY
+  touchStartX.value = touch.clientX
+  touchElement.value = e.currentTarget
+  
+  // Prevent scrolling while dragging
+  document.body.style.overflow = 'hidden'
+}
+
+const handleTouchMove = (e) => {
+  if (!touchElement.value || props.isPlaced || props.isPreview) return
+  
+  const touch = e.touches[0]
+  const deltaY = Math.abs(touch.clientY - touchStartY.value)
+  const deltaX = Math.abs(touch.clientX - touchStartX.value)
+  
+  // Start dragging if moved beyond threshold
+  if ((deltaY > dragThreshold || deltaX > dragThreshold) && !isDragging.value) {
+    isDragging.value = true
+    emit('dragstart', { type: 'touch', clientY: touch.clientY })
+    // Hide the card being dragged visually
+    if (touchElement.value) {
+      touchElement.value.style.opacity = '0.5'
+    }
+  }
+  
+  if (isDragging.value) {
+    e.preventDefault()
+    // Find element under touch point
+    const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY)
+    emit('touchdrag', {
+      clientY: touch.clientY,
+      clientX: touch.clientX,
+      element: elementBelow,
+      end: false
+    })
+  }
+}
+
+const handleTouchEnd = (e) => {
+  if (!touchElement.value) return
+  
+  document.body.style.overflow = ''
+  
+  if (isDragging.value) {
+    const touch = e.changedTouches[0]
+    const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY)
+    emit('touchdrag', {
+      clientY: touch.clientY,
+      clientX: touch.clientX,
+      element: elementBelow,
+      end: true
+    })
+    // Restore opacity
+    if (touchElement.value) {
+      touchElement.value.style.opacity = ''
+    }
+    isDragging.value = false
+    emit('dragend', { type: 'touch' })
+  }
+  
+  touchElement.value = null
+  touchStartY.value = 0
+  touchStartX.value = 0
+}
+
+onUnmounted(() => {
+  document.body.style.overflow = ''
+})
 </script>
 
 <style scoped>
@@ -92,6 +179,9 @@ const handleDragEnd = (e) => {
   transition: all 0.3s ease;
   position: relative;
   cursor: grab;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .event-card.unplaced {
@@ -114,6 +204,13 @@ const handleDragEnd = (e) => {
   background: #3a3a3a;
   color: #fff;
   cursor: default;
+  margin-top: 4px;
+  touch-action: auto;
+}
+
+.event-card.dragging {
+  z-index: 1000;
+  transform: scale(1.05);
 }
 
 .event-card.correct {
@@ -164,23 +261,34 @@ const handleDragEnd = (e) => {
   pointer-events: none;
 }
 
-.card-actions {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-bottom: 6px;
+.place-btn-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
 
 .place-btn {
   background: #4CAF50;
   color: #fff;
   padding: 6px 12px;
-  font-size: 13px;
+  font-size: 12px;
   border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  white-space: nowrap;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 32px;
 }
 
 .place-btn:hover {
   background: #45a049;
+}
+
+.place-btn:active {
+  background: #3d8b40;
+  transform: scale(0.98);
 }
 
 .card-content {

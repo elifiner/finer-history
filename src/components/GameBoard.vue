@@ -15,7 +15,7 @@
       <div class="game-header">
         <div class="header-top">
           <div class="points-box">{{ totalPoints }} Points</div>
-          <h1 class="game-title">Flashback Timeline</h1>
+          <h1 class="game-title">Finer History</h1>
           <div class="round-box">Round {{ currentRound }}</div>
         </div>
         <div class="progress-container">
@@ -46,6 +46,7 @@
           @place="handlePlaceClick"
           @dragstart="handleDragStart"
           @dragend="handleDragEnd"
+          @touchdrag="handleTouchDrag"
         />
       </div>
 
@@ -57,6 +58,7 @@
           :sliding-event-id="slidingEventId"
           @drop="handleDrop"
           @place="handlePlaceClick"
+          @touchdrag="handleTouchDrag"
         />
       </div>
     </div>
@@ -148,6 +150,54 @@ const handleDrop = (position) => {
       draggedPosition.value = 0
     } else {
       draggedPosition.value = position
+    }
+  }
+}
+
+const handleTouchDrag = (data) => {
+  if (!unplacedEvent.value) return
+  
+  if (data.end) {
+    // Touch ended - place the card
+    if (draggedPosition.value !== null) {
+      handlePlaceClick(draggedPosition.value)
+    }
+  } else {
+    // Touch moving - find drop zone and update preview
+    if (data.element) {
+      const dropZone = data.element.closest('.drop-zone')
+      if (dropZone) {
+        // Find the index of this drop zone
+        const allDropZones = Array.from(document.querySelectorAll('.drop-zone'))
+        const dropZoneIndex = allDropZones.indexOf(dropZone)
+        
+        if (dropZoneIndex !== -1) {
+          let position = null
+          
+          // Check if it's the bottom drop zone
+          if (dropZone.classList.contains('bottom')) {
+            position = 'bottom'
+          } else {
+            // Find which timeline item this drop zone belongs to
+            const timelineItems = Array.from(document.querySelectorAll('.timeline-item'))
+            for (let i = 0; i < timelineItems.length; i++) {
+              const itemDropZones = timelineItems[i].querySelectorAll('.drop-zone')
+              if (Array.from(itemDropZones).includes(dropZone)) {
+                position = i
+                break
+              }
+            }
+            // If not found, it might be before the first item
+            if (position === null && dropZoneIndex === 0) {
+              position = 0
+            }
+          }
+          
+          if (position !== null) {
+            handleDrop(position)
+          }
+        }
+      }
     }
   }
 }

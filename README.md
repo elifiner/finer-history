@@ -1,4 +1,4 @@
-# Flashback Timeline Game
+# Finer History
 
 A fun, educational history timeline game built with Vue.js. Players drag historical events to their correct chronological positions on a timeline.
 
