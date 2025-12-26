@@ -108,7 +108,6 @@ const handlePlaceClick = () => {
   flex-direction: column;
   align-items: center;
   padding: 20px 0;
-  min-height: 400px;
 }
 
 .timeline-marker {

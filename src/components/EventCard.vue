@@ -13,7 +13,10 @@
     @dragstart="handleDragStart"
     @dragend="handleDragEnd"
   >
-    <div v-if="isPlaced && isCorrect" class="year-badge correct-badge">
+    <div v-if="isPlaced && (isCorrect || isIncorrect)" class="year-badge" :class="{ 
+      'correct-badge': isCorrect && !event.wasIncorrect, 
+      'incorrect-badge': isIncorrect || event.wasIncorrect
+    }">
       {{ event.year }}
     </div>
     <div v-if="!isPlaced" class="card-actions">

@@ -32,14 +32,16 @@
         />
       </div>
 
-      <Timeline
-        :placed-events="placedEvents"
-        :preview-event="draggedPosition !== null ? unplacedEvent : null"
-        :preview-position="draggedPosition"
-        :sliding-event-id="slidingEventId"
-        @drop="handleDrop"
-        @place="handlePlaceClick"
-      />
+      <div class="timeline-wrapper-container">
+        <Timeline
+          :placed-events="placedEvents"
+          :preview-event="draggedPosition !== null ? unplacedEvent : null"
+          :preview-position="draggedPosition"
+          :sliding-event-id="slidingEventId"
+          @drop="handleDrop"
+          @place="handlePlaceClick"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -170,6 +172,7 @@ const placeEvent = (position) => {
     roundIncorrect.value++
     eventToPlace.isCorrect = false
     eventToPlace.isIncorrect = true
+    eventToPlace.wasIncorrect = true // Mark that it was initially placed incorrectly
     // Add at wrong position first for animation
     placedEvents.value.splice(placedIndex, 0, eventToPlace)
     // Trigger sliding animation for incorrect placement
@@ -186,11 +189,12 @@ const placeEvent = (position) => {
         const finalIndex = newCorrectIndex === -1 ? placedEvents.value.length : newCorrectIndex
         placedEvents.value.splice(finalIndex, 0, eventToPlace)
         
-        // After animation completes, mark as correct
+        // After animation completes, mark as correct but keep wasIncorrect flag
         setTimeout(() => {
           slidingEventId.value = null
           eventToPlace.isIncorrect = false
           eventToPlace.isCorrect = true
+          // wasIncorrect stays true to keep the badge red
         }, 300)
       }
     }, 100)
@@ -217,20 +221,28 @@ const placeEvent = (position) => {
 <style scoped>
 .game-board {
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 20px;
   padding: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .game-content {
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .game-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
 .game-title {
@@ -257,8 +269,9 @@ const placeEvent = (position) => {
 }
 
 .unplaced-section {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   padding: 0 20px;
+  flex-shrink: 0;
 }
 
 .placement-hint {
@@ -273,26 +286,40 @@ const placeEvent = (position) => {
   font-size: 14px;
 }
 
+.timeline-wrapper-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+
 .score-overlay {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100%;
   padding: 20px;
 }
 
 @media (max-width: 768px) {
   .game-title {
-    font-size: 28px;
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .game-header {
+    margin-bottom: 15px;
   }
   
   .game-info {
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+    font-size: 16px;
   }
   
   .unplaced-section {
     padding: 0 10px;
+    margin-bottom: 10px;
   }
 }
 </style>
