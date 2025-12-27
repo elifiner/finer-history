@@ -36,38 +36,42 @@ class _TimelineWidgetState extends State<TimelineWidget> {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     
-    return Stack(
-      children: [
-        // Vertical timeline line - slightly shorter to be hidden behind pills
-        Positioned(
-          left: MediaQuery.of(context).size.width / 2 - 1.5,
-          top: 28, // Start below BEFORE pill
-          bottom: 28, // End above AFTER pill
-          child: Container(
-            width: 3,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  const Color(0xFF8B6914),
-                  const Color(0xFFD4A574),
-                  const Color(0xFF8B6914),
-                ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Stack(
+          children: [
+            // Vertical timeline line - centered relative to container width
+            Positioned(
+              left: constraints.maxWidth / 2 - 1.5,
+              top: 28, // Start below BEFORE pill
+              bottom: 28, // End above AFTER pill
+              child: Container(
+                width: 3,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      const Color(0xFF8B6914),
+                      const Color(0xFFD4A574),
+                      const Color(0xFF8B6914),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
-              borderRadius: BorderRadius.circular(2),
             ),
-          ),
-        ),
-        // Scrollable timeline content including BEFORE and AFTER
-        ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-          itemCount: _buildTimelineItems(colorScheme).length,
-          itemBuilder: (context, index) {
-            return _buildTimelineItems(colorScheme)[index];
-          },
-        ),
-      ],
+            // Scrollable timeline content including BEFORE and AFTER
+            ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+              itemCount: _buildTimelineItems(colorScheme).length,
+              itemBuilder: (context, index) {
+                return _buildTimelineItems(colorScheme)[index];
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
