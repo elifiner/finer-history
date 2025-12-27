@@ -3,7 +3,7 @@
 set -e
 
 # Base version name - UPDATE THIS IN ONE PLACE
-VERSION_NAME="0.0.3"
+VERSION_NAME="0.0.4"
 
 # Get git commit count for build number
 VERSION_CODE=$(git rev-list --count HEAD 2>/dev/null || echo "1")
