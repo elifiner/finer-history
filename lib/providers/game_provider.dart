@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/event.dart';
 import '../models/game_state.dart';
 import '../models/history_topic.dart';
@@ -13,13 +14,34 @@ class GameProvider extends ChangeNotifier {
 
   HistoryTopic? _currentTopic;
   List<HistoryTopic> _availableTopics = [];
+  List<HistoryTopic> _allTopics = [];
+  Set<String> _enabledTopicIds = {};
+
+  static const String _enabledTopicsKey = 'enabled_topic_ids';
+  static const Set<String> _defaultEnabledTopicIds = {
+    'us',
+    'evolution',
+    'computing',
+    'rome',
+    'greece',
+  };
 
   GameState get state => _state;
   HistoryTopic? get currentTopic => _currentTopic;
   List<HistoryTopic> get availableTopics => _availableTopics;
+  List<HistoryTopic> get allTopics => _allTopics;
+
+  bool isTopicEnabled(String topicId) => _enabledTopicIds.contains(topicId);
+
+  bool canDisableTopic(String topicId) {
+    // Can only disable if there's more than one enabled topic
+    return _enabledTopicIds.length > 1;
+  }
 
   Future<void> initialize() async {
     await discoverTopics();
+    await loadEnabledTopics();
+    _updateAvailableTopics();
     if (_availableTopics.isNotEmpty) {
       _currentTopic = _availableTopics.first;
       await loadTopic(_currentTopic!);
@@ -38,7 +60,7 @@ class GameProvider extends ChangeNotifier {
         'assets/data/computing.json',
       ];
 
-      _availableTopics = [];
+      _allTopics = [];
 
       for (final assetPath in topicFiles) {
         try {
@@ -49,7 +71,7 @@ class GameProvider extends ChangeNotifier {
           final String category = jsonData['category'] as String;
           final String id = assetPath.split('/').last.replaceAll('.json', '');
 
-          _availableTopics.add(
+          _allTopics.add(
             HistoryTopic(id: id, displayName: category, assetPath: assetPath),
           );
         } catch (e) {
@@ -59,6 +81,71 @@ class GameProvider extends ChangeNotifier {
     } catch (e) {
       debugPrint('Error discovering topics: $e');
     }
+  }
+
+  Future<void> loadEnabledTopics() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final List<String>? savedIds = prefs.getStringList(_enabledTopicsKey);
+
+      if (savedIds != null && savedIds.isNotEmpty) {
+        _enabledTopicIds = savedIds.toSet();
+      } else {
+        // First launch - use defaults
+        _enabledTopicIds = Set<String>.from(_defaultEnabledTopicIds);
+        await saveEnabledTopics();
+      }
+    } catch (e) {
+      debugPrint('Error loading enabled topics: $e');
+      // Fallback to defaults on error
+      _enabledTopicIds = Set<String>.from(_defaultEnabledTopicIds);
+    }
+  }
+
+  Future<void> saveEnabledTopics() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setStringList(_enabledTopicsKey, _enabledTopicIds.toList());
+    } catch (e) {
+      debugPrint('Error saving enabled topics: $e');
+    }
+  }
+
+  void _updateAvailableTopics() {
+    _availableTopics = _allTopics
+        .where((topic) => _enabledTopicIds.contains(topic.id))
+        .toList();
+  }
+
+  Future<void> toggleTopicEnabled(String topicId) async {
+    if (_enabledTopicIds.contains(topicId)) {
+      // Disabling a topic - prevent if it's the last enabled topic
+      if (_enabledTopicIds.length <= 1) {
+        debugPrint('Cannot disable the last enabled topic');
+        return;
+      }
+      _enabledTopicIds.remove(topicId);
+
+      // If this was the current topic, switch to first available topic
+      if (_currentTopic?.id == topicId) {
+        _updateAvailableTopics();
+        if (_availableTopics.isNotEmpty) {
+          _currentTopic = _availableTopics.first;
+          await loadTopic(_currentTopic!);
+        } else {
+          _currentTopic = null;
+        }
+      } else {
+        _updateAvailableTopics();
+      }
+    } else {
+      // Enabling a topic
+      _enabledTopicIds.add(topicId);
+      _updateAvailableTopics();
+    }
+
+    await saveEnabledTopics();
+    notifyListeners();
   }
 
   Future<void> loadTopic(HistoryTopic topic) async {

@@ -5,6 +5,7 @@ import '../models/game_state.dart';
 import '../widgets/timeline_widget.dart';
 import '../widgets/event_card.dart';
 import '../widgets/score_summary.dart';
+import '../widgets/topic_selection_dialog.dart';
 
 class GameScreen extends StatelessWidget {
   const GameScreen({super.key});
@@ -355,6 +356,18 @@ class GameScreen extends StatelessWidget {
               ],
             ),
           ),
+          ListTile(
+            leading: Icon(Icons.settings, color: colorScheme.onSurfaceVariant),
+            title: Text('More Topics', style: theme.textTheme.bodyLarge),
+            onTap: () {
+              Navigator.pop(context);
+              showDialog(
+                context: context,
+                builder: (context) => const TopicSelectionDialog(),
+              );
+            },
+          ),
+          const Divider(),
           ...gameProvider.availableTopics.map((topic) {
             final isSelected = gameProvider.currentTopic?.id == topic.id;
             return ListTile(
