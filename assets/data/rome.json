@@ -17,6 +17,11 @@
       "description": "The Gauls, led by Brennus, sack Rome, marking one of the city's greatest early defeats."
     },
     {
+      "year": -312,
+      "title": "Appian Way Construction Begins",
+      "description": "Construction begins on the Appian Way, the first major Roman road, connecting Rome to southern Italy and demonstrating Roman engineering prowess."
+    },
+    {
       "year": -264,
       "title": "First Punic War Begins",
       "description": "Rome and Carthage begin the First Punic War over control of Sicily, marking Rome's expansion beyond Italy."
@@ -34,7 +39,32 @@
     {
       "year": -73,
       "title": "Spartacus Revolt",
-      "description": "Spartacus leads a major slave revolt against the Roman Republic, one of the largest slave uprisings in history."
+      "description": "Spartacus leads a major slave revolt against the Roman Republic, one of the largest slave uprisings in history, highlighting the extent and brutality of the Roman slave system."
+    },
+    {
+      "year": -106,
+      "title": "Cicero Born",
+      "description": "Marcus Tullius Cicero is born, later becoming Rome's greatest orator, philosopher, and statesman, whose writings preserve much of Roman political thought."
+    },
+    {
+      "year": -70,
+      "title": "Virgil Born",
+      "description": "Publius Vergilius Maro (Virgil) is born, later composing the Aeneid, Rome's national epic and one of the greatest works of Latin literature."
+    },
+    {
+      "year": -43,
+      "title": "Cicero Assassinated",
+      "description": "Cicero is assassinated on the orders of Mark Antony, ending the life of Rome's greatest orator and defender of the Republic."
+    },
+    {
+      "year": -43,
+      "title": "Ovid Born",
+      "description": "Publius Ovidius Naso (Ovid) is born, later becoming one of Rome's greatest poets, known for Metamorphoses and his influence on Western literature."
+    },
+    {
+      "year": -19,
+      "title": "Death of Virgil",
+      "description": "Virgil dies, leaving behind the Aeneid, which becomes the foundational epic of Roman literature and culture."
     },
     {
       "year": -60,
@@ -62,6 +92,16 @@
       "description": "Octavian is granted the title Augustus, marking the end of the Roman Republic and the beginning of the Roman Empire."
     },
     {
+      "year": -19,
+      "title": "Aqua Virgo Aqueduct Completed",
+      "description": "The Aqua Virgo aqueduct is completed, one of Rome's eleven major aqueducts that supplied the city with water, demonstrating advanced Roman engineering."
+    },
+    {
+      "year": 17,
+      "title": "Death of Ovid",
+      "description": "Ovid dies in exile, leaving behind a vast body of poetry including Metamorphoses, which becomes one of the most influential works of Western literature."
+    },
+    {
       "year": 64,
       "title": "Great Fire of Rome",
       "description": "A devastating fire destroys much of Rome, and Emperor Nero is accused of starting it to clear land for his palace."
@@ -70,6 +110,11 @@
       "year": 79,
       "title": "Eruption of Mount Vesuvius",
       "description": "Mount Vesuvius erupts, destroying the cities of Pompeii and Herculaneum and preserving them for posterity."
+    },
+    {
+      "year": 69,
+      "title": "Year of the Four Emperors",
+      "description": "Four different emperors rule Rome in a single year following Nero's death, causing civil war and instability that nearly destroys the empire."
     },
     {
       "year": 80,
@@ -92,6 +137,11 @@
       "description": "Marcus Aurelius dies, ending the era of the Five Good Emperors and beginning a period of instability."
     },
     {
+      "year": 235,
+      "title": "Crisis of the Third Century Begins",
+      "description": "The assassination of Emperor Severus Alexander begins the Crisis of the Third Century, a period of military anarchy, economic collapse, and civil war that nearly destroys the Roman Empire."
+    },
+    {
       "year": 212,
       "title": "Edict of Caracalla",
       "description": "Emperor Caracalla grants Roman citizenship to all free inhabitants of the empire."
@@ -99,7 +149,7 @@
     {
       "year": 284,
       "title": "Diocletian Becomes Emperor",
-      "description": "Diocletian becomes emperor and institutes major reforms, including the division of the empire into East and West."
+      "description": "Diocletian becomes emperor and institutes major reforms, including the division of the empire into East and West, ending the Crisis of the Third Century."
     },
     {
       "year": 313,

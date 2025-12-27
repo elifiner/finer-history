@@ -7,9 +7,19 @@
       "description": "The first major wave of Jewish immigration to Palestine begins, marking the start of modern Zionist settlement."
     },
     {
+      "year": 1909,
+      "title": "First Kibbutz Founded",
+      "description": "Degania, the first kibbutz, is established near the Sea of Galilee, beginning a unique communal settlement movement that becomes central to Israeli society and agriculture."
+    },
+    {
       "year": 1897,
       "title": "First Zionist Congress",
       "description": "Theodor Herzl convenes the First Zionist Congress in Basel, Switzerland, establishing the World Zionist Organization."
+    },
+    {
+      "year": 1915,
+      "title": "McMahon-Hussein Correspondence",
+      "description": "British promises of Arab independence in exchange for revolting against the Ottomans complicate Zionist aspirations amid World War I alliances and conflicting British commitments."
     },
     {
       "year": 1917,
@@ -37,6 +47,11 @@
       "description": "A three-year Arab uprising against British rule and Jewish immigration begins in Palestine."
     },
     {
+      "year": 1937,
+      "title": "Peel Commission Partition Proposal",
+      "description": "The British Peel Commission proposes partitioning Palestine into separate Jewish and Arab states amid violence, seen as early international recognition of Jewish state needs."
+    },
+    {
       "year": 1939,
       "title": "White Paper",
       "description": "Britain issues the White Paper, severely restricting Jewish immigration to Palestine at a critical time."
@@ -50,6 +65,11 @@
       "year": 1945,
       "title": "End of World War II",
       "description": "The Holocaust ends, revealing the full extent of the genocide and strengthening the case for a Jewish state."
+    },
+    {
+      "year": 1946,
+      "title": "King David Hotel Bombing",
+      "description": "The Irgun, a Jewish militant group, bombs the British headquarters in Jerusalem, killing 91 people, as part of resistance to Mandate restrictions on Jewish immigration."
     },
     {
       "year": 1947,
@@ -72,6 +92,11 @@
       "description": "Israel signs armistice agreements with Egypt, Lebanon, Jordan, and Syria, ending the War of Independence."
     },
     {
+      "year": 1951,
+      "title": "Fedayeen Raids and Retaliations",
+      "description": "Palestinian infiltrators from Gaza and the West Bank conduct raids into Israel, prompting Israeli reprisals for security and creating a cycle of border violence."
+    },
+    {
       "year": 1956,
       "title": "Suez Crisis",
       "description": "Israel, along with Britain and France, invades Egypt's Sinai Peninsula in response to the nationalization of the Suez Canal."
@@ -82,9 +107,19 @@
       "description": "Nazi war criminal Adolf Eichmann is captured in Argentina by Israeli agents and brought to trial in Israel."
     },
     {
+      "year": 1966,
+      "title": "Shmuel Yosef Agnon Wins Nobel Prize",
+      "description": "Shmuel Yosef Agnon becomes the first Hebrew writer to win the Nobel Prize in Literature, recognizing the revival of Hebrew as a literary language."
+    },
+    {
       "year": 1967,
       "title": "Six-Day War",
       "description": "Israel wins a decisive victory in six days, gaining control of the West Bank, Gaza Strip, Sinai Peninsula, and Golan Heights."
+    },
+    {
+      "year": 1972,
+      "title": "Munich Olympics Attack",
+      "description": "Palestinian Black September group kills 11 Israeli athletes at the Munich Olympics, seen as terrorism targeting civilians and highlighting the globalization of the conflict."
     },
     {
       "year": 1973,
@@ -95,6 +130,11 @@
       "year": 1977,
       "title": "Menachem Begin Elected",
       "description": "Menachem Begin becomes Prime Minister, ending 29 years of Labor Party dominance and beginning the Likud era."
+    },
+    {
+      "year": 1992,
+      "title": "Yitzhak Rabin Elected Prime Minister",
+      "description": "Yitzhak Rabin is elected Prime Minister for the second time, returning the Labor Party to power and initiating a new peace process with the Palestinians."
     },
     {
       "year": 1978,
@@ -115,6 +155,11 @@
       "year": 1987,
       "title": "First Intifada Begins",
       "description": "Palestinian uprising begins in the West Bank and Gaza Strip, marked by widespread protests and civil disobedience."
+    },
+    {
+      "year": 1988,
+      "title": "Hamas Founded",
+      "description": "Hamas, an Islamist group committed to armed struggle and non-recognition of Israel, emerges during the First Intifada as a grassroots resistance movement."
     },
     {
       "year": 1991,
@@ -142,9 +187,24 @@
       "description": "Prime Minister Yitzhak Rabin is assassinated by a Jewish extremist opposed to the peace process."
     },
     {
+      "year": 1995,
+      "title": "Bank of Israel Independence Law",
+      "description": "The Bank of Israel is granted independence, establishing monetary policy autonomy and contributing to Israel's economic stability and tech boom."
+    },
+    {
+      "year": 2000,
+      "title": "Camp David Summit Failure",
+      "description": "Prime Minister Ehud Barak offers what Israel considers a generous peace deal, but Yasser Arafat rejects it, leading to the collapse of negotiations and the Second Intifada."
+    },
+    {
       "year": 2000,
       "title": "Second Intifada Begins",
       "description": "The Al-Aqsa Intifada begins after Ariel Sharon visits the Temple Mount, leading to years of violence."
+    },
+    {
+      "year": 2005,
+      "title": "Israeli Tech Boom",
+      "description": "Israel becomes known as the 'Startup Nation,' with the highest concentration of startups per capita in the world and major contributions to cybersecurity, software, and medical technology."
     },
     {
       "year": 2005,
@@ -162,14 +222,39 @@
       "description": "Israel launches a major military operation in Gaza in response to rocket attacks from Hamas."
     },
     {
+      "year": 2010,
+      "title": "Gaza Flotilla Raid",
+      "description": "Israeli Navy intercepts aid ships attempting to break the Gaza blockade, resulting in the deaths of 9 activists in a clash that highlights the humanitarian impact of the blockade."
+    },
+    {
       "year": 2014,
       "title": "Operation Protective Edge",
       "description": "A 50-day conflict between Israel and Hamas in Gaza, resulting in significant casualties on both sides."
     },
     {
+      "year": 2015,
+      "title": "Supreme Court Strikes Down Infiltration Law",
+      "description": "The Israeli Supreme Court strikes down amendments to the Prevention of Infiltration Law, demonstrating judicial independence and protection of human rights."
+    },
+    {
+      "year": 2018,
+      "title": "US Embassy Move to Jerusalem",
+      "description": "The United States moves its embassy to Jerusalem, recognizing the city as Israel's capital and affirming Israeli claims, though Palestinians view it as undermining the two-state solution."
+    },
+    {
       "year": 2020,
       "title": "Abraham Accords",
       "description": "Israel normalizes relations with the United Arab Emirates and Bahrain, with Morocco and Sudan following later."
+    },
+    {
+      "year": 2022,
+      "title": "Benjamin Netanyahu Returns to Power",
+      "description": "Benjamin Netanyahu forms a coalition government and returns as Prime Minister, marking his sixth term and a shift toward more conservative policies."
+    },
+    {
+      "year": 2023,
+      "title": "Judicial Reform Protests",
+      "description": "Massive domestic protests erupt across Israel against Prime Minister Netanyahu's judicial reforms, revealing deep internal divisions over democracy and the role of the courts."
     },
     {
       "year": 2023,

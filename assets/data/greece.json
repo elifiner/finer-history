@@ -12,6 +12,11 @@
       "description": "Greeks begin establishing colonies throughout the Mediterranean, spreading Greek culture and trade."
     },
     {
+      "year": -750,
+      "title": "Homer's Epics Composed",
+      "description": "Homer composes the Iliad and Odyssey, foundational works of Western literature that preserve the oral tradition of the Trojan War and its aftermath."
+    },
+    {
       "year": -650,
       "title": "Rise of Tyrants",
       "description": "Tyrants begin to seize power in various Greek city-states, challenging aristocratic rule."
@@ -47,6 +52,26 @@
       "description": "Greek forces decisively defeat the Persians, ending the Persian invasion of Greece."
     },
     {
+      "year": -447,
+      "title": "Parthenon Construction Begins",
+      "description": "Construction begins on the Parthenon, the magnificent temple dedicated to Athena on the Acropolis, symbolizing the height of Athenian power and artistic achievement."
+    },
+    {
+      "year": -440,
+      "title": "Herodotus Writes Histories",
+      "description": "Herodotus completes his Histories, earning him the title 'Father of History' for his systematic investigation of the Greco-Persian Wars and the cultures of the ancient world."
+    },
+    {
+      "year": -440,
+      "title": "Sophocles' Oedipus Rex",
+      "description": "Sophocles writes Oedipus Rex, one of the greatest tragedies of ancient Greek drama, exemplifying the golden age of Athenian theater."
+    },
+    {
+      "year": -430,
+      "title": "Euripides' Medea",
+      "description": "Euripides writes Medea, showcasing his innovative approach to tragedy and psychological depth in Greek drama."
+    },
+    {
       "year": -461,
       "title": "First Peloponnesian War Begins",
       "description": "Conflict breaks out between Athens and Sparta, beginning decades of warfare between the two powers."
@@ -67,9 +92,19 @@
       "description": "Athens surrenders to Sparta, ending the Peloponnesian War and beginning Spartan hegemony."
     },
     {
+      "year": -400,
+      "title": "Thucydides' History of the Peloponnesian War",
+      "description": "Thucydides completes his History of the Peloponnesian War, establishing rigorous standards for historical writing and political analysis."
+    },
+    {
       "year": -399,
       "title": "Trial and Death of Socrates",
       "description": "Socrates is tried and executed for corrupting the youth and impiety, becoming a martyr for philosophy."
+    },
+    {
+      "year": -387,
+      "title": "Plato Founds the Academy",
+      "description": "Plato establishes the Academy in Athens, the first institution of higher learning in the Western world, where he teaches philosophy and mathematics."
     },
     {
       "year": -371,
@@ -87,6 +122,11 @@
       "description": "Philip II of Macedon defeats the combined forces of Athens and Thebes, establishing Macedonian dominance over Greece."
     },
     {
+      "year": -335,
+      "title": "Aristotle Founds the Lyceum",
+      "description": "Aristotle establishes the Lyceum in Athens, where he teaches and conducts research, creating a comprehensive system of philosophy and science."
+    },
+    {
       "year": -336,
       "title": "Alexander the Great Becomes King",
       "description": "Alexander succeeds his father Philip II and begins his legendary conquests across Asia."
@@ -100,6 +140,11 @@
       "year": -331,
       "title": "Battle of Gaugamela",
       "description": "Alexander defeats Darius III at Gaugamela, effectively ending the Persian Empire."
+    },
+    {
+      "year": -331,
+      "title": "Alexandria Founded",
+      "description": "Alexander the Great founds the city of Alexandria in Egypt, which becomes a major center of Hellenistic culture, learning, and commerce."
     },
     {
       "year": -327,
@@ -120,6 +165,31 @@
       "year": -301,
       "title": "Battle of Ipsus",
       "description": "The successors of Alexander fight at Ipsus, leading to the final division of his empire."
+    },
+    {
+      "year": -300,
+      "title": "Euclid Writes Elements",
+      "description": "Euclid compiles Elements, a comprehensive treatise on geometry and mathematics that becomes the standard textbook for over two millennia."
+    },
+    {
+      "year": -280,
+      "title": "Library of Alexandria Founded",
+      "description": "Ptolemy II establishes the Library of Alexandria, the largest library of the ancient world, becoming a center of scholarship and preserving countless works of literature and science."
+    },
+    {
+      "year": -287,
+      "title": "Archimedes Born",
+      "description": "Archimedes is born in Syracuse, later becoming one of the greatest mathematicians and inventors of antiquity, known for his work on geometry, mechanics, and hydrostatics."
+    },
+    {
+      "year": -276,
+      "title": "Eratosthenes Born",
+      "description": "Eratosthenes is born, later becoming the chief librarian of Alexandria and calculating the Earth's circumference with remarkable accuracy."
+    },
+    {
+      "year": -212,
+      "title": "Death of Archimedes",
+      "description": "Archimedes is killed during the Roman siege of Syracuse, ending the life of one of history's greatest mathematicians and inventors."
     },
     {
       "year": -146,

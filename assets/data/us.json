@@ -32,6 +32,16 @@
       "description": "Congress passes legislation admitting Missouri as a slave state and Maine as a free state, maintaining the balance of power."
     },
     {
+      "year": 1830,
+      "title": "Indian Removal Act",
+      "description": "President Andrew Jackson signs the Indian Removal Act, authorizing the forced relocation of Native American tribes from the southeastern United States to lands west of the Mississippi River."
+    },
+    {
+      "year": 1838,
+      "title": "Trail of Tears",
+      "description": "The forced removal of Cherokee and other Native American tribes begins, resulting in thousands of deaths during the journey to Indian Territory in present-day Oklahoma."
+    },
+    {
       "year": 1846,
       "title": "Mexican-American War Begins",
       "description": "The United States declares war on Mexico over territorial disputes, resulting in significant territorial gains."
@@ -58,13 +68,38 @@
     },
     {
       "year": 1865,
+      "title": "13th Amendment Ratified",
+      "description": "The 13th Amendment is ratified, abolishing slavery and involuntary servitude throughout the United States."
+    },
+    {
+      "year": 1865,
       "title": "Lincoln Assassinated",
       "description": "President Abraham Lincoln is assassinated by John Wilkes Booth at Ford's Theatre in Washington, D.C."
+    },
+    {
+      "year": 1868,
+      "title": "14th Amendment Ratified",
+      "description": "The 14th Amendment is ratified, granting citizenship to all persons born or naturalized in the United States and guaranteeing equal protection under the law."
     },
     {
       "year": 1869,
       "title": "Transcontinental Railroad Completed",
       "description": "The first transcontinental railroad is completed, connecting the eastern and western United States."
+    },
+    {
+      "year": 1870,
+      "title": "15th Amendment Ratified",
+      "description": "The 15th Amendment is ratified, prohibiting the denial of voting rights based on race, color, or previous condition of servitude."
+    },
+    {
+      "year": 1870,
+      "title": "American Industrial Revolution",
+      "description": "The United States experiences rapid industrialization, with innovations in steel production, railroads, and manufacturing transforming the economy and society."
+    },
+    {
+      "year": 1890,
+      "title": "Wounded Knee Massacre",
+      "description": "U.S. troops massacre over 200 Lakota Sioux at Wounded Knee Creek, South Dakota, marking the end of armed Native American resistance to U.S. expansion."
     },
     {
       "year": 1898,
@@ -82,9 +117,19 @@
       "description": "The 19th Amendment is ratified, granting women the right to vote nationwide."
     },
     {
+      "year": 1870,
+      "title": "American Industrial Revolution",
+      "description": "The United States experiences rapid industrialization, with innovations in steel production, railroads, and manufacturing transforming the economy and society."
+    },
+    {
       "year": 1929,
       "title": "Stock Market Crash",
       "description": "The Wall Street Crash of 1929 triggers the Great Depression, the worst economic downturn in American history."
+    },
+    {
+      "year": 1933,
+      "title": "New Deal Begins",
+      "description": "President Franklin D. Roosevelt launches the New Deal, a series of programs and reforms including the CCC, WPA, Social Security, and banking regulations to combat the Great Depression."
     },
     {
       "year": 1941,

@@ -56,6 +56,7 @@ class GameProvider extends ChangeNotifier {
         'assets/data/rome.json',
         'assets/data/greece.json',
         'assets/data/israel.json',
+        'assets/data/palestine.json',
         'assets/data/evolution.json',
         'assets/data/computing.json',
       ];

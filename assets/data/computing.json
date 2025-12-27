@@ -47,6 +47,16 @@
       "description": "Konrad Zuse completes the Z3, the world's first programmable, fully automatic digital computer."
     },
     {
+      "year": 1940,
+      "title": "Enigma Code Broken",
+      "description": "Alan Turing and his team at Bletchley Park successfully break the German Enigma code, using electromechanical machines called Bombes, significantly shortening World War II."
+    },
+    {
+      "year": 1943,
+      "title": "Colossus Computer Operational",
+      "description": "The Colossus computer becomes operational at Bletchley Park, becoming the world's first programmable, electronic, digital computer, used to break German Lorenz cipher messages."
+    },
+    {
       "year": 1945,
       "title": "ENIAC Completed",
       "description": "The Electronic Numerical Integrator and Computer (ENIAC) is completed, becoming the first general-purpose electronic digital computer."
@@ -112,6 +122,11 @@
       "description": "ARPANET, the precursor to the internet, is established, connecting four major universities in the U.S."
     },
     {
+      "year": 1969,
+      "title": "UNIX Operating System Created",
+      "description": "Ken Thompson and Dennis Ritchie begin developing UNIX at Bell Labs, creating a powerful, portable operating system that becomes foundational to modern computing."
+    },
+    {
       "year": 1971,
       "title": "Intel 4004 Microprocessor",
       "description": "Intel introduces the 4004, the first commercially available microprocessor, containing 2,300 transistors."
@@ -152,6 +167,11 @@
       "description": "The Domain Name System (DNS) is introduced, organizing the internet into a hierarchical structure with domain names."
     },
     {
+      "year": 1983,
+      "title": "GNU Project Announced",
+      "description": "Richard Stallman announces the GNU Project and the Free Software Foundation, launching the free software movement and creating the foundation for open-source software."
+    },
+    {
       "year": 1984,
       "title": "Apple Macintosh",
       "description": "Apple launches the Macintosh, the first mass-market personal computer with a graphical user interface and mouse."
@@ -167,9 +187,19 @@
       "description": "Tim Berners-Lee proposes the World Wide Web at CERN, revolutionizing information sharing and creating the foundation of the modern internet."
     },
     {
+      "year": 1993,
+      "title": "World Wide Web Released to Public Domain",
+      "description": "CERN releases the World Wide Web technology into the public domain, ensuring it remains free and open, allowing the internet to flourish globally."
+    },
+    {
       "year": 1991,
       "title": "Linux Kernel Released",
       "description": "Linus Torvalds releases the first version of the Linux operating system kernel, creating an open-source alternative to Unix."
+    },
+    {
+      "year": 1995,
+      "title": "Apache HTTP Server Released",
+      "description": "The Apache HTTP Server is released as open-source software, becoming the most widely used web server software and demonstrating the power of collaborative open-source development."
     },
     {
       "year": 1993,
@@ -267,19 +297,9 @@
       "description": "Google researchers introduce the Transformer architecture in 'Attention Is All You Need', revolutionizing natural language processing and enabling modern LLMs."
     },
     {
-      "year": 2019,
-      "title": "Quantum Supremacy",
-      "description": "Google claims quantum supremacy with its 53-qubit Sycamore processor, performing a calculation that would take classical computers thousands of years."
-    },
-    {
       "year": 2020,
       "title": "GPT-3 Released",
       "description": "OpenAI releases GPT-3, a language model with 175 billion parameters capable of generating human-like text, marking a significant advancement in natural language processing."
-    },
-    {
-      "year": 2022,
-      "title": "Exascale Computing",
-      "description": "Frontier becomes the world's fastest supercomputer, achieving exascale performance and ushering in a new era of high-performance computing."
     },
     {
       "year": 2022,

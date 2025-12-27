@@ -1,0 +1,256 @@
+{
+  "category": "Palestine",
+  "events": [
+    {
+      "year": 1882,
+      "title": "First Aliyah Begins",
+      "description": "The first major wave of Jewish immigration to Palestine begins, marking the start of Zionist settlement and changing the demographic balance of the region."
+    },
+    {
+      "year": 1897,
+      "title": "First Zionist Congress",
+      "description": "Theodor Herzl convenes the First Zionist Congress, establishing the World Zionist Organization and formalizing plans for a Jewish state in Palestine."
+    },
+    {
+      "year": 1915,
+      "title": "McMahon-Hussein Correspondence",
+      "description": "Britain pledges Arab independence in exchange for revolting against the Ottomans, but later betrays these promises with the Balfour Declaration, highlighting British duplicity that affects both Arabs and Jews."
+    },
+    {
+      "year": 1917,
+      "title": "Balfour Declaration",
+      "description": "Britain issues the Balfour Declaration, promising support for a 'national home for the Jewish people' in Palestine without consulting the indigenous Palestinian population."
+    },
+    {
+      "year": 1920,
+      "title": "British Mandate Begins",
+      "description": "The League of Nations grants Britain the mandate to govern Palestine, beginning a period of British colonial rule that facilitates increased Jewish immigration."
+    },
+    {
+      "year": 1920,
+      "title": "Nebi Musa Riots",
+      "description": "Palestinian Arab riots break out in Jerusalem during the Nebi Musa festival, expressing opposition to Zionist immigration and British policies."
+    },
+    {
+      "year": 1929,
+      "title": "1929 Palestinian Uprising",
+      "description": "Widespread Palestinian protests and violence erupt across Palestine in response to growing Jewish immigration and land purchases, resulting in hundreds of casualties."
+    },
+    {
+      "year": 1936,
+      "title": "Great Arab Revolt Begins",
+      "description": "A three-year Palestinian uprising against British rule and Zionist immigration begins, led by the Arab Higher Committee and involving strikes, protests, and armed resistance."
+    },
+    {
+      "year": 1937,
+      "title": "Peel Commission Recommends Partition",
+      "description": "The British Peel Commission recommends partitioning Palestine into separate Jewish and Arab states, allocating most of the land to the Jewish minority, a proposal rejected by Palestinian leaders as unfair."
+    },
+    {
+      "year": 1939,
+      "title": "White Paper Limits Immigration",
+      "description": "Britain issues the White Paper, limiting Jewish immigration to Palestine, but Palestinians view it as too little too late after years of demographic change."
+    },
+    {
+      "year": 1946,
+      "title": "King David Hotel Bombing",
+      "description": "Zionist paramilitary group Irgun bombs the British headquarters in Jerusalem, killing 91 people, highlighting escalating Zionist militancy and British favoritism toward Jewish settlers."
+    },
+    {
+      "year": 1947,
+      "title": "UN Partition Plan",
+      "description": "The United Nations votes to partition Palestine, allocating 56% of the land to a Jewish state despite Jews comprising about one-third of the population, a decision Palestinians reject."
+    },
+    {
+      "year": 1948,
+      "title": "Nakba Begins",
+      "description": "The Palestinian Nakba (catastrophe) begins as hundreds of thousands of Palestinians are displaced from their homes during the establishment of Israel, creating a refugee crisis that continues today."
+    },
+    {
+      "year": 1948,
+      "title": "Deir Yassin Massacre",
+      "description": "Zionist paramilitary forces kill over 100 Palestinian civilians in the village of Deir Yassin, becoming a symbol of Palestinian suffering during the Nakba."
+    },
+    {
+      "year": 1949,
+      "title": "Armistice Agreements",
+      "description": "Armistice agreements are signed, leaving Palestinians divided between Israel, the West Bank (under Jordan), and Gaza (under Egypt), with no independent Palestinian state."
+    },
+    {
+      "year": 1951,
+      "title": "Fedayeen Raids Begin",
+      "description": "Palestinian refugees begin conducting raids from Gaza and the West Bank into Israel, representing early armed resistance against border restrictions and lost lands, prompting Israeli reprisals."
+    },
+    {
+      "year": 1950,
+      "title": "Jordan Annexes West Bank",
+      "description": "Jordan formally annexes the West Bank, granting Palestinians there Jordanian citizenship but maintaining their identity as Palestinians."
+    },
+    {
+      "year": 1964,
+      "title": "PLO Founded",
+      "description": "The Palestine Liberation Organization is founded at the Arab League summit, becoming the main representative body of the Palestinian people."
+    },
+    {
+      "year": 1967,
+      "title": "Naksa - Six-Day War",
+      "description": "Israel occupies the West Bank, Gaza Strip, and East Jerusalem during the Six-Day War, beginning a military occupation that continues for decades."
+    },
+    {
+      "year": 1968,
+      "title": "Battle of Karameh",
+      "description": "Palestinian fedayeen fighters, supported by Jordanian forces, resist an Israeli attack on the Karameh refugee camp, becoming a symbol of Palestinian resistance."
+    },
+    {
+      "year": 1970,
+      "title": "Black September",
+      "description": "Jordan expels the PLO after violent clashes, forcing Palestinian fighters to relocate to Lebanon and marking a turning point in Palestinian-Jordanian relations."
+    },
+    {
+      "year": 1972,
+      "title": "Munich Olympics Attack",
+      "description": "Palestinian Black September group attacks Israeli athletes at the Munich Olympics, killing 11, an act of desperation to draw global attention to the refugee plight and ongoing occupation."
+    },
+    {
+      "year": 1974,
+      "title": "PLO Recognized as Palestinian Representative",
+      "description": "The Arab League and United Nations recognize the PLO as the sole legitimate representative of the Palestinian people."
+    },
+    {
+      "year": 1982,
+      "title": "Sabra and Shatila Massacre",
+      "description": "Lebanese Christian militias, with Israeli complicity, massacre hundreds of Palestinian refugees in the Sabra and Shatila camps in Beirut."
+    },
+    {
+      "year": 1987,
+      "title": "First Intifada Begins",
+      "description": "The First Intifada begins in the West Bank and Gaza Strip, a popular uprising marked by civil disobedience, strikes, and stone-throwing against Israeli occupation."
+    },
+    {
+      "year": 1988,
+      "title": "Hamas Founded",
+      "description": "Hamas is founded as a grassroots resistance movement during the First Intifada, providing social services amid occupation and representing a shift from secular PLO to Islamist factions."
+    },
+    {
+      "year": 1988,
+      "title": "Palestinian Declaration of Independence",
+      "description": "The PLO declares Palestinian independence and accepts UN Resolution 242, implicitly recognizing Israel's right to exist in exchange for a Palestinian state."
+    },
+    {
+      "year": 1991,
+      "title": "Madrid Conference",
+      "description": "Palestinians participate in the Madrid Peace Conference, marking the first time Palestinians engage in direct negotiations with Israel."
+    },
+    {
+      "year": 1993,
+      "title": "Oslo Accords Signed",
+      "description": "Israel and the PLO sign the Oslo Accords, establishing the Palestinian Authority and creating hope for a two-state solution, though many Palestinians remain skeptical."
+    },
+    {
+      "year": 1994,
+      "title": "Palestinian Authority Established",
+      "description": "Yasser Arafat returns to Gaza and establishes the Palestinian Authority, beginning limited self-rule in parts of the West Bank and Gaza Strip."
+    },
+    {
+      "year": 2000,
+      "title": "Camp David Summit Failure",
+      "description": "The Camp David peace summit collapses as Palestinian leaders reject Israeli proposals as insufficient on refugees, Jerusalem, and borders, leading to blame for the diplomatic impasse."
+    },
+    {
+      "year": 2000,
+      "title": "Second Intifada Begins",
+      "description": "The Al-Aqsa Intifada begins after Ariel Sharon's visit to the Temple Mount, escalating into years of violence and Israeli military operations in Palestinian territories."
+    },
+    {
+      "year": 2002,
+      "title": "Battle of Jenin",
+      "description": "Israeli forces launch a major military operation in the Jenin refugee camp, resulting in significant Palestinian casualties and destruction."
+    },
+    {
+      "year": 2004,
+      "title": "Death of Yasser Arafat",
+      "description": "Yasser Arafat, the longtime leader of the PLO and Palestinian Authority, dies in Paris, marking the end of an era in Palestinian politics."
+    },
+    {
+      "year": 2005,
+      "title": "Mahmoud Abbas Elected",
+      "description": "Mahmoud Abbas is elected President of the Palestinian Authority, succeeding Yasser Arafat and committing to a diplomatic approach to achieving Palestinian statehood."
+    },
+    {
+      "year": 2006,
+      "title": "Hamas Wins Legislative Elections",
+      "description": "Hamas wins a majority in Palestinian Legislative Council elections, leading to international isolation and internal Palestinian political division."
+    },
+    {
+      "year": 2007,
+      "title": "Gaza Blockade Begins",
+      "description": "Israel imposes a strict blockade on the Gaza Strip after Hamas takes control, severely restricting movement and access to basic necessities for Gaza's population."
+    },
+    {
+      "year": 2008,
+      "title": "Operation Cast Lead",
+      "description": "Israel launches a major military operation in Gaza, resulting in over 1,400 Palestinian deaths and widespread destruction, while Hamas fires rockets into Israel."
+    },
+    {
+      "year": 2010,
+      "title": "Gaza Flotilla Raid",
+      "description": "Israeli forces raid humanitarian aid ships attempting to break the Gaza blockade, killing 9 activists and highlighting the blockade's devastating impact on Palestinian civilians."
+    },
+    {
+      "year": 2011,
+      "title": "Palestinian Statehood Bid",
+      "description": "Palestinian Authority President Mahmoud Abbas submits a request for full UN membership, seeking recognition of Palestine as an independent state."
+    },
+    {
+      "year": 2012,
+      "title": "UN Grants Palestine Non-Member Observer Status",
+      "description": "The UN General Assembly upgrades Palestine to non-member observer state status, a symbolic but significant step toward international recognition."
+    },
+    {
+      "year": 2014,
+      "title": "Operation Protective Edge",
+      "description": "A 50-day conflict between Israel and Hamas in Gaza results in over 2,200 Palestinian deaths and massive destruction of infrastructure in the Gaza Strip."
+    },
+    {
+      "year": 2017,
+      "title": "Hamas-Fatah Reconciliation Agreement",
+      "description": "Hamas and Fatah sign a reconciliation agreement in Cairo, attempting to end a decade of political division, though implementation remains limited."
+    },
+    {
+      "year": 2018,
+      "title": "US Embassy Move to Jerusalem",
+      "description": "The United States moves its embassy to Jerusalem, a provocation that undermines the two-state solution and sparks the Great March of Return protests in Gaza."
+    },
+    {
+      "year": 2018,
+      "title": "Great March of Return Begins",
+      "description": "Palestinians in Gaza begin weekly protests along the border fence with Israel, demanding the right of return for refugees and an end to the blockade."
+    },
+    {
+      "year": 2021,
+      "title": "Sheikh Jarrah Protests",
+      "description": "Palestinian families in East Jerusalem's Sheikh Jarrah neighborhood face eviction, sparking widespread protests and an 11-day conflict between Israel and Hamas."
+    },
+    {
+      "year": 2022,
+      "title": "Shireen Abu Akleh Killed",
+      "description": "Palestinian-American journalist Shireen Abu Akleh is killed by Israeli forces while covering a raid in Jenin, drawing international condemnation."
+    },
+    {
+      "year": 2023,
+      "title": "Israeli Judicial Reform Protests",
+      "description": "Massive protests erupt in Israel against Netanyahu's judicial reforms, revealing internal Israeli divisions that Palestinians see as an opportunity for unity, though overshadowed by escalating tensions."
+    },
+    {
+      "year": 2023,
+      "title": "October 7 Attacks and War",
+      "description": "Hamas launches attacks on Israel, killing over 1,200 Israelis, triggering a major Israeli military operation in Gaza that results in tens of thousands of Palestinian casualties."
+    },
+    {
+      "year": 2024,
+      "title": "ICJ Ruling on Genocide",
+      "description": "The International Court of Justice issues a preliminary ruling ordering Israel to prevent acts of genocide in Gaza, while Palestinians continue to face severe humanitarian crisis."
+    }
+  ]
+}
+
