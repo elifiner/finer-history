@@ -65,6 +65,7 @@ flutter:
     - assets/data/rome.json
     - assets/data/greece.json
     - assets/data/evolution.json
+    - assets/data/computing.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

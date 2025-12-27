@@ -1,133 +1,135 @@
-[
-  {
-    "year": -3500000000,
-    "title": "First Life Appears",
-    "description": "The earliest evidence of life on Earth appears in the form of prokaryotic cells, single-celled organisms without a nucleus."
-  },
-  {
-    "year": -2500000000,
-    "title": "Great Oxidation Event",
-    "description": "Cyanobacteria begin producing oxygen through photosynthesis, dramatically changing Earth's atmosphere and enabling complex life."
-  },
-  {
-    "year": -2100000000,
-    "title": "First Eukaryotic Cells",
-    "description": "Eukaryotic cells evolve with a nucleus and organelles, representing a major step toward complex multicellular life."
-  },
-  {
-    "year": -1200000000,
-    "title": "First Multicellular Organisms",
-    "description": "The first multicellular organisms appear, allowing for specialization of cells and more complex life forms."
-  },
-  {
-    "year": -600000000,
-    "title": "Ediacaran Biota",
-    "description": "The Ediacaran period sees the first complex multicellular organisms, soft-bodied creatures that represent early animal life."
-  },
-  {
-    "year": -540000000,
-    "title": "Cambrian Explosion",
-    "description": "A rapid diversification of life occurs, with most major animal phyla appearing in the fossil record within a few million years."
-  },
-  {
-    "year": -470000000,
-    "title": "First Land Plants",
-    "description": "Plants begin colonizing land, evolving from aquatic ancestors and transforming terrestrial ecosystems."
-  },
-  {
-    "year": -420000000,
-    "title": "First Land Animals",
-    "description": "Arthropods become the first animals to successfully colonize land, paving the way for terrestrial ecosystems."
-  },
-  {
-    "year": -360000000,
-    "title": "First Vertebrates on Land",
-    "description": "Amphibians evolve from fish ancestors, becoming the first vertebrates to walk on land."
-  },
-  {
-    "year": -320000000,
-    "title": "First Reptiles",
-    "description": "Reptiles evolve from amphibians, developing amniotic eggs that allow reproduction away from water."
-  },
-  {
-    "year": -250000000,
-    "title": "Permian-Triassic Extinction",
-    "description": "The largest mass extinction in Earth's history wipes out 90% of marine species and 70% of terrestrial vertebrates."
-  },
-  {
-    "year": -230000000,
-    "title": "First Dinosaurs",
-    "description": "Dinosaurs first appear and begin to dominate terrestrial ecosystems for the next 165 million years."
-  },
-  {
-    "year": -200000000,
-    "title": "First Mammals",
-    "description": "Mammals evolve from synapsid ancestors, initially small and nocturnal, surviving alongside dinosaurs."
-  },
-  {
-    "year": -150000000,
-    "title": "First Birds",
-    "description": "Birds evolve from theropod dinosaurs, developing feathers and flight capabilities."
-  },
-  {
-    "year": -130000000,
-    "title": "First Flowering Plants",
-    "description": "Angiosperms (flowering plants) evolve, eventually becoming the dominant plant group on Earth."
-  },
-  {
-    "year": -66000000,
-    "title": "Cretaceous-Paleogene Extinction",
-    "description": "An asteroid impact triggers mass extinction, wiping out non-avian dinosaurs and many other species."
-  },
-  {
-    "year": -55000000,
-    "title": "Mammals Diversify",
-    "description": "With dinosaurs gone, mammals rapidly diversify and fill ecological niches, leading to modern mammal groups."
-  },
-  {
-    "year": -25000000,
-    "title": "First Primates",
-    "description": "Primates evolve, developing forward-facing eyes, grasping hands, and larger brains."
-  },
-  {
-    "year": -6000000,
-    "title": "Human-Chimpanzee Split",
-    "description": "The evolutionary lineages of humans and chimpanzees diverge, leading to the hominin line."
-  },
-  {
-    "year": -4000000,
-    "title": "First Hominins",
-    "description": "Early hominins like Australopithecus walk upright, a key adaptation for human evolution."
-  },
-  {
-    "year": -2500000,
-    "title": "Genus Homo Appears",
-    "description": "The genus Homo first appears with Homo habilis, characterized by tool use and larger brains."
-  },
-  {
-    "year": -2000000,
-    "title": "Homo Erectus",
-    "description": "Homo erectus spreads across Africa, Asia, and Europe, using fire and more sophisticated tools."
-  },
-  {
-    "year": -300000,
-    "title": "Homo Sapiens Evolves",
-    "description": "Modern humans (Homo sapiens) evolve in Africa, with advanced cognitive abilities and complex culture."
-  },
-  {
-    "year": -100000,
-    "title": "Humans Leave Africa",
-    "description": "Homo sapiens begin migrating out of Africa, eventually populating the entire globe."
-  },
-  {
-    "year": -50000,
-    "title": "Behavioral Modernity",
-    "description": "Humans develop symbolic thought, art, complex language, and sophisticated tool-making techniques."
-  },
-  {
-    "year": -12000,
-    "title": "Agricultural Revolution",
-    "description": "Humans begin domesticating plants and animals, transitioning from hunter-gatherer to agricultural societies."
-  }
-]
-
+{
+  "category": "Evolution",
+  "events": [
+    {
+      "year": -3500000000,
+      "title": "First Life Appears",
+      "description": "The earliest evidence of life on Earth appears in the form of prokaryotic cells, single-celled organisms without a nucleus."
+    },
+    {
+      "year": -2500000000,
+      "title": "Great Oxidation Event",
+      "description": "Cyanobacteria begin producing oxygen through photosynthesis, dramatically changing Earth's atmosphere and enabling complex life."
+    },
+    {
+      "year": -2100000000,
+      "title": "First Eukaryotic Cells",
+      "description": "Eukaryotic cells evolve with a nucleus and organelles, representing a major step toward complex multicellular life."
+    },
+    {
+      "year": -1200000000,
+      "title": "First Multicellular Organisms",
+      "description": "The first multicellular organisms appear, allowing for specialization of cells and more complex life forms."
+    },
+    {
+      "year": -600000000,
+      "title": "Ediacaran Biota",
+      "description": "The Ediacaran period sees the first complex multicellular organisms, soft-bodied creatures that represent early animal life."
+    },
+    {
+      "year": -540000000,
+      "title": "Cambrian Explosion",
+      "description": "A rapid diversification of life occurs, with most major animal phyla appearing in the fossil record within a few million years."
+    },
+    {
+      "year": -470000000,
+      "title": "First Land Plants",
+      "description": "Plants begin colonizing land, evolving from aquatic ancestors and transforming terrestrial ecosystems."
+    },
+    {
+      "year": -420000000,
+      "title": "First Land Animals",
+      "description": "Arthropods become the first animals to successfully colonize land, paving the way for terrestrial ecosystems."
+    },
+    {
+      "year": -360000000,
+      "title": "First Vertebrates on Land",
+      "description": "Amphibians evolve from fish ancestors, becoming the first vertebrates to walk on land."
+    },
+    {
+      "year": -320000000,
+      "title": "First Reptiles",
+      "description": "Reptiles evolve from amphibians, developing amniotic eggs that allow reproduction away from water."
+    },
+    {
+      "year": -250000000,
+      "title": "Permian-Triassic Extinction",
+      "description": "The largest mass extinction in Earth's history wipes out 90% of marine species and 70% of terrestrial vertebrates."
+    },
+    {
+      "year": -230000000,
+      "title": "First Dinosaurs",
+      "description": "Dinosaurs first appear and begin to dominate terrestrial ecosystems for the next 165 million years."
+    },
+    {
+      "year": -200000000,
+      "title": "First Mammals",
+      "description": "Mammals evolve from synapsid ancestors, initially small and nocturnal, surviving alongside dinosaurs."
+    },
+    {
+      "year": -150000000,
+      "title": "First Birds",
+      "description": "Birds evolve from theropod dinosaurs, developing feathers and flight capabilities."
+    },
+    {
+      "year": -130000000,
+      "title": "First Flowering Plants",
+      "description": "Angiosperms (flowering plants) evolve, eventually becoming the dominant plant group on Earth."
+    },
+    {
+      "year": -66000000,
+      "title": "Cretaceous-Paleogene Extinction",
+      "description": "An asteroid impact triggers mass extinction, wiping out non-avian dinosaurs and many other species."
+    },
+    {
+      "year": -55000000,
+      "title": "Mammals Diversify",
+      "description": "With dinosaurs gone, mammals rapidly diversify and fill ecological niches, leading to modern mammal groups."
+    },
+    {
+      "year": -25000000,
+      "title": "First Primates",
+      "description": "Primates evolve, developing forward-facing eyes, grasping hands, and larger brains."
+    },
+    {
+      "year": -6000000,
+      "title": "Human-Chimpanzee Split",
+      "description": "The evolutionary lineages of humans and chimpanzees diverge, leading to the hominin line."
+    },
+    {
+      "year": -4000000,
+      "title": "First Hominins",
+      "description": "Early hominins like Australopithecus walk upright, a key adaptation for human evolution."
+    },
+    {
+      "year": -2500000,
+      "title": "Genus Homo Appears",
+      "description": "The genus Homo first appears with Homo habilis, characterized by tool use and larger brains."
+    },
+    {
+      "year": -2000000,
+      "title": "Homo Erectus",
+      "description": "Homo erectus spreads across Africa, Asia, and Europe, using fire and more sophisticated tools."
+    },
+    {
+      "year": -300000,
+      "title": "Homo Sapiens Evolves",
+      "description": "Modern humans (Homo sapiens) evolve in Africa, with advanced cognitive abilities and complex culture."
+    },
+    {
+      "year": -100000,
+      "title": "Humans Leave Africa",
+      "description": "Homo sapiens begin migrating out of Africa, eventually populating the entire globe."
+    },
+    {
+      "year": -50000,
+      "title": "Behavioral Modernity",
+      "description": "Humans develop symbolic thought, art, complex language, and sophisticated tool-making techniques."
+    },
+    {
+      "year": -12000,
+      "title": "Agricultural Revolution",
+      "description": "Humans begin domesticating plants and animals, transitioning from hunter-gatherer to agricultural societies."
+    }
+  ]
+}

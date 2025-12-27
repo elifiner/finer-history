@@ -1,38 +1,24 @@
-enum HistoryTopic {
-  israel,
-  us,
-  rome,
-  greece,
-  evolution;
+class HistoryTopic {
+  final String id;
+  final String displayName;
+  final String assetPath;
 
-  String get displayName {
-    switch (this) {
-      case HistoryTopic.israel:
-        return 'Israel';
-      case HistoryTopic.us:
-        return 'United States';
-      case HistoryTopic.rome:
-        return 'Rome';
-      case HistoryTopic.greece:
-        return 'Greece';
-      case HistoryTopic.evolution:
-        return 'Evolution';
-    }
-  }
+  HistoryTopic({
+    required this.id,
+    required this.displayName,
+    required this.assetPath,
+  });
 
-  String get assetPath {
-    switch (this) {
-      case HistoryTopic.israel:
-        return 'assets/data/israel.json';
-      case HistoryTopic.us:
-        return 'assets/data/us.json';
-      case HistoryTopic.rome:
-        return 'assets/data/rome.json';
-      case HistoryTopic.greece:
-        return 'assets/data/greece.json';
-      case HistoryTopic.evolution:
-        return 'assets/data/evolution.json';
-    }
-  }
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is HistoryTopic &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
+  String toString() => displayName;
 }
-

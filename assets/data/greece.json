@@ -1,133 +1,135 @@
-[
-  {
-    "year": -776,
-    "title": "First Olympic Games",
-    "description": "The first recorded Olympic Games are held in Olympia, establishing the four-year cycle of the ancient Olympics."
-  },
-  {
-    "year": -750,
-    "title": "Greek Colonization Begins",
-    "description": "Greeks begin establishing colonies throughout the Mediterranean, spreading Greek culture and trade."
-  },
-  {
-    "year": -650,
-    "title": "Rise of Tyrants",
-    "description": "Tyrants begin to seize power in various Greek city-states, challenging aristocratic rule."
-  },
-  {
-    "year": -594,
-    "title": "Solon's Reforms",
-    "description": "Solon institutes major political and economic reforms in Athens, laying the foundation for democracy."
-  },
-  {
-    "year": -508,
-    "title": "Cleisthenes Establishes Democracy",
-    "description": "Cleisthenes reforms the Athenian constitution, establishing the world's first democratic government."
-  },
-  {
-    "year": -490,
-    "title": "Battle of Marathon",
-    "description": "Athenian forces defeat the Persians at Marathon, a decisive victory in the First Persian War."
-  },
-  {
-    "year": -480,
-    "title": "Battle of Thermopylae",
-    "description": "A small Greek force led by King Leonidas of Sparta makes a heroic stand against the Persian army."
-  },
-  {
-    "year": -480,
-    "title": "Battle of Salamis",
-    "description": "The Greek navy defeats the Persian fleet at Salamis, turning the tide of the Persian Wars."
-  },
-  {
-    "year": -479,
-    "title": "Battles of Plataea and Mycale",
-    "description": "Greek forces decisively defeat the Persians, ending the Persian invasion of Greece."
-  },
-  {
-    "year": -461,
-    "title": "First Peloponnesian War Begins",
-    "description": "Conflict breaks out between Athens and Sparta, beginning decades of warfare between the two powers."
-  },
-  {
-    "year": -431,
-    "title": "Peloponnesian War Begins",
-    "description": "The great war between Athens and Sparta begins, lasting 27 years and ending Athenian dominance."
-  },
-  {
-    "year": -430,
-    "title": "Plague of Athens",
-    "description": "A devastating plague strikes Athens during the Peloponnesian War, killing thousands including Pericles."
-  },
-  {
-    "year": -404,
-    "title": "Athens Surrenders",
-    "description": "Athens surrenders to Sparta, ending the Peloponnesian War and beginning Spartan hegemony."
-  },
-  {
-    "year": -399,
-    "title": "Trial and Death of Socrates",
-    "description": "Socrates is tried and executed for corrupting the youth and impiety, becoming a martyr for philosophy."
-  },
-  {
-    "year": -371,
-    "title": "Battle of Leuctra",
-    "description": "Thebes defeats Sparta at Leuctra, ending Spartan military dominance and beginning Theban hegemony."
-  },
-  {
-    "year": -359,
-    "title": "Philip II Becomes King of Macedon",
-    "description": "Philip II becomes king and begins transforming Macedon into a major military power."
-  },
-  {
-    "year": -338,
-    "title": "Battle of Chaeronea",
-    "description": "Philip II of Macedon defeats the combined forces of Athens and Thebes, establishing Macedonian dominance over Greece."
-  },
-  {
-    "year": -336,
-    "title": "Alexander the Great Becomes King",
-    "description": "Alexander succeeds his father Philip II and begins his legendary conquests across Asia."
-  },
-  {
-    "year": -334,
-    "title": "Alexander Invades Persia",
-    "description": "Alexander begins his invasion of the Persian Empire, winning decisive victories at Granicus and Issus."
-  },
-  {
-    "year": -331,
-    "title": "Battle of Gaugamela",
-    "description": "Alexander defeats Darius III at Gaugamela, effectively ending the Persian Empire."
-  },
-  {
-    "year": -327,
-    "title": "Alexander Invades India",
-    "description": "Alexander leads his army into India, reaching the furthest extent of his conquests."
-  },
-  {
-    "year": -323,
-    "title": "Death of Alexander the Great",
-    "description": "Alexander dies in Babylon at age 32, leaving his vast empire to be divided among his generals."
-  },
-  {
-    "year": -322,
-    "title": "Death of Aristotle",
-    "description": "Aristotle, one of the greatest philosophers in history, dies, leaving behind a vast body of work."
-  },
-  {
-    "year": -301,
-    "title": "Battle of Ipsus",
-    "description": "The successors of Alexander fight at Ipsus, leading to the final division of his empire."
-  },
-  {
-    "year": -146,
-    "title": "Roman Conquest of Greece",
-    "description": "Rome defeats the Achaean League and sacks Corinth, completing the conquest of Greece and ending Greek independence."
-  },
-  {
-    "year": -86,
-    "title": "Sulla Sacks Athens",
-    "description": "Roman general Sulla sacks Athens during the First Mithridatic War, ending the city's golden age."
-  }
-]
-
+{
+  "category": "Greece",
+  "events": [
+    {
+      "year": -776,
+      "title": "First Olympic Games",
+      "description": "The first recorded Olympic Games are held in Olympia, establishing the four-year cycle of the ancient Olympics."
+    },
+    {
+      "year": -750,
+      "title": "Greek Colonization Begins",
+      "description": "Greeks begin establishing colonies throughout the Mediterranean, spreading Greek culture and trade."
+    },
+    {
+      "year": -650,
+      "title": "Rise of Tyrants",
+      "description": "Tyrants begin to seize power in various Greek city-states, challenging aristocratic rule."
+    },
+    {
+      "year": -594,
+      "title": "Solon's Reforms",
+      "description": "Solon institutes major political and economic reforms in Athens, laying the foundation for democracy."
+    },
+    {
+      "year": -508,
+      "title": "Cleisthenes Establishes Democracy",
+      "description": "Cleisthenes reforms the Athenian constitution, establishing the world's first democratic government."
+    },
+    {
+      "year": -490,
+      "title": "Battle of Marathon",
+      "description": "Athenian forces defeat the Persians at Marathon, a decisive victory in the First Persian War."
+    },
+    {
+      "year": -480,
+      "title": "Battle of Thermopylae",
+      "description": "A small Greek force led by King Leonidas of Sparta makes a heroic stand against the Persian army."
+    },
+    {
+      "year": -480,
+      "title": "Battle of Salamis",
+      "description": "The Greek navy defeats the Persian fleet at Salamis, turning the tide of the Persian Wars."
+    },
+    {
+      "year": -479,
+      "title": "Battles of Plataea and Mycale",
+      "description": "Greek forces decisively defeat the Persians, ending the Persian invasion of Greece."
+    },
+    {
+      "year": -461,
+      "title": "First Peloponnesian War Begins",
+      "description": "Conflict breaks out between Athens and Sparta, beginning decades of warfare between the two powers."
+    },
+    {
+      "year": -431,
+      "title": "Peloponnesian War Begins",
+      "description": "The great war between Athens and Sparta begins, lasting 27 years and ending Athenian dominance."
+    },
+    {
+      "year": -430,
+      "title": "Plague of Athens",
+      "description": "A devastating plague strikes Athens during the Peloponnesian War, killing thousands including Pericles."
+    },
+    {
+      "year": -404,
+      "title": "Athens Surrenders",
+      "description": "Athens surrenders to Sparta, ending the Peloponnesian War and beginning Spartan hegemony."
+    },
+    {
+      "year": -399,
+      "title": "Trial and Death of Socrates",
+      "description": "Socrates is tried and executed for corrupting the youth and impiety, becoming a martyr for philosophy."
+    },
+    {
+      "year": -371,
+      "title": "Battle of Leuctra",
+      "description": "Thebes defeats Sparta at Leuctra, ending Spartan military dominance and beginning Theban hegemony."
+    },
+    {
+      "year": -359,
+      "title": "Philip II Becomes King of Macedon",
+      "description": "Philip II becomes king and begins transforming Macedon into a major military power."
+    },
+    {
+      "year": -338,
+      "title": "Battle of Chaeronea",
+      "description": "Philip II of Macedon defeats the combined forces of Athens and Thebes, establishing Macedonian dominance over Greece."
+    },
+    {
+      "year": -336,
+      "title": "Alexander the Great Becomes King",
+      "description": "Alexander succeeds his father Philip II and begins his legendary conquests across Asia."
+    },
+    {
+      "year": -334,
+      "title": "Alexander Invades Persia",
+      "description": "Alexander begins his invasion of the Persian Empire, winning decisive victories at Granicus and Issus."
+    },
+    {
+      "year": -331,
+      "title": "Battle of Gaugamela",
+      "description": "Alexander defeats Darius III at Gaugamela, effectively ending the Persian Empire."
+    },
+    {
+      "year": -327,
+      "title": "Alexander Invades India",
+      "description": "Alexander leads his army into India, reaching the furthest extent of his conquests."
+    },
+    {
+      "year": -323,
+      "title": "Death of Alexander the Great",
+      "description": "Alexander dies in Babylon at age 32, leaving his vast empire to be divided among his generals."
+    },
+    {
+      "year": -322,
+      "title": "Death of Aristotle",
+      "description": "Aristotle, one of the greatest philosophers in history, dies, leaving behind a vast body of work."
+    },
+    {
+      "year": -301,
+      "title": "Battle of Ipsus",
+      "description": "The successors of Alexander fight at Ipsus, leading to the final division of his empire."
+    },
+    {
+      "year": -146,
+      "title": "Roman Conquest of Greece",
+      "description": "Rome defeats the Achaean League and sacks Corinth, completing the conquest of Greece and ending Greek independence."
+    },
+    {
+      "year": -86,
+      "title": "Sulla Sacks Athens",
+      "description": "Roman general Sulla sacks Athens during the First Mithridatic War, ending the city's golden age."
+    }
+  ]
+}

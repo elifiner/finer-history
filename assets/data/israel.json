@@ -1,178 +1,180 @@
-[
-  {
-    "year": 1882,
-    "title": "First Aliyah",
-    "description": "The first major wave of Jewish immigration to Palestine begins, marking the start of modern Zionist settlement."
-  },
-  {
-    "year": 1897,
-    "title": "First Zionist Congress",
-    "description": "Theodor Herzl convenes the First Zionist Congress in Basel, Switzerland, establishing the World Zionist Organization."
-  },
-  {
-    "year": 1917,
-    "title": "Balfour Declaration",
-    "description": "Britain issues the Balfour Declaration, expressing support for a 'national home for the Jewish people' in Palestine."
-  },
-  {
-    "year": 1920,
-    "title": "British Mandate Begins",
-    "description": "The League of Nations grants Britain the mandate to govern Palestine, following the collapse of the Ottoman Empire."
-  },
-  {
-    "year": 1929,
-    "title": "Hebron Massacre",
-    "description": "Arab riots in Hebron result in the deaths of 67 Jews, leading to the evacuation of the Jewish community there."
-  },
-  {
-    "year": 1933,
-    "title": "Hitler Comes to Power",
-    "description": "Adolf Hitler becomes Chancellor of Germany, leading to increased Jewish immigration to Palestine."
-  },
-  {
-    "year": 1936,
-    "title": "Arab Revolt Begins",
-    "description": "A three-year Arab uprising against British rule and Jewish immigration begins in Palestine."
-  },
-  {
-    "year": 1939,
-    "title": "White Paper",
-    "description": "Britain issues the White Paper, severely restricting Jewish immigration to Palestine at a critical time."
-  },
-  {
-    "year": 1942,
-    "title": "Biltmore Program",
-    "description": "Zionist leaders adopt the Biltmore Program, calling for a Jewish state in Palestine after World War II."
-  },
-  {
-    "year": 1945,
-    "title": "End of World War II",
-    "description": "The Holocaust ends, revealing the full extent of the genocide and strengthening the case for a Jewish state."
-  },
-  {
-    "year": 1947,
-    "title": "UN Partition Plan",
-    "description": "The United Nations votes to partition Palestine into separate Jewish and Arab states."
-  },
-  {
-    "year": 1948,
-    "title": "Declaration of Independence",
-    "description": "David Ben-Gurion declares the establishment of the State of Israel on May 14, 1948."
-  },
-  {
-    "year": 1948,
-    "title": "War of Independence",
-    "description": "Israel fights for survival against invading Arab armies from Egypt, Syria, Jordan, Lebanon, and Iraq."
-  },
-  {
-    "year": 1949,
-    "title": "Armistice Agreements",
-    "description": "Israel signs armistice agreements with Egypt, Lebanon, Jordan, and Syria, ending the War of Independence."
-  },
-  {
-    "year": 1956,
-    "title": "Suez Crisis",
-    "description": "Israel, along with Britain and France, invades Egypt's Sinai Peninsula in response to the nationalization of the Suez Canal."
-  },
-  {
-    "year": 1960,
-    "title": "Eichmann Captured",
-    "description": "Nazi war criminal Adolf Eichmann is captured in Argentina by Israeli agents and brought to trial in Israel."
-  },
-  {
-    "year": 1967,
-    "title": "Six-Day War",
-    "description": "Israel wins a decisive victory in six days, gaining control of the West Bank, Gaza Strip, Sinai Peninsula, and Golan Heights."
-  },
-  {
-    "year": 1973,
-    "title": "Yom Kippur War",
-    "description": "Egypt and Syria launch a surprise attack on Yom Kippur, the holiest day in Judaism, beginning the October War."
-  },
-  {
-    "year": 1977,
-    "title": "Menachem Begin Elected",
-    "description": "Menachem Begin becomes Prime Minister, ending 29 years of Labor Party dominance and beginning the Likud era."
-  },
-  {
-    "year": 1978,
-    "title": "Camp David Accords",
-    "description": "Israel and Egypt sign the Camp David Accords, leading to a peace treaty and the return of the Sinai Peninsula to Egypt."
-  },
-  {
-    "year": 1979,
-    "title": "Peace Treaty with Egypt",
-    "description": "Israel and Egypt sign a formal peace treaty, making Egypt the first Arab country to recognize Israel."
-  },
-  {
-    "year": 1982,
-    "title": "First Lebanon War",
-    "description": "Israel invades Lebanon to remove PLO forces, leading to a prolonged military presence in southern Lebanon."
-  },
-  {
-    "year": 1987,
-    "title": "First Intifada Begins",
-    "description": "Palestinian uprising begins in the West Bank and Gaza Strip, marked by widespread protests and civil disobedience."
-  },
-  {
-    "year": 1991,
-    "title": "Gulf War",
-    "description": "Iraq fires Scud missiles at Israel during the Gulf War, but Israel does not retaliate at the request of the United States."
-  },
-  {
-    "year": 1991,
-    "title": "Madrid Conference",
-    "description": "The Madrid Peace Conference brings together Israel, Arab states, and Palestinians for direct negotiations."
-  },
-  {
-    "year": 1993,
-    "title": "Oslo Accords",
-    "description": "Israel and the PLO sign the Oslo Accords, establishing the Palestinian Authority and beginning the peace process."
-  },
-  {
-    "year": 1994,
-    "title": "Peace Treaty with Jordan",
-    "description": "Israel and Jordan sign a peace treaty, making Jordan the second Arab country to recognize Israel."
-  },
-  {
-    "year": 1995,
-    "title": "Rabin Assassinated",
-    "description": "Prime Minister Yitzhak Rabin is assassinated by a Jewish extremist opposed to the peace process."
-  },
-  {
-    "year": 2000,
-    "title": "Second Intifada Begins",
-    "description": "The Al-Aqsa Intifada begins after Ariel Sharon visits the Temple Mount, leading to years of violence."
-  },
-  {
-    "year": 2005,
-    "title": "Gaza Disengagement",
-    "description": "Israel unilaterally withdraws all settlements and military forces from the Gaza Strip."
-  },
-  {
-    "year": 2006,
-    "title": "Second Lebanon War",
-    "description": "Israel fights a 34-day war with Hezbollah in Lebanon after the group kidnaps Israeli soldiers."
-  },
-  {
-    "year": 2008,
-    "title": "Operation Cast Lead",
-    "description": "Israel launches a major military operation in Gaza in response to rocket attacks from Hamas."
-  },
-  {
-    "year": 2014,
-    "title": "Operation Protective Edge",
-    "description": "A 50-day conflict between Israel and Hamas in Gaza, resulting in significant casualties on both sides."
-  },
-  {
-    "year": 2020,
-    "title": "Abraham Accords",
-    "description": "Israel normalizes relations with the United Arab Emirates and Bahrain, with Morocco and Sudan following later."
-  },
-  {
-    "year": 2023,
-    "title": "October 7 Attacks",
-    "description": "Hamas launches a surprise attack on Israel, killing over 1,200 people and triggering a major war in Gaza."
-  }
-]
-
+{
+  "category": "Israel",
+  "events": [
+    {
+      "year": 1882,
+      "title": "First Aliyah",
+      "description": "The first major wave of Jewish immigration to Palestine begins, marking the start of modern Zionist settlement."
+    },
+    {
+      "year": 1897,
+      "title": "First Zionist Congress",
+      "description": "Theodor Herzl convenes the First Zionist Congress in Basel, Switzerland, establishing the World Zionist Organization."
+    },
+    {
+      "year": 1917,
+      "title": "Balfour Declaration",
+      "description": "Britain issues the Balfour Declaration, expressing support for a 'national home for the Jewish people' in Palestine."
+    },
+    {
+      "year": 1920,
+      "title": "British Mandate Begins",
+      "description": "The League of Nations grants Britain the mandate to govern Palestine, following the collapse of the Ottoman Empire."
+    },
+    {
+      "year": 1929,
+      "title": "Hebron Massacre",
+      "description": "Arab riots in Hebron result in the deaths of 67 Jews, leading to the evacuation of the Jewish community there."
+    },
+    {
+      "year": 1933,
+      "title": "Hitler Comes to Power",
+      "description": "Adolf Hitler becomes Chancellor of Germany, leading to increased Jewish immigration to Palestine."
+    },
+    {
+      "year": 1936,
+      "title": "Arab Revolt Begins",
+      "description": "A three-year Arab uprising against British rule and Jewish immigration begins in Palestine."
+    },
+    {
+      "year": 1939,
+      "title": "White Paper",
+      "description": "Britain issues the White Paper, severely restricting Jewish immigration to Palestine at a critical time."
+    },
+    {
+      "year": 1942,
+      "title": "Biltmore Program",
+      "description": "Zionist leaders adopt the Biltmore Program, calling for a Jewish state in Palestine after World War II."
+    },
+    {
+      "year": 1945,
+      "title": "End of World War II",
+      "description": "The Holocaust ends, revealing the full extent of the genocide and strengthening the case for a Jewish state."
+    },
+    {
+      "year": 1947,
+      "title": "UN Partition Plan",
+      "description": "The United Nations votes to partition Palestine into separate Jewish and Arab states."
+    },
+    {
+      "year": 1948,
+      "title": "Declaration of Independence",
+      "description": "David Ben-Gurion declares the establishment of the State of Israel on May 14, 1948."
+    },
+    {
+      "year": 1948,
+      "title": "War of Independence",
+      "description": "Israel fights for survival against invading Arab armies from Egypt, Syria, Jordan, Lebanon, and Iraq."
+    },
+    {
+      "year": 1949,
+      "title": "Armistice Agreements",
+      "description": "Israel signs armistice agreements with Egypt, Lebanon, Jordan, and Syria, ending the War of Independence."
+    },
+    {
+      "year": 1956,
+      "title": "Suez Crisis",
+      "description": "Israel, along with Britain and France, invades Egypt's Sinai Peninsula in response to the nationalization of the Suez Canal."
+    },
+    {
+      "year": 1960,
+      "title": "Eichmann Captured",
+      "description": "Nazi war criminal Adolf Eichmann is captured in Argentina by Israeli agents and brought to trial in Israel."
+    },
+    {
+      "year": 1967,
+      "title": "Six-Day War",
+      "description": "Israel wins a decisive victory in six days, gaining control of the West Bank, Gaza Strip, Sinai Peninsula, and Golan Heights."
+    },
+    {
+      "year": 1973,
+      "title": "Yom Kippur War",
+      "description": "Egypt and Syria launch a surprise attack on Yom Kippur, the holiest day in Judaism, beginning the October War."
+    },
+    {
+      "year": 1977,
+      "title": "Menachem Begin Elected",
+      "description": "Menachem Begin becomes Prime Minister, ending 29 years of Labor Party dominance and beginning the Likud era."
+    },
+    {
+      "year": 1978,
+      "title": "Camp David Accords",
+      "description": "Israel and Egypt sign the Camp David Accords, leading to a peace treaty and the return of the Sinai Peninsula to Egypt."
+    },
+    {
+      "year": 1979,
+      "title": "Peace Treaty with Egypt",
+      "description": "Israel and Egypt sign a formal peace treaty, making Egypt the first Arab country to recognize Israel."
+    },
+    {
+      "year": 1982,
+      "title": "First Lebanon War",
+      "description": "Israel invades Lebanon to remove PLO forces, leading to a prolonged military presence in southern Lebanon."
+    },
+    {
+      "year": 1987,
+      "title": "First Intifada Begins",
+      "description": "Palestinian uprising begins in the West Bank and Gaza Strip, marked by widespread protests and civil disobedience."
+    },
+    {
+      "year": 1991,
+      "title": "Gulf War",
+      "description": "Iraq fires Scud missiles at Israel during the Gulf War, but Israel does not retaliate at the request of the United States."
+    },
+    {
+      "year": 1991,
+      "title": "Madrid Conference",
+      "description": "The Madrid Peace Conference brings together Israel, Arab states, and Palestinians for direct negotiations."
+    },
+    {
+      "year": 1993,
+      "title": "Oslo Accords",
+      "description": "Israel and the PLO sign the Oslo Accords, establishing the Palestinian Authority and beginning the peace process."
+    },
+    {
+      "year": 1994,
+      "title": "Peace Treaty with Jordan",
+      "description": "Israel and Jordan sign a peace treaty, making Jordan the second Arab country to recognize Israel."
+    },
+    {
+      "year": 1995,
+      "title": "Rabin Assassinated",
+      "description": "Prime Minister Yitzhak Rabin is assassinated by a Jewish extremist opposed to the peace process."
+    },
+    {
+      "year": 2000,
+      "title": "Second Intifada Begins",
+      "description": "The Al-Aqsa Intifada begins after Ariel Sharon visits the Temple Mount, leading to years of violence."
+    },
+    {
+      "year": 2005,
+      "title": "Gaza Disengagement",
+      "description": "Israel unilaterally withdraws all settlements and military forces from the Gaza Strip."
+    },
+    {
+      "year": 2006,
+      "title": "Second Lebanon War",
+      "description": "Israel fights a 34-day war with Hezbollah in Lebanon after the group kidnaps Israeli soldiers."
+    },
+    {
+      "year": 2008,
+      "title": "Operation Cast Lead",
+      "description": "Israel launches a major military operation in Gaza in response to rocket attacks from Hamas."
+    },
+    {
+      "year": 2014,
+      "title": "Operation Protective Edge",
+      "description": "A 50-day conflict between Israel and Hamas in Gaza, resulting in significant casualties on both sides."
+    },
+    {
+      "year": 2020,
+      "title": "Abraham Accords",
+      "description": "Israel normalizes relations with the United Arab Emirates and Bahrain, with Morocco and Sudan following later."
+    },
+    {
+      "year": 2023,
+      "title": "October 7 Attacks",
+      "description": "Hamas launches a surprise attack on Israel, killing over 1,200 people and triggering a major war in Gaza."
+    }
+  ]
+}

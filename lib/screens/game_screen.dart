@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/game_provider.dart';
 import '../models/game_state.dart';
-import '../models/history_topic.dart';
 import '../widgets/timeline_widget.dart';
 import '../widgets/event_card.dart';
 import '../widgets/score_summary.dart';
@@ -142,7 +141,7 @@ class GameScreen extends StatelessWidget {
               const Spacer(),
               // Title (current topic name)
               Text(
-                gameProvider.currentTopic.displayName,
+                gameProvider.currentTopic?.displayName ?? 'History',
                 style: theme.textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: colorScheme.onSurface,
@@ -208,7 +207,7 @@ class GameScreen extends StatelessWidget {
                   const Spacer(),
                   // Invisible title for measurement
                   Text(
-                    gameProvider.currentTopic.displayName,
+                    gameProvider.currentTopic?.displayName ?? 'History',
                     style: theme.textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.transparent,
@@ -356,8 +355,8 @@ class GameScreen extends StatelessWidget {
               ],
             ),
           ),
-          ...HistoryTopic.values.map((topic) {
-            final isSelected = gameProvider.currentTopic == topic;
+          ...gameProvider.availableTopics.map((topic) {
+            final isSelected = gameProvider.currentTopic?.id == topic.id;
             return ListTile(
               leading: Icon(
                 isSelected ? Icons.check_circle : Icons.circle_outlined,

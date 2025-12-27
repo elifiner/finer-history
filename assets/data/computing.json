@@ -1,0 +1,295 @@
+{
+  "category": "Computing",
+  "events": [
+    {
+      "year": 1617,
+      "title": "Napier's Bones",
+      "description": "John Napier invents Napier's Bones, a manual calculating device for multiplication and division."
+    },
+    {
+      "year": 1642,
+      "title": "Pascaline Calculator",
+      "description": "Blaise Pascal develops the Pascaline, an early mechanical calculator capable of addition and subtraction."
+    },
+    {
+      "year": 1673,
+      "title": "Stepped Reckoner",
+      "description": "Gottfried Wilhelm Leibniz creates the Stepped Reckoner, a mechanical calculator that performs all four arithmetic operations."
+    },
+    {
+      "year": 1822,
+      "title": "Difference Engine",
+      "description": "Charles Babbage conceptualizes the Difference Engine, a mechanical device designed to compute polynomial functions."
+    },
+    {
+      "year": 1833,
+      "title": "Analytical Engine",
+      "description": "Charles Babbage designs the Analytical Engine, considered the first general-purpose mechanical computer concept."
+    },
+    {
+      "year": 1848,
+      "title": "First Computer Program",
+      "description": "Ada Lovelace writes the first algorithm intended for processing on the Analytical Engine, earning her the title of the first computer programmer."
+    },
+    {
+      "year": 1890,
+      "title": "Punch-Card Machine",
+      "description": "Herman Hollerith invents the punch-card machine to assist in processing the U.S. Census data, leading to the formation of IBM."
+    },
+    {
+      "year": 1936,
+      "title": "Turing Machine",
+      "description": "Alan Turing introduces the concept of the Turing Machine, laying the theoretical foundation for modern computing."
+    },
+    {
+      "year": 1941,
+      "title": "Z3 Computer",
+      "description": "Konrad Zuse completes the Z3, the world's first programmable, fully automatic digital computer."
+    },
+    {
+      "year": 1945,
+      "title": "ENIAC Completed",
+      "description": "The Electronic Numerical Integrator and Computer (ENIAC) is completed, becoming the first general-purpose electronic digital computer."
+    },
+    {
+      "year": 1947,
+      "title": "Transistor Invented",
+      "description": "John Bardeen, Walter Brattain, and William Shockley invent the transistor at Bell Labs, revolutionizing electronic circuits and leading to smaller, more efficient computers."
+    },
+    {
+      "year": 1951,
+      "title": "Ferranti Mark 1",
+      "description": "The Ferranti Mark 1, the world's first commercially available general-purpose electronic computer, is delivered to the University of Manchester."
+    },
+    {
+      "year": 1953,
+      "title": "IBM 701",
+      "description": "IBM introduces the 701, its first commercial scientific computer."
+    },
+    {
+      "year": 1956,
+      "title": "First Hard Disk Drive",
+      "description": "IBM's 305 RAMAC is released, featuring the first hard disk drive for computer storage."
+    },
+    {
+      "year": 1956,
+      "title": "Dartmouth Conference",
+      "description": "The term 'artificial intelligence' is coined at the Dartmouth Conference, marking the formal beginning of AI as a field of study."
+    },
+    {
+      "year": 1958,
+      "title": "Integrated Circuit",
+      "description": "Jack Kilby and Robert Noyce independently invent the integrated circuit, paving the way for modern microelectronics."
+    },
+    {
+      "year": 1960,
+      "title": "MOSFET Transistor",
+      "description": "The first working MOSFET (Metal-Oxide-Semiconductor Field-Effect Transistor) is built at Bell Labs, leading to the development of modern microprocessors."
+    },
+    {
+      "year": 1964,
+      "title": "IBM System/360",
+      "description": "IBM announces the System/360, a family of mainframe computers that set standards for future computing."
+    },
+    {
+      "year": 1964,
+      "title": "Computer Mouse",
+      "description": "Douglas Engelbart develops the first computer mouse at the Stanford Research Institute."
+    },
+    {
+      "year": 1965,
+      "title": "Moore's Law",
+      "description": "Gordon Moore publishes Moore's Law, predicting the doubling of transistors on integrated circuits approximately every two years."
+    },
+    {
+      "year": 1966,
+      "title": "ELIZA Program",
+      "description": "Joseph Weizenbaum develops ELIZA, one of the first natural language processing programs and chatbots, simulating conversation by pattern matching."
+    },
+    {
+      "year": 1969,
+      "title": "ARPANET Established",
+      "description": "ARPANET, the precursor to the internet, is established, connecting four major universities in the U.S."
+    },
+    {
+      "year": 1971,
+      "title": "Intel 4004 Microprocessor",
+      "description": "Intel introduces the 4004, the first commercially available microprocessor, containing 2,300 transistors."
+    },
+    {
+      "year": 1972,
+      "title": "C Programming Language",
+      "description": "Dennis Ritchie develops the C programming language at Bell Labs, which becomes one of the most influential programming languages."
+    },
+    {
+      "year": 1973,
+      "title": "Xerox Alto",
+      "description": "The Xerox Alto is developed, featuring the first computer with a graphical user interface (GUI) and mouse, influencing future personal computers."
+    },
+    {
+      "year": 1975,
+      "title": "Microsoft Founded",
+      "description": "Microsoft is founded by Bill Gates and Paul Allen, beginning the era of personal computer software."
+    },
+    {
+      "year": 1976,
+      "title": "Apple Computer Founded",
+      "description": "Apple Computer Company is founded by Steve Jobs, Steve Wozniak, and Ronald Wayne."
+    },
+    {
+      "year": 1977,
+      "title": "Apple II Released",
+      "description": "The Apple II is released, becoming one of the first highly successful mass-produced personal computers."
+    },
+    {
+      "year": 1981,
+      "title": "IBM PC Introduced",
+      "description": "IBM introduces the IBM PC, setting a standard for personal computing hardware and establishing the PC-compatible market."
+    },
+    {
+      "year": 1983,
+      "title": "Domain Name System",
+      "description": "The Domain Name System (DNS) is introduced, organizing the internet into a hierarchical structure with domain names."
+    },
+    {
+      "year": 1984,
+      "title": "Apple Macintosh",
+      "description": "Apple launches the Macintosh, the first mass-market personal computer with a graphical user interface and mouse."
+    },
+    {
+      "year": 1985,
+      "title": "Windows 1.0",
+      "description": "Microsoft releases Windows 1.0, its first graphical operating system, introducing a GUI to the MS-DOS environment."
+    },
+    {
+      "year": 1989,
+      "title": "World Wide Web Proposed",
+      "description": "Tim Berners-Lee proposes the World Wide Web at CERN, revolutionizing information sharing and creating the foundation of the modern internet."
+    },
+    {
+      "year": 1991,
+      "title": "Linux Kernel Released",
+      "description": "Linus Torvalds releases the first version of the Linux operating system kernel, creating an open-source alternative to Unix."
+    },
+    {
+      "year": 1993,
+      "title": "Mosaic Web Browser",
+      "description": "The Mosaic web browser is released, popularizing the World Wide Web and making web browsing accessible to the general public."
+    },
+    {
+      "year": 1994,
+      "title": "Netscape Navigator",
+      "description": "Netscape Navigator is released, becoming a dominant web browser and helping to commercialize the internet."
+    },
+    {
+      "year": 1995,
+      "title": "Java Programming Language",
+      "description": "Sun Microsystems releases Java, a platform-independent programming language that becomes widely used for web applications."
+    },
+    {
+      "year": 1995,
+      "title": "Windows 95",
+      "description": "Microsoft releases Windows 95, introducing the Start menu, taskbar, and improved multitasking capabilities."
+    },
+    {
+      "year": 1997,
+      "title": "Deep Blue Defeats Kasparov",
+      "description": "IBM's Deep Blue becomes the first computer system to defeat a reigning world chess champion, Garry Kasparov, in a match under standard tournament conditions."
+    },
+    {
+      "year": 1998,
+      "title": "Google Founded",
+      "description": "Google is founded by Larry Page and Sergey Brin, transforming web search with their PageRank algorithm."
+    },
+    {
+      "year": 2001,
+      "title": "Apple iPod",
+      "description": "Apple introduces the iPod, revolutionizing portable music and digital media consumption."
+    },
+    {
+      "year": 2004,
+      "title": "Facebook Launched",
+      "description": "Facebook is launched by Mark Zuckerberg, becoming a major social networking platform and changing how people connect online."
+    },
+    {
+      "year": 2005,
+      "title": "YouTube Founded",
+      "description": "YouTube is founded by Chad Hurley, Steve Chen, and Jawed Karim, transforming video sharing on the internet."
+    },
+    {
+      "year": 2007,
+      "title": "Apple iPhone",
+      "description": "Apple releases the iPhone, integrating computing, telephony, and internet access in a revolutionary mobile device."
+    },
+    {
+      "year": 2008,
+      "title": "Android OS Released",
+      "description": "Google releases the first version of the Android operating system, creating an open-source mobile platform."
+    },
+    {
+      "year": 2010,
+      "title": "Apple iPad",
+      "description": "Apple introduces the iPad, popularizing tablet computing and creating a new category of mobile devices."
+    },
+    {
+      "year": 2011,
+      "title": "IBM Watson Wins Jeopardy!",
+      "description": "IBM's Watson computer system wins Jeopardy!, showcasing significant advancements in artificial intelligence and natural language processing."
+    },
+    {
+      "year": 2012,
+      "title": "Raspberry Pi Released",
+      "description": "The Raspberry Pi, a low-cost, credit-card-sized computer, is released to promote computer science education and affordable computing."
+    },
+    {
+      "year": 2012,
+      "title": "Deep Learning Revolution",
+      "description": "Deep neural networks achieve breakthrough results in image recognition at ImageNet competition, sparking the modern deep learning revolution."
+    },
+    {
+      "year": 2014,
+      "title": "Amazon Echo",
+      "description": "Amazon introduces the Echo smart speaker with Alexa voice assistant, popularizing voice-controlled computing in homes."
+    },
+    {
+      "year": 2015,
+      "title": "Windows 10",
+      "description": "Microsoft releases Windows 10, unifying its operating system across multiple device types including desktops, tablets, and phones."
+    },
+    {
+      "year": 2016,
+      "title": "AlphaGo Defeats Go Champion",
+      "description": "AlphaGo, developed by Google's DeepMind, defeats world champion Lee Sedol in the board game Go, a major milestone in artificial intelligence."
+    },
+    {
+      "year": 2017,
+      "title": "Transformer Architecture",
+      "description": "Google researchers introduce the Transformer architecture in 'Attention Is All You Need', revolutionizing natural language processing and enabling modern LLMs."
+    },
+    {
+      "year": 2019,
+      "title": "Quantum Supremacy",
+      "description": "Google claims quantum supremacy with its 53-qubit Sycamore processor, performing a calculation that would take classical computers thousands of years."
+    },
+    {
+      "year": 2020,
+      "title": "GPT-3 Released",
+      "description": "OpenAI releases GPT-3, a language model with 175 billion parameters capable of generating human-like text, marking a significant advancement in natural language processing."
+    },
+    {
+      "year": 2022,
+      "title": "Exascale Computing",
+      "description": "Frontier becomes the world's fastest supercomputer, achieving exascale performance and ushering in a new era of high-performance computing."
+    },
+    {
+      "year": 2022,
+      "title": "ChatGPT Launched",
+      "description": "OpenAI launches ChatGPT, an AI chatbot that gains over 100 million users within two months, becoming the fastest-growing consumer application in history."
+    },
+    {
+      "year": 2023,
+      "title": "GPT-4 Released",
+      "description": "OpenAI releases GPT-4, a multimodal large language model capable of processing both text and images, with significant improvements in reasoning and instruction-following."
+    }
+  ]
+}

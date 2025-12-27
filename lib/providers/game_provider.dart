@@ -11,25 +11,70 @@ class GameProvider extends ChangeNotifier {
     roundProgress: List.filled(10, RoundProgressStatus.pending),
   );
 
-  HistoryTopic _currentTopic = HistoryTopic.israel;
+  HistoryTopic? _currentTopic;
+  List<HistoryTopic> _availableTopics = [];
 
   GameState get state => _state;
-  HistoryTopic get currentTopic => _currentTopic;
+  HistoryTopic? get currentTopic => _currentTopic;
+  List<HistoryTopic> get availableTopics => _availableTopics;
 
   Future<void> initialize() async {
-    await loadTopic(_currentTopic);
+    await discoverTopics();
+    if (_availableTopics.isNotEmpty) {
+      _currentTopic = _availableTopics.first;
+      await loadTopic(_currentTopic!);
+    }
+  }
+
+  Future<void> discoverTopics() async {
+    try {
+      // List of known topic files - in a real app, you might scan the assets directory
+      final List<String> topicFiles = [
+        'assets/data/us.json',
+        'assets/data/rome.json',
+        'assets/data/greece.json',
+        'assets/data/israel.json',
+        'assets/data/evolution.json',
+        'assets/data/computing.json',
+      ];
+
+      _availableTopics = [];
+
+      for (final assetPath in topicFiles) {
+        try {
+          final String jsonString = await rootBundle.loadString(assetPath);
+          final Map<String, dynamic> jsonData =
+              json.decode(jsonString) as Map<String, dynamic>;
+
+          final String category = jsonData['category'] as String;
+          final String id = assetPath.split('/').last.replaceAll('.json', '');
+
+          _availableTopics.add(
+            HistoryTopic(id: id, displayName: category, assetPath: assetPath),
+          );
+        } catch (e) {
+          debugPrint('Error loading topic from $assetPath: $e');
+        }
+      }
+    } catch (e) {
+      debugPrint('Error discovering topics: $e');
+    }
   }
 
   Future<void> loadTopic(HistoryTopic topic) async {
     try {
-      final String jsonString =
-          await rootBundle.loadString(topic.assetPath);
-      final List<dynamic> jsonList = json.decode(jsonString) as List<dynamic>;
-      
+      final String jsonString = await rootBundle.loadString(topic.assetPath);
+      final Map<String, dynamic> jsonData =
+          json.decode(jsonString) as Map<String, dynamic>;
+      final List<dynamic> jsonList = jsonData['events'] as List<dynamic>;
+
       final List<Event> events = jsonList
           .asMap()
           .entries
-          .map((entry) => Event.fromJson(entry.value as Map<String, dynamic>, entry.key))
+          .map(
+            (entry) =>
+                Event.fromJson(entry.value as Map<String, dynamic>, entry.key),
+          )
           .toList();
 
       _state = _state.copyWith(allEvents: events);
@@ -40,8 +85,8 @@ class GameProvider extends ChangeNotifier {
   }
 
   Future<void> switchTopic(HistoryTopic topic) async {
-    if (_currentTopic == topic) return;
-    
+    if (_currentTopic?.id == topic.id) return;
+
     _currentTopic = topic;
     await loadTopic(topic);
     notifyListeners();
@@ -90,15 +135,17 @@ class GameProvider extends ChangeNotifier {
     if (_state.previousRoundIncorrectEvents.isNotEmpty) {
       // Start with incorrect events from previous round
       sourceEvents = List<Event>.from(_state.previousRoundIncorrectEvents);
-      
+
       // If we have fewer than 10 incorrect events, supplement with additional events from allEvents
       if (sourceEvents.length < 10) {
         // Get events that aren't already in the incorrect events list
-        final Set<String> incorrectEventIds = sourceEvents.map((e) => e.id).toSet();
+        final Set<String> incorrectEventIds = sourceEvents
+            .map((e) => e.id)
+            .toSet();
         final List<Event> additionalEvents = _state.allEvents
             .where((e) => !incorrectEventIds.contains(e.id))
             .toList();
-        
+
         // Shuffle and take enough to reach 10 (or all available if less than 10 total)
         additionalEvents.shuffle();
         final int needed = 10 - sourceEvents.length;
@@ -109,10 +156,12 @@ class GameProvider extends ChangeNotifier {
     } else {
       sourceEvents = _state.allEvents;
     }
-    
+
     // Shuffle and select up to 10 events (or all if fewer than 10 total)
     sourceEvents.shuffle();
-    final int eventsToTake = sourceEvents.length < 10 ? sourceEvents.length : 10;
+    final int eventsToTake = sourceEvents.length < 10
+        ? sourceEvents.length
+        : 10;
     final List<Event> roundEvents = sourceEvents.take(eventsToTake).toList();
 
     // Pre-place the first event
@@ -121,7 +170,10 @@ class GameProvider extends ChangeNotifier {
       isIncorrect: false,
     );
 
-    final List<RoundProgressStatus> progress = List.filled(roundEvents.length, RoundProgressStatus.pending);
+    final List<RoundProgressStatus> progress = List.filled(
+      roundEvents.length,
+      RoundProgressStatus.pending,
+    );
     progress[0] = RoundProgressStatus.correct;
 
     _state = _state.copyWith(
@@ -163,8 +215,9 @@ class GameProvider extends ChangeNotifier {
     final bool isCorrect = placedIndex == correctIndex;
 
     // Find the index of this event in roundEvents to update progress
-    final int eventIndex = _state.roundEvents
-        .indexWhere((e) => e.id == eventToPlace.id);
+    final int eventIndex = _state.roundEvents.indexWhere(
+      (e) => e.id == eventToPlace.id,
+    );
 
     final List<Event> newPlacedEvents = List<Event>.from(_state.placedEvents);
     final List<RoundProgressStatus> newProgress =
@@ -173,14 +226,14 @@ class GameProvider extends ChangeNotifier {
     if (isCorrect) {
       final int newRoundCorrect = _state.roundCorrect + 1;
       final int newTotalPoints = _state.totalPoints + 1;
-      
+
       final Event placedEvent = eventToPlace.copyWith(
         isCorrect: true,
         isIncorrect: false,
       );
-      
+
       newPlacedEvents.insert(correctIndex, placedEvent);
-      
+
       if (eventIndex != -1) {
         newProgress[eventIndex] = RoundProgressStatus.correct;
       }
@@ -194,15 +247,15 @@ class GameProvider extends ChangeNotifier {
       );
     } else {
       final int newRoundIncorrect = _state.roundIncorrect + 1;
-      
+
       final Event placedEvent = eventToPlace.copyWith(
         isCorrect: false,
         isIncorrect: true,
         wasIncorrect: true,
       );
-      
+
       newPlacedEvents.insert(placedIndex, placedEvent);
-      
+
       if (eventIndex != -1) {
         newProgress[eventIndex] = RoundProgressStatus.incorrect;
       }
@@ -217,11 +270,13 @@ class GameProvider extends ChangeNotifier {
 
       // Move to correct position after a brief delay
       Future.delayed(const Duration(milliseconds: 100), () {
-        final int wrongIndex =
-            newPlacedEvents.indexWhere((e) => e.id == eventToPlace.id);
+        final int wrongIndex = newPlacedEvents.indexWhere(
+          (e) => e.id == eventToPlace.id,
+        );
         if (wrongIndex != -1) {
-          final List<Event> updatedPlacedEvents =
-              List<Event>.from(newPlacedEvents);
+          final List<Event> updatedPlacedEvents = List<Event>.from(
+            newPlacedEvents,
+          );
           updatedPlacedEvents.removeAt(wrongIndex);
 
           // Find correct position
@@ -260,10 +315,7 @@ class GameProvider extends ChangeNotifier {
       );
     } else {
       // No more events to place - round is complete
-      _state = _state.copyWith(
-        unplacedEvent: null,
-        clearDraggedPosition: true,
-      );
+      _state = _state.copyWith(unplacedEvent: null, clearDraggedPosition: true);
       Future.delayed(const Duration(milliseconds: 1500), () {
         _state = _state.copyWith(showScoreSummary: true);
         notifyListeners();
@@ -273,4 +325,3 @@ class GameProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
-
