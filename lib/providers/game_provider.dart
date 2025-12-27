@@ -86,15 +86,34 @@ class GameProvider extends ChangeNotifier {
 
   void startRound() {
     // Use incorrect events from previous round if available, otherwise use all events
-    final List<Event> sourceEvents = _state.previousRoundIncorrectEvents.isNotEmpty
-        ? _state.previousRoundIncorrectEvents
-        : _state.allEvents;
+    List<Event> sourceEvents;
+    if (_state.previousRoundIncorrectEvents.isNotEmpty) {
+      // Start with incorrect events from previous round
+      sourceEvents = List<Event>.from(_state.previousRoundIncorrectEvents);
+      
+      // If we have fewer than 10 incorrect events, supplement with additional events from allEvents
+      if (sourceEvents.length < 10) {
+        // Get events that aren't already in the incorrect events list
+        final Set<String> incorrectEventIds = sourceEvents.map((e) => e.id).toSet();
+        final List<Event> additionalEvents = _state.allEvents
+            .where((e) => !incorrectEventIds.contains(e.id))
+            .toList();
+        
+        // Shuffle and take enough to reach 10 (or all available if less than 10 total)
+        additionalEvents.shuffle();
+        final int needed = 10 - sourceEvents.length;
+        final int available = additionalEvents.length;
+        final int toAdd = needed < available ? needed : available;
+        sourceEvents.addAll(additionalEvents.take(toAdd));
+      }
+    } else {
+      sourceEvents = _state.allEvents;
+    }
     
-    // If we have fewer than 10 incorrect events, use all of them
-    // Otherwise, randomly select 10
-    final List<Event> shuffled = List<Event>.from(sourceEvents)..shuffle();
-    final int eventsToTake = shuffled.length < 10 ? shuffled.length : 10;
-    final List<Event> roundEvents = shuffled.take(eventsToTake).toList();
+    // Shuffle and select up to 10 events (or all if fewer than 10 total)
+    sourceEvents.shuffle();
+    final int eventsToTake = sourceEvents.length < 10 ? sourceEvents.length : 10;
+    final List<Event> roundEvents = sourceEvents.take(eventsToTake).toList();
 
     // Pre-place the first event
     final Event firstEvent = roundEvents[0].copyWith(
