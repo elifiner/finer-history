@@ -30,25 +30,30 @@ class TopicSelectionDialog extends StatelessWidget {
                   );
                 }
 
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: allTopics.length,
-                  itemBuilder: (context, index) {
-                    final topic = allTopics[index];
-                    final isEnabled = provider.isTopicEnabled(topic.id);
+                final sortedTopics = List.from(allTopics)
+                  ..sort((a, b) => a.displayName.compareTo(b.displayName));
 
-                    return SwitchListTile(
-                      title: Text(
-                        topic.displayName,
-                        style: theme.textTheme.bodyLarge,
-                      ),
-                      value: isEnabled,
-                      onChanged: (value) {
-                        provider.toggleTopicEnabled(topic.id);
-                      },
-                      activeColor: colorScheme.primary,
-                    );
-                  },
+                return SizedBox(
+                  height: 400,
+                  child: ListView.builder(
+                    itemCount: sortedTopics.length,
+                    itemBuilder: (context, index) {
+                      final topic = sortedTopics[index];
+                      final isEnabled = provider.isTopicEnabled(topic.id);
+
+                      return SwitchListTile(
+                        title: Text(
+                          topic.displayName,
+                          style: theme.textTheme.bodyLarge,
+                        ),
+                        value: isEnabled,
+                        onChanged: (value) {
+                          provider.toggleTopicEnabled(topic.id);
+                        },
+                        activeColor: colorScheme.primary,
+                      );
+                    },
+                  ),
                 );
               },
             ),

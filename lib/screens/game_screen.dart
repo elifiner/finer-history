@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/game_provider.dart';
 import '../models/game_state.dart';
+import '../models/history_topic.dart';
 import '../widgets/timeline_widget.dart';
 import '../widgets/event_card.dart';
 import '../widgets/score_summary.dart';
@@ -319,35 +320,43 @@ class GameScreen extends StatelessWidget {
             },
           ),
           const Divider(),
-          ...gameProvider.availableTopics.map((topic) {
-            final isSelected = gameProvider.currentTopic?.id == topic.id;
-            return ListTile(
-              leading: Icon(
-                isSelected ? Icons.check_circle : Icons.circle_outlined,
-                color: isSelected
-                    ? colorScheme.primary
-                    : theme.listTileTheme.iconColor ??
-                          colorScheme.onSurfaceVariant,
-              ),
-              title: Text(
-                topic.displayName,
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+          ...() {
+            final sortedTopics = List<HistoryTopic>.from(
+              gameProvider.availableTopics,
+            )..sort((a, b) => a.displayName.compareTo(b.displayName));
+            return sortedTopics.map((topic) {
+              final isSelected = gameProvider.currentTopic?.id == topic.id;
+              return ListTile(
+                leading: Icon(
+                  isSelected ? Icons.check_circle : Icons.circle_outlined,
                   color: isSelected
                       ? colorScheme.primary
-                      : theme.listTileTheme.textColor ?? colorScheme.onSurface,
+                      : theme.listTileTheme.iconColor ??
+                            colorScheme.onSurfaceVariant,
                 ),
-              ),
-              selected: isSelected,
-              selectedTileColor: colorScheme.primaryContainer.withValues(
-                alpha: 0.3,
-              ),
-              onTap: () {
-                Navigator.pop(context);
-                gameProvider.switchTopic(topic);
-              },
-            );
-          }),
+                title: Text(
+                  topic.displayName,
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    fontWeight: isSelected
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                    color: isSelected
+                        ? colorScheme.primary
+                        : theme.listTileTheme.textColor ??
+                              colorScheme.onSurface,
+                  ),
+                ),
+                selected: isSelected,
+                selectedTileColor: colorScheme.primaryContainer.withValues(
+                  alpha: 0.3,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                  gameProvider.switchTopic(topic);
+                },
+              );
+            });
+          }(),
         ],
       ),
     );
