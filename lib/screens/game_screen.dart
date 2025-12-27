@@ -105,175 +105,126 @@ class GameScreen extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       child: Column(
         children: [
-          // Top row: Hamburger, Points, Title, Round
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Hamburger menu icon
-              Builder(
-                builder: (builderContext) => IconButton(
-                  icon: Icon(Icons.menu, color: colorScheme.onSurface),
-                  onPressed: () {
-                    Scaffold.of(builderContext).openDrawer();
-                  },
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
-                ),
-              ),
-              const SizedBox(width: 8),
-              // Points box
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 14,
-                  vertical: 6,
-                ),
-                decoration: BoxDecoration(
-                  color: colorScheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  '${state.totalPoints} Points',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
-              ),
-              const Spacer(),
-              // Title (current topic name)
-              Text(
-                gameProvider.currentTopic?.displayName ?? 'History',
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: colorScheme.onSurface,
-                ),
-              ),
-              const Spacer(),
-              // Round box
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 14,
-                  vertical: 6,
-                ),
-                decoration: BoxDecoration(
-                  color: colorScheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  'Round ${state.currentRound}',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          // Progress boxes - centered using Stack for reliable centering
+          // Top row: Hamburger, Title (centered), Points
           Stack(
             children: [
-              // Invisible row to match top row structure for alignment
+              // Layout row for hamburger and points
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Hamburger menu icon
                   Builder(
                     builder: (builderContext) => IconButton(
-                      icon: Icon(Icons.menu, color: Colors.transparent),
-                      onPressed: () {},
+                      icon: Icon(Icons.menu, color: colorScheme.onSurface),
+                      onPressed: () {
+                        Scaffold.of(builderContext).openDrawer();
+                      },
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),
                     ),
                   ),
-                  const SizedBox(width: 8),
-                  Opacity(
-                    opacity: 0,
+                  // Points box with animation
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
                     child: Container(
+                      key: ValueKey(state.totalPoints),
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 14,
+                        horizontal: 10,
                         vertical: 6,
                       ),
                       decoration: BoxDecoration(
-                        color: colorScheme.surfaceContainerHighest,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        '${state.totalPoints} Points',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: colorScheme.onSurface,
+                        color: colorScheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: colorScheme.primary,
+                          width: 2,
                         ),
                       ),
-                    ),
-                  ),
-                  const Spacer(),
-                  // Invisible title for measurement
-                  Text(
-                    gameProvider.currentTopic?.displayName ?? 'History',
-                    style: theme.textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.transparent,
-                    ),
-                  ),
-                  const Spacer(),
-                  Opacity(
-                    opacity: 0,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: colorScheme.surfaceContainerHighest,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        'Round ${state.currentRound}',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: colorScheme.onSurface,
-                        ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.star_rounded,
+                            color: colorScheme.primary,
+                            size: 16,
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            '${state.totalPoints}',
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: colorScheme.onPrimaryContainer,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ],
               ),
-              // Progress boxes centered
-              Positioned.fill(
-                child: Center(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: List.generate(
-                      state.roundProgress.length,
-                      (index) => Container(
-                        width: 20,
-                        height: 20,
-                        margin: const EdgeInsets.symmetric(horizontal: 2),
-                        decoration: BoxDecoration(
-                          color: _getProgressColor(
-                            state.roundProgress[index],
-                            colorScheme,
-                          ),
-                          border: Border.all(
-                            color: _getProgressBorderColor(
-                              state.roundProgress[index],
-                              colorScheme,
-                            ),
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child:
-                            _getProgressIcon(
-                              state.roundProgress[index],
-                              colorScheme,
-                            ) ??
-                            const SizedBox(),
+              // Title with round number below - centered
+              Align(
+                alignment: Alignment.topCenter,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Title (current topic name)
+                    Text(
+                      gameProvider.currentTopic?.displayName ?? 'History',
+                      style: theme.textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.onSurface,
                       ),
                     ),
-                  ),
+                    const SizedBox(height: 2),
+                    // Round number in small text
+                    Text(
+                      'Round ${state.currentRound}',
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 8),
+          // Progress boxes - centered under title
+          Center(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: List.generate(
+                state.roundProgress.length,
+                (index) => Container(
+                  width: 20,
+                  height: 20,
+                  margin: const EdgeInsets.symmetric(horizontal: 2),
+                  decoration: BoxDecoration(
+                    color: _getProgressColor(
+                      state.roundProgress[index],
+                      colorScheme,
+                    ),
+                    border: Border.all(
+                      color: _getProgressBorderColor(
+                        state.roundProgress[index],
+                        colorScheme,
+                      ),
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child:
+                      _getProgressIcon(
+                        state.roundProgress[index],
+                        colorScheme,
+                      ) ??
+                      const SizedBox(),
+                ),
+              ),
+            ),
           ),
         ],
       ),
