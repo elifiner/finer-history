@@ -48,6 +48,12 @@ android/local.properties
 android/.idea/
 android/*.iml
 android/app/build/
+# Encrypted files (tracked but encrypted with git-crypt) - must come before wildcard patterns
+!android/key.properties
+!android/upload-keystore.jks
+# Other keystore files (not meant for this repo) should still be ignored
+*.keystore
+*.jks
 
 # iOS (if added later)
 ios/

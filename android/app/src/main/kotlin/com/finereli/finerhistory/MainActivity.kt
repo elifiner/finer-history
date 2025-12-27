@@ -1,5 +1,6 @@
-package com.example.finer_history
+package com.finereli.finerhistory
 
 import io.flutter.embedding.android.FlutterActivity
 
 class MainActivity : FlutterActivity()
+

@@ -1,0 +1,11 @@
+# Encrypted files - these will be automatically encrypted by git-crypt
+android/key.properties filter=git-crypt diff=git-crypt
+android/upload-keystore.jks filter=git-crypt diff=git-crypt
+*.jks filter=git-crypt diff=git-crypt
+*.keystore filter=git-crypt diff=git-crypt
+
+# You can add more patterns here for other sensitive files
+# Example:
+# secrets/* filter=git-crypt diff=git-crypt
+# *.pem filter=git-crypt diff=git-crypt
+
