@@ -192,6 +192,42 @@ class GameScreen extends StatelessWidget {
               ),
             ],
           ),
+          // Progress bar for current topic
+          if (gameProvider.currentTopic != null) ...[
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: LinearProgressIndicator(
+                          value: gameProvider.getTopicProgress(
+                            gameProvider.currentTopic!.id,
+                          ),
+                          backgroundColor: colorScheme.surfaceContainerHighest,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            colorScheme.primary,
+                          ),
+                          minHeight: 3,
+                          borderRadius: BorderRadius.circular(1.5),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        '${(gameProvider.getTopicProgress(gameProvider.currentTopic!.id) * 100).round()}%',
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
           const SizedBox(height: 8),
           // Progress boxes - centered under title
           Center(
@@ -326,6 +362,9 @@ class GameScreen extends StatelessWidget {
             )..sort((a, b) => a.displayName.compareTo(b.displayName));
             return sortedTopics.map((topic) {
               final isSelected = gameProvider.currentTopic?.id == topic.id;
+              final progress = gameProvider.getTopicProgress(topic.id);
+              final progressPercent = (progress * 100).round();
+              
               return ListTile(
                 leading: Icon(
                   isSelected ? Icons.check_circle : Icons.circle_outlined,
@@ -334,17 +373,50 @@ class GameScreen extends StatelessWidget {
                       : theme.listTileTheme.iconColor ??
                             colorScheme.onSurfaceVariant,
                 ),
-                title: Text(
-                  topic.displayName,
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    fontWeight: isSelected
-                        ? FontWeight.bold
-                        : FontWeight.normal,
-                    color: isSelected
-                        ? colorScheme.primary
-                        : theme.listTileTheme.textColor ??
-                              colorScheme.onSurface,
-                  ),
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      topic.displayName,
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                        color: isSelected
+                            ? colorScheme.primary
+                            : theme.listTileTheme.textColor ??
+                                  colorScheme.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: LinearProgressIndicator(
+                            value: progress,
+                            backgroundColor: colorScheme.surfaceContainerHighest,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              isSelected
+                                  ? colorScheme.primary
+                                  : colorScheme.primary.withValues(alpha: 0.7),
+                            ),
+                            minHeight: 4,
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          '$progressPercent%',
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: isSelected
+                                ? colorScheme.primary
+                                : colorScheme.onSurfaceVariant,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 selected: isSelected,
                 selectedTileColor: colorScheme.primaryContainer.withValues(

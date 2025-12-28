@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/event.dart';
 import '../models/game_state.dart';
 import '../models/history_topic.dart';
+import '../services/progress_tracker.dart';
 
 class GameProvider extends ChangeNotifier {
   GameState _state = GameState(
@@ -16,6 +17,8 @@ class GameProvider extends ChangeNotifier {
   List<HistoryTopic> _availableTopics = [];
   List<HistoryTopic> _allTopics = [];
   Set<String> _enabledTopicIds = {};
+  final ProgressTracker _progressTracker = ProgressTracker();
+  final Map<String, int> _topicEventCounts = {};
 
   static const String _enabledTopicsKey = 'enabled_topic_ids';
   static const Set<String> _defaultEnabledTopicIds = {
@@ -33,12 +36,19 @@ class GameProvider extends ChangeNotifier {
 
   bool isTopicEnabled(String topicId) => _enabledTopicIds.contains(topicId);
 
+  double getTopicProgress(String topicId) {
+    final totalEvents = _topicEventCounts[topicId] ?? 0;
+    if (totalEvents == 0) return 0.0;
+    return _progressTracker.getProgress(topicId, totalEvents);
+  }
+
   bool canDisableTopic(String topicId) {
     // Can only disable if there's more than one enabled topic
     return _enabledTopicIds.length > 1;
   }
 
   Future<void> initialize() async {
+    await _progressTracker.loadProgress();
     await discoverTopics();
     await loadEnabledTopics();
     _updateAvailableTopics();
@@ -71,6 +81,10 @@ class GameProvider extends ChangeNotifier {
 
           final String category = jsonData['category'] as String;
           final String id = assetPath.split('/').last.replaceAll('.json', '');
+          final List<dynamic> events = jsonData['events'] as List<dynamic>;
+          
+          // Cache event count for this topic
+          _topicEventCounts[id] = events.length;
 
           _allTopics.add(
             HistoryTopic(id: id, displayName: category, assetPath: assetPath),
@@ -165,6 +179,9 @@ class GameProvider extends ChangeNotifier {
           )
           .toList();
 
+      // Ensure event count is cached
+      _topicEventCounts[topic.id] = events.length;
+
       _state = _state.copyWith(allEvents: events);
       startNewGame();
     } catch (e) {
@@ -187,7 +204,7 @@ class GameProvider extends ChangeNotifier {
       totalPoints: 0,
       roundCorrect: 0,
       roundIncorrect: 0,
-      roundProgress: List.filled(10, RoundProgressStatus.pending),
+      roundProgress: const [],
       previousRoundIncorrectEvents: [],
     );
     startRound();
@@ -195,16 +212,21 @@ class GameProvider extends ChangeNotifier {
 
   void startNextRound() {
     // Collect events that were incorrect in the current round
+    // roundProgress tracks the 10 placeable events (excluding the anchor)
+    // roundProgress[i] corresponds to roundEvents[i+1] (since roundEvents[0] is the anchor)
     final List<Event> incorrectEvents = [];
-    for (int i = 0; i < _state.roundEvents.length; i++) {
+    for (int i = 0; i < _state.roundProgress.length; i++) {
       if (_state.roundProgress[i] == RoundProgressStatus.incorrect) {
-        // Find the original event from allEvents
-        final Event incorrectEvent = _state.roundEvents[i];
-        final Event originalEvent = _state.allEvents.firstWhere(
-          (e) => e.id == incorrectEvent.id,
-          orElse: () => incorrectEvent,
-        );
-        incorrectEvents.add(originalEvent);
+        // Find the corresponding event in roundEvents (index i+1 because 0 is anchor)
+        final int roundEventIndex = i + 1;
+        if (roundEventIndex < _state.roundEvents.length) {
+          final Event incorrectEvent = _state.roundEvents[roundEventIndex];
+          final Event originalEvent = _state.allEvents.firstWhere(
+            (e) => e.id == incorrectEvent.id,
+            orElse: () => incorrectEvent,
+          );
+          incorrectEvents.add(originalEvent);
+        }
       }
     }
 
@@ -245,24 +267,28 @@ class GameProvider extends ChangeNotifier {
       sourceEvents = _state.allEvents;
     }
 
-    // Shuffle and select up to 10 events (or all if fewer than 10 total)
+    // Shuffle and select 11 events (10 to place + 1 pre-placed anchor)
+    // If we have fewer than 11 total, use what we have
     sourceEvents.shuffle();
-    final int eventsToTake = sourceEvents.length < 10
+    final int targetCount = 11;
+    final int eventsToTake = sourceEvents.length < targetCount
         ? sourceEvents.length
-        : 10;
+        : targetCount;
     final List<Event> roundEvents = sourceEvents.take(eventsToTake).toList();
 
-    // Pre-place the first event
+    // Pre-place the first event (this is the anchor, not counted in progress)
     final Event firstEvent = roundEvents[0].copyWith(
       isCorrect: true,
       isIncorrect: false,
     );
 
+    // roundProgress tracks the 10 placeable cards (excluding the anchor)
+    // Initialize with pending status for all placeable cards
+    final int placeableCount = roundEvents.length > 1 ? roundEvents.length - 1 : 0;
     final List<RoundProgressStatus> progress = List.filled(
-      roundEvents.length,
+      placeableCount,
       RoundProgressStatus.pending,
     );
-    progress[0] = RoundProgressStatus.correct;
 
     _state = _state.copyWith(
       roundEvents: roundEvents,
@@ -302,10 +328,13 @@ class GameProvider extends ChangeNotifier {
     // Check if placement is correct
     final bool isCorrect = placedIndex == correctIndex;
 
-    // Find the index of this event in roundEvents to update progress
-    final int eventIndex = _state.roundEvents.indexWhere(
+    // Find the index of this event in the placeable events (excluding the anchor)
+    // roundEvents[0] is the anchor, so placeable events start at index 1
+    // eventIndex will be 0-9 for the 10 placeable events
+    final int roundEventIndex = _state.roundEvents.indexWhere(
       (e) => e.id == eventToPlace.id,
     );
+    final int eventIndex = roundEventIndex > 0 ? roundEventIndex - 1 : -1;
 
     final List<Event> newPlacedEvents = List<Event>.from(_state.placedEvents);
     final List<RoundProgressStatus> newProgress =
@@ -322,8 +351,14 @@ class GameProvider extends ChangeNotifier {
 
       newPlacedEvents.insert(correctIndex, placedEvent);
 
-      if (eventIndex != -1) {
+      // Update progress for this placed card (eventIndex is the index in placeable events)
+      if (eventIndex != -1 && eventIndex < newProgress.length) {
         newProgress[eventIndex] = RoundProgressStatus.correct;
+      }
+
+      // Update progress tracking
+      if (_currentTopic != null) {
+        _progressTracker.markCorrect(_currentTopic!.id, eventToPlace.id);
       }
 
       _state = _state.copyWith(
@@ -344,8 +379,14 @@ class GameProvider extends ChangeNotifier {
 
       newPlacedEvents.insert(placedIndex, placedEvent);
 
-      if (eventIndex != -1) {
+      // Update progress for this placed card (eventIndex is the index in placeable events)
+      if (eventIndex != -1 && eventIndex < newProgress.length) {
         newProgress[eventIndex] = RoundProgressStatus.incorrect;
+      }
+
+      // Update progress tracking - remove from correct set if present
+      if (_currentTopic != null) {
+        _progressTracker.markIncorrect(_currentTopic!.id, eventToPlace.id);
       }
 
       _state = _state.copyWith(
@@ -395,10 +436,12 @@ class GameProvider extends ChangeNotifier {
     }
 
     // Find next event to place
-    final int nextEventIndex = eventIndex + 1;
-    if (nextEventIndex < _state.roundEvents.length) {
+    // eventIndex is the index in placeable events (0-9), roundEventIndex is the index in roundEvents (1-10)
+    // The next placeable event would be at roundEventIndex + 1
+    final int nextRoundEventIndex = roundEventIndex + 1;
+    if (nextRoundEventIndex < _state.roundEvents.length) {
       _state = _state.copyWith(
-        unplacedEvent: _state.roundEvents[nextEventIndex],
+        unplacedEvent: _state.roundEvents[nextRoundEventIndex],
         clearDraggedPosition: true, // Clear dragged position for next card
       );
     } else {
