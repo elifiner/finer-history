@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:confetti/confetti.dart';
 import '../providers/game_provider.dart';
 import '../models/game_state.dart';
 import '../models/history_topic.dart';
@@ -23,6 +24,7 @@ class GameScreen extends StatelessWidget {
             correctCount: state.roundCorrect,
             incorrectCount: state.roundIncorrect,
             totalPoints: state.totalPoints,
+            confettiController: gameProvider.confettiController,
             onNextRound: () {
               gameProvider.startNextRound();
             },
@@ -32,63 +34,95 @@ class GameScreen extends StatelessWidget {
           );
         }
 
-        return Scaffold(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          drawer: _buildDrawer(context, gameProvider),
-          body: SafeArea(
-            child: Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 600),
-                child: Column(
-                  children: [
-                    // Header
-                    _buildHeader(context, state, gameProvider),
-                    // Unplaced event section
-                    if (state.unplacedEvent != null &&
-                        state.draggedPosition == null)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 10,
+        return Stack(
+          children: [
+            Scaffold(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              drawer: _buildDrawer(context, gameProvider),
+              body: SafeArea(
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 600),
+                    child: Column(
+                      children: [
+                        // Header
+                        _buildHeader(context, state, gameProvider),
+                        // Unplaced event section
+                        if (state.unplacedEvent != null &&
+                            state.draggedPosition == null)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 10,
+                            ),
+                            child: EventCard(
+                              event: state.unplacedEvent!,
+                              isPlaced: false,
+                              isSliding:
+                                  state.slidingEventId ==
+                                  state.unplacedEvent!.id,
+                              onDragStart: () {},
+                              onDragEnd: () {},
+                            ),
+                          ),
+                        // Timeline
+                        Expanded(
+                          child: TimelineWidget(
+                            placedEvents: state.placedEvents,
+                            previewEvent: state.draggedPosition != null
+                                ? state.unplacedEvent
+                                : null,
+                            previewPosition: state.draggedPosition,
+                            slidingEventId: state.slidingEventId,
+                            onDrop: (position) {
+                              gameProvider.setDraggedPosition(position);
+                            },
+                            onPlace: () {
+                              gameProvider.placeEvent(state.draggedPosition);
+                            },
+                            onPreviewDragStart: () {
+                              // When dragging preview, we keep the current position
+                              // The drop will update it
+                            },
+                            onPreviewDragEnd: () {
+                              // Preview drag ended - if not dropped on target, position stays the same
+                            },
+                          ),
                         ),
-                        child: EventCard(
-                          event: state.unplacedEvent!,
-                          isPlaced: false,
-                          isSliding:
-                              state.slidingEventId == state.unplacedEvent!.id,
-                          onDragStart: () {},
-                          onDragEnd: () {},
-                        ),
-                      ),
-                    // Timeline
-                    Expanded(
-                      child: TimelineWidget(
-                        placedEvents: state.placedEvents,
-                        previewEvent: state.draggedPosition != null
-                            ? state.unplacedEvent
-                            : null,
-                        previewPosition: state.draggedPosition,
-                        slidingEventId: state.slidingEventId,
-                        onDrop: (position) {
-                          gameProvider.setDraggedPosition(position);
-                        },
-                        onPlace: () {
-                          gameProvider.placeEvent(state.draggedPosition);
-                        },
-                        onPreviewDragStart: () {
-                          // When dragging preview, we keep the current position
-                          // The drop will update it
-                        },
-                        onPreviewDragEnd: () {
-                          // Preview drag ended - if not dropped on target, position stays the same
-                        },
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
+            // Confetti widget - explode from center (for topic completion at 100%)
+            if (gameProvider.confettiController != null &&
+                state.celebrationMessage != null)
+              Align(
+                alignment: Alignment.center,
+                child: ConfettiWidget(
+                  confettiController: gameProvider.confettiController!,
+                  blastDirectionality: BlastDirectionality.explosive,
+                  maxBlastForce: 10,
+                  minBlastForce: 5,
+                  emissionFrequency: 0.01,
+                  numberOfParticles: 80,
+                  gravity: 0.3,
+                  shouldLoop: false,
+                  colors: const [
+                    Colors.green,
+                    Colors.blue,
+                    Colors.pink,
+                    Colors.orange,
+                    Colors.purple,
+                    Colors.yellow,
+                  ],
+                ),
+              ),
+            // Celebration message overlay (for topic completion at 100%)
+            if (state.celebrationMessage != null)
+              _buildCelebrationMessage(context, state.celebrationMessage!),
+          ],
         );
       },
     );
@@ -364,7 +398,7 @@ class GameScreen extends StatelessWidget {
               final isSelected = gameProvider.currentTopic?.id == topic.id;
               final progress = gameProvider.getTopicProgress(topic.id);
               final progressPercent = (progress * 100).round();
-              
+
               return ListTile(
                 leading: Icon(
                   isSelected ? Icons.check_circle : Icons.circle_outlined,
@@ -394,7 +428,8 @@ class GameScreen extends StatelessWidget {
                         Expanded(
                           child: LinearProgressIndicator(
                             value: progress,
-                            backgroundColor: colorScheme.surfaceContainerHighest,
+                            backgroundColor:
+                                colorScheme.surfaceContainerHighest,
                             valueColor: AlwaysStoppedAnimation<Color>(
                               isSelected
                                   ? colorScheme.primary
@@ -433,4 +468,54 @@ class GameScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _buildCelebrationMessage(BuildContext context, String message) {
+  final theme = Theme.of(context);
+  final colorScheme = theme.colorScheme;
+
+  return Positioned.fill(
+    child: IgnorePointer(
+      child: Center(
+        child: TweenAnimationBuilder<double>(
+          tween: Tween(begin: 0.0, end: 1.0),
+          duration: const Duration(milliseconds: 300),
+          builder: (context, value, child) {
+            return Opacity(
+              opacity: value,
+              child: Transform.scale(
+                scale: value,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 20,
+                  ),
+                  decoration: BoxDecoration(
+                    color: colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: colorScheme.primary, width: 3),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.3),
+                        blurRadius: 20,
+                        spreadRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    message,
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onPrimaryContainer,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    ),
+  );
 }

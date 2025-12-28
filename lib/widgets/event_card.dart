@@ -156,7 +156,10 @@ class EventCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           child: Transform.scale(
             scale: 1.05,
-            child: cardContent,
+            child: MouseRegion(
+              cursor: SystemMouseCursors.grabbing,
+              child: cardContent,
+            ),
           ),
         ),
         childWhenDragging: Opacity(
@@ -170,7 +173,10 @@ class EventCard extends StatelessWidget {
         onDragEnd: (_) {
           onDragEnd?.call();
         },
-        child: cardContent,
+        child: MouseRegion(
+          cursor: SystemMouseCursors.grab,
+          child: cardContent,
+        ),
       );
     }
 

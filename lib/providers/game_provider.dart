@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:confetti/confetti.dart';
 import '../models/event.dart';
 import '../models/game_state.dart';
 import '../models/history_topic.dart';
@@ -19,6 +20,7 @@ class GameProvider extends ChangeNotifier {
   Set<String> _enabledTopicIds = {};
   final ProgressTracker _progressTracker = ProgressTracker();
   final Map<String, int> _topicEventCounts = {};
+  ConfettiController? _confettiController;
 
   static const String _enabledTopicsKey = 'enabled_topic_ids';
   static const Set<String> _defaultEnabledTopicIds = {
@@ -33,6 +35,7 @@ class GameProvider extends ChangeNotifier {
   HistoryTopic? get currentTopic => _currentTopic;
   List<HistoryTopic> get availableTopics => _availableTopics;
   List<HistoryTopic> get allTopics => _allTopics;
+  ConfettiController? get confettiController => _confettiController;
 
   bool isTopicEnabled(String topicId) => _enabledTopicIds.contains(topicId);
 
@@ -48,6 +51,9 @@ class GameProvider extends ChangeNotifier {
   }
 
   Future<void> initialize() async {
+    _confettiController = ConfettiController(
+      duration: const Duration(seconds: 2),
+    );
     await _progressTracker.loadProgress();
     await discoverTopics();
     await loadEnabledTopics();
@@ -56,6 +62,12 @@ class GameProvider extends ChangeNotifier {
       _currentTopic = _availableTopics.first;
       await loadTopic(_currentTopic!);
     }
+  }
+
+  @override
+  void dispose() {
+    _confettiController?.dispose();
+    super.dispose();
   }
 
   Future<void> discoverTopics() async {
@@ -82,7 +94,7 @@ class GameProvider extends ChangeNotifier {
           final String category = jsonData['category'] as String;
           final String id = assetPath.split('/').last.replaceAll('.json', '');
           final List<dynamic> events = jsonData['events'] as List<dynamic>;
-          
+
           // Cache event count for this topic
           _topicEventCounts[id] = events.length;
 
@@ -284,7 +296,9 @@ class GameProvider extends ChangeNotifier {
 
     // roundProgress tracks the 10 placeable cards (excluding the anchor)
     // Initialize with pending status for all placeable cards
-    final int placeableCount = roundEvents.length > 1 ? roundEvents.length - 1 : 0;
+    final int placeableCount = roundEvents.length > 1
+        ? roundEvents.length - 1
+        : 0;
     final List<RoundProgressStatus> progress = List.filled(
       placeableCount,
       RoundProgressStatus.pending,
@@ -357,8 +371,27 @@ class GameProvider extends ChangeNotifier {
       }
 
       // Update progress tracking
+      String? celebrationMessage;
       if (_currentTopic != null) {
         _progressTracker.markCorrect(_currentTopic!.id, eventToPlace.id);
+
+        // Check if topic reached 100% completion
+        final progress = _progressTracker.getProgress(
+          _currentTopic!.id,
+          _topicEventCounts[_currentTopic!.id] ?? 0,
+        );
+        if (progress >= 1.0) {
+          celebrationMessage = 'Topic Complete! 🎉';
+          _confettiController?.play();
+
+          // Auto-dismiss celebration message after 3 seconds
+          Future.delayed(const Duration(seconds: 3), () {
+            if (_state.celebrationMessage == celebrationMessage) {
+              _state = _state.copyWith(clearCelebrationMessage: true);
+              notifyListeners();
+            }
+          });
+        }
       }
 
       _state = _state.copyWith(
@@ -367,6 +400,7 @@ class GameProvider extends ChangeNotifier {
         placedEvents: newPlacedEvents,
         roundProgress: newProgress,
         clearDraggedPosition: true,
+        celebrationMessage: celebrationMessage,
       );
     } else {
       final int newRoundIncorrect = _state.roundIncorrect + 1;
@@ -447,6 +481,7 @@ class GameProvider extends ChangeNotifier {
     } else {
       // No more events to place - round is complete
       _state = _state.copyWith(unplacedEvent: null, clearDraggedPosition: true);
+
       Future.delayed(const Duration(milliseconds: 1500), () {
         _state = _state.copyWith(showScoreSummary: true);
         notifyListeners();
