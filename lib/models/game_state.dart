@@ -44,6 +44,7 @@ class GameState {
     List<Event>? roundEvents,
     List<Event>? placedEvents,
     Event? unplacedEvent,
+    bool clearUnplacedEvent = false, // Flag to explicitly clear
     bool? showScoreSummary,
     int? draggedPosition,
     bool clearDraggedPosition = false, // Flag to explicitly clear
@@ -62,7 +63,9 @@ class GameState {
       roundIncorrect: roundIncorrect ?? this.roundIncorrect,
       roundEvents: roundEvents ?? this.roundEvents,
       placedEvents: placedEvents ?? this.placedEvents,
-      unplacedEvent: unplacedEvent ?? this.unplacedEvent,
+      unplacedEvent: clearUnplacedEvent
+          ? null
+          : (unplacedEvent ?? this.unplacedEvent),
       showScoreSummary: showScoreSummary ?? this.showScoreSummary,
       draggedPosition: clearDraggedPosition 
           ? null 

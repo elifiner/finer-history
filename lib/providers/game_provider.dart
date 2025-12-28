@@ -9,9 +9,13 @@ import '../models/history_topic.dart';
 import '../services/progress_tracker.dart';
 
 class GameProvider extends ChangeNotifier {
+  static const int _cardsPerRound =
+      10; // Number of cards to place (excluding anchor)
+  static const int _totalCardsPerRound = _cardsPerRound + 1; // Including anchor
+
   GameState _state = GameState(
     allEvents: [],
-    roundProgress: List.filled(10, RoundProgressStatus.pending),
+    roundProgress: const [], // TEMP: will be initialized in startRound
   );
 
   HistoryTopic? _currentTopic;
@@ -224,7 +228,7 @@ class GameProvider extends ChangeNotifier {
 
   void startNextRound() {
     // Collect events that were incorrect in the current round
-    // roundProgress tracks the 10 placeable events (excluding the anchor)
+    // roundProgress tracks the placeable events (excluding the anchor)
     // roundProgress[i] corresponds to roundEvents[i+1] (since roundEvents[0] is the anchor)
     final List<Event> incorrectEvents = [];
     for (int i = 0; i < _state.roundProgress.length; i++) {
@@ -258,8 +262,8 @@ class GameProvider extends ChangeNotifier {
       // Start with incorrect events from previous round
       sourceEvents = List<Event>.from(_state.previousRoundIncorrectEvents);
 
-      // If we have fewer than 10 incorrect events, supplement with additional events from allEvents
-      if (sourceEvents.length < 10) {
+      // If we have fewer than required total events, supplement with additional events from allEvents
+      if (sourceEvents.length < _totalCardsPerRound) {
         // Get events that aren't already in the incorrect events list
         final Set<String> incorrectEventIds = sourceEvents
             .map((e) => e.id)
@@ -268,9 +272,9 @@ class GameProvider extends ChangeNotifier {
             .where((e) => !incorrectEventIds.contains(e.id))
             .toList();
 
-        // Shuffle and take enough to reach 10 (or all available if less than 10 total)
+        // Shuffle and take enough to reach required total count (or all available if less)
         additionalEvents.shuffle();
-        final int needed = 10 - sourceEvents.length;
+        final int needed = _totalCardsPerRound - sourceEvents.length;
         final int available = additionalEvents.length;
         final int toAdd = needed < available ? needed : available;
         sourceEvents.addAll(additionalEvents.take(toAdd));
@@ -279,10 +283,10 @@ class GameProvider extends ChangeNotifier {
       sourceEvents = _state.allEvents;
     }
 
-    // Shuffle and select 11 events (10 to place + 1 pre-placed anchor)
-    // If we have fewer than 11 total, use what we have
+    // Shuffle and select events (cardsPerRound to place + 1 pre-placed anchor)
+    // If we have fewer than required total, use what we have
     sourceEvents.shuffle();
-    final int targetCount = 11;
+    final int targetCount = _totalCardsPerRound;
     final int eventsToTake = sourceEvents.length < targetCount
         ? sourceEvents.length
         : targetCount;
@@ -294,7 +298,7 @@ class GameProvider extends ChangeNotifier {
       isIncorrect: false,
     );
 
-    // roundProgress tracks the 10 placeable cards (excluding the anchor)
+    // roundProgress tracks the placeable cards (excluding the anchor)
     // Initialize with pending status for all placeable cards
     final int placeableCount = roundEvents.length > 1
         ? roundEvents.length - 1
@@ -344,7 +348,7 @@ class GameProvider extends ChangeNotifier {
 
     // Find the index of this event in the placeable events (excluding the anchor)
     // roundEvents[0] is the anchor, so placeable events start at index 1
-    // eventIndex will be 0-9 for the 10 placeable events
+    // eventIndex will be 0 to (cardsPerRound-1) for the placeable events
     final int roundEventIndex = _state.roundEvents.indexWhere(
       (e) => e.id == eventToPlace.id,
     );
@@ -353,6 +357,13 @@ class GameProvider extends ChangeNotifier {
     final List<Event> newPlacedEvents = List<Event>.from(_state.placedEvents);
     final List<RoundProgressStatus> newProgress =
         List<RoundProgressStatus>.from(_state.roundProgress);
+
+    // Determine if this is the last card (round will be complete after placing)
+    final int nextRoundEventIndex = roundEventIndex + 1;
+    final bool isRoundComplete = nextRoundEventIndex >= _state.roundEvents.length;
+    final Event? nextUnplacedEvent = isRoundComplete
+        ? null
+        : _state.roundEvents[nextRoundEventIndex];
 
     if (isCorrect) {
       final int newRoundCorrect = _state.roundCorrect + 1;
@@ -401,6 +412,8 @@ class GameProvider extends ChangeNotifier {
         roundProgress: newProgress,
         clearDraggedPosition: true,
         celebrationMessage: celebrationMessage,
+        unplacedEvent: nextUnplacedEvent,
+        clearUnplacedEvent: isRoundComplete,
       );
     } else {
       final int newRoundIncorrect = _state.roundIncorrect + 1;
@@ -429,6 +442,8 @@ class GameProvider extends ChangeNotifier {
         roundProgress: newProgress,
         clearDraggedPosition: true,
         slidingEventId: eventToPlace.id,
+        unplacedEvent: nextUnplacedEvent,
+        clearUnplacedEvent: isRoundComplete,
       );
 
       // Move to correct position after a brief delay
@@ -469,19 +484,8 @@ class GameProvider extends ChangeNotifier {
       });
     }
 
-    // Find next event to place
-    // eventIndex is the index in placeable events (0-9), roundEventIndex is the index in roundEvents (1-10)
-    // The next placeable event would be at roundEventIndex + 1
-    final int nextRoundEventIndex = roundEventIndex + 1;
-    if (nextRoundEventIndex < _state.roundEvents.length) {
-      _state = _state.copyWith(
-        unplacedEvent: _state.roundEvents[nextRoundEventIndex],
-        clearDraggedPosition: true, // Clear dragged position for next card
-      );
-    } else {
-      // No more events to place - round is complete
-      _state = _state.copyWith(unplacedEvent: null, clearDraggedPosition: true);
-
+    // Schedule score summary if round is complete
+    if (isRoundComplete) {
       Future.delayed(const Duration(milliseconds: 1500), () {
         _state = _state.copyWith(showScoreSummary: true);
         notifyListeners();
