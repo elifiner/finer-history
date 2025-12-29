@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,6 +13,7 @@ class GameProvider extends ChangeNotifier {
   static const int _cardsPerRound =
       10; // Number of cards to place (excluding anchor)
   static const int _totalCardsPerRound = _cardsPerRound + 1; // Including anchor
+  static const double _weightDecayRate = 0.4; // Decay rate for weighted selection
 
   GameState _state = GameState(
     allEvents: [],
@@ -226,6 +228,79 @@ class GameProvider extends ChangeNotifier {
     startRound();
   }
 
+  /// Calculate weight for an event based on correct count
+  /// Uses inverse linear decay: weight = 1 / (1 + correctCount * decayRate)
+  double _calculateWeight(int correctCount) {
+    return 1.0 / (1.0 + correctCount * _weightDecayRate);
+  }
+
+  /// Select events using weighted random selection
+  /// Events with fewer correct answers have higher weights and are more likely to be selected
+  List<Event> _weightedSelectEvents(
+    List<Event> events,
+    int count,
+    String? topicId,
+  ) {
+    if (events.isEmpty || count <= 0) return [];
+    if (events.length <= count) return List<Event>.from(events);
+
+    // Calculate weights for all events
+    final List<double> weights = events.map((event) {
+      final correctCount = topicId != null
+          ? _progressTracker.getCorrectCount(topicId, event.id)
+          : 0;
+      return _calculateWeight(correctCount);
+    }).toList();
+
+    // Calculate cumulative weights for weighted random selection
+    final List<double> cumulativeWeights = [];
+    double sum = 0.0;
+    for (final weight in weights) {
+      sum += weight;
+      cumulativeWeights.add(sum);
+    }
+    final double totalWeight = sum;
+
+    // Select events using weighted random selection
+    final List<Event> selected = [];
+    final Set<int> selectedIndices = {};
+    final random = Random();
+
+    while (selected.length < count && selected.length < events.length) {
+      // Generate random number between 0 and totalWeight
+      final double randomValue = random.nextDouble() * totalWeight;
+      
+      // Find which event this random value corresponds to
+      int selectedIndex = 0;
+      for (int i = 0; i < cumulativeWeights.length; i++) {
+        if (randomValue < cumulativeWeights[i]) {
+          selectedIndex = i;
+          break;
+        }
+      }
+
+      // If already selected, try next one (fallback to sequential if needed)
+      if (selectedIndices.contains(selectedIndex)) {
+        // Find next available index
+        bool found = false;
+        for (int i = 0; i < events.length; i++) {
+          final int nextIndex = (selectedIndex + i) % events.length;
+          if (!selectedIndices.contains(nextIndex)) {
+            selectedIndex = nextIndex;
+            found = true;
+            break;
+          }
+        }
+        if (!found) break; // All events selected
+      }
+
+      selected.add(events[selectedIndex]);
+      selectedIndices.add(selectedIndex);
+    }
+
+    return selected;
+  }
+
   void startNextRound() {
     // Collect events that were incorrect in the current round
     // roundProgress tracks the placeable events (excluding the anchor)
@@ -278,12 +353,14 @@ class GameProvider extends ChangeNotifier {
             .where((e) => !incorrectEventIds.contains(e.id))
             .toList();
 
-        // Shuffle and take enough to reach required total count (or all available if less)
-        additionalEvents.shuffle();
+        // Use weighted selection to supplement
         final int needed = _totalCardsPerRound - sourceEvents.length;
-        final int available = additionalEvents.length;
-        final int toAdd = needed < available ? needed : available;
-        sourceEvents.addAll(additionalEvents.take(toAdd));
+        final List<Event> weightedAdditional = _weightedSelectEvents(
+          additionalEvents,
+          needed,
+          _currentTopic?.id,
+        );
+        sourceEvents.addAll(weightedAdditional);
       }
     } else {
       sourceEvents = _state.allEvents;
@@ -298,14 +375,16 @@ class GameProvider extends ChangeNotifier {
     }
     final List<Event> deduplicatedEvents = uniqueEvents.values.toList();
 
-    // Shuffle and select events (cardsPerRound to place + 1 pre-placed anchor)
-    // If we have fewer than required total, use what we have
-    deduplicatedEvents.shuffle();
+    // Use weighted selection to choose events for the round
     final int targetCount = _totalCardsPerRound;
     final int eventsToTake = deduplicatedEvents.length < targetCount
         ? deduplicatedEvents.length
         : targetCount;
-    final List<Event> roundEvents = deduplicatedEvents.take(eventsToTake).toList();
+    final List<Event> roundEvents = _weightedSelectEvents(
+      deduplicatedEvents,
+      eventsToTake,
+      _currentTopic?.id,
+    );
 
     // Pre-place the first event (this is the anchor, not counted in progress)
     final Event firstEvent = roundEvents[0].copyWith(
