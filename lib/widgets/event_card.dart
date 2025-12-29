@@ -116,8 +116,6 @@ class EventCard extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: isPlaced ? Colors.white : Colors.black87,
                       ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 6),
                     Text(
@@ -129,8 +127,6 @@ class EventCard extends StatelessWidget {
                             ? Colors.white.withValues(alpha: 0.9)
                             : Colors.black87,
                       ),
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
@@ -180,7 +176,7 @@ class EventCard extends StatelessWidget {
                   scale: 1.05,
                   child: MouseRegion(
                     cursor: SystemMouseCursors.grabbing,
-                    child: cardContent,
+                    child: _buildFeedbackCard(context, colorScheme),
                   ),
                 ),
               ),
@@ -234,5 +230,70 @@ class EventCard extends StatelessWidget {
       return colorScheme.error;
     }
     return colorScheme.surfaceContainerHighest;
+  }
+
+  /// Builds the feedback card (dragged card) with text limits
+  Widget _buildFeedbackCard(BuildContext context, ColorScheme colorScheme) {
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 600, minWidth: 200),
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(color: _getBorderColor(colorScheme), width: 2),
+        ),
+        color: _getBackgroundColor(),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Stack(
+            children: [
+              // Content with padding on the right to avoid overlap
+              Padding(
+                padding: const EdgeInsets.only(right: 90),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      event.title,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: isPlaced ? Colors.white : Colors.black87,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      event.description,
+                      style: TextStyle(
+                        fontSize: 13,
+                        height: 1.4,
+                        color: isPlaced
+                            ? Colors.white.withValues(alpha: 0.9)
+                            : Colors.black87,
+                      ),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              // Drag handle indicator (bottom right)
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: Icon(
+                  Icons.drag_handle,
+                  color: colorScheme.onSurface.withValues(alpha: 0.4),
+                  size: 20,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
