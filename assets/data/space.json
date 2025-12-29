@@ -1,0 +1,240 @@
+{
+  "category": "Space Exploration",
+  "events": [
+    {
+      "year": 1543,
+      "title": "Copernicus Publishes Heliocentric Theory",
+      "description": "Nicolaus Copernicus publishes 'On the Revolutions of the Heavenly Spheres', proposing that Earth and other planets orbit the Sun, revolutionizing our understanding of the cosmos."
+    },
+    {
+      "year": 1609,
+      "title": "Kepler Publishes Laws of Planetary Motion",
+      "description": "Johannes Kepler publishes his first two laws of planetary motion, describing how planets move in elliptical orbits around the Sun."
+    },
+    {
+      "year": 1610,
+      "title": "Galileo Discovers Jupiter's Moons",
+      "description": "Galileo Galilei uses a telescope to discover the four largest moons of Jupiter, providing evidence that not all celestial bodies orbit Earth."
+    },
+    {
+      "year": 1687,
+      "title": "Newton Publishes Principia",
+      "description": "Isaac Newton publishes 'Philosophiæ Naturalis Principia Mathematica', establishing the laws of motion and universal gravitation that govern planetary motion."
+    },
+    {
+      "year": 1903,
+      "title": "Tsiolkovsky Publishes Rocket Equation",
+      "description": "Konstantin Tsiolkovsky publishes 'Exploration of Cosmic Space by Means of Reaction Devices', establishing the theoretical foundation for spaceflight with the rocket equation."
+    },
+    {
+      "year": 1926,
+      "title": "Goddard Launches First Liquid-Fuel Rocket",
+      "description": "Robert Goddard successfully launches the world's first liquid-fueled rocket in Massachusetts, demonstrating the practical feasibility of rocket propulsion."
+    },
+    {
+      "year": 1944,
+      "title": "V-2 Rocket Reaches Space",
+      "description": "A German V-2 (A-4) rocket, designated MW 18014, becomes the first human-made object to cross the Kármán line into outer space during a vertical test launch, reaching an altitude of 176 km."
+    },
+    {
+      "year": 1957,
+      "title": "Sputnik 1 Launched",
+      "description": "The Soviet Union launches Sputnik 1, the first artificial satellite, marking the beginning of the space age and initiating the Space Race."
+    },
+    {
+      "year": 1958,
+      "title": "Explorer 1 Discovers Van Allen Belts",
+      "description": "The United States launches Explorer 1, its first satellite, which discovers the Van Allen radiation belts surrounding Earth."
+    },
+    {
+      "year": 1959,
+      "title": "Luna 3 Photographs Moon's Far Side",
+      "description": "The Soviet Union's Luna 3 spacecraft captures the first images of the Moon's far side, revealing previously unseen terrain."
+    },
+    {
+      "year": 1961,
+      "title": "First Human in Space",
+      "description": "Yuri Gagarin becomes the first human to orbit Earth aboard Vostok 1, completing one orbit in 108 minutes."
+    },
+    {
+      "year": 1962,
+      "title": "First American to Orbit Earth",
+      "description": "John Glenn becomes the first American to orbit Earth aboard Friendship 7, completing three orbits."
+    },
+    {
+      "year": 1963,
+      "title": "First Woman in Space",
+      "description": "Valentina Tereshkova becomes the first woman in space, orbiting Earth 48 times aboard Vostok 6."
+    },
+    {
+      "year": 1965,
+      "title": "First Spacewalk",
+      "description": "Alexei Leonov performs the first spacewalk during the Voskhod 2 mission, spending 12 minutes outside the spacecraft."
+    },
+    {
+      "year": 1967,
+      "title": "Apollo 1 Fire",
+      "description": "A cabin fire during a launch rehearsal test kills all three Apollo 1 astronauts (Gus Grissom, Ed White, and Roger Chaffee), leading to major safety improvements in spacecraft design."
+    },
+    {
+      "year": 1968,
+      "title": "Apollo 8 Orbits the Moon",
+      "description": "NASA's Apollo 8 becomes the first crewed spacecraft to orbit the Moon, with astronauts Frank Borman, James Lovell, and William Anders becoming the first humans to see Earth from lunar orbit."
+    },
+    {
+      "year": 1969,
+      "title": "First Moon Landing",
+      "description": "Neil Armstrong and Buzz Aldrin become the first humans to walk on the Moon during NASA's Apollo 11 mission."
+    },
+    {
+      "year": 1970,
+      "title": "Venera 7 Lands on Venus",
+      "description": "The Soviet Union's Venera 7 achieves the first soft landing on another planet (Venus) and transmits data from its surface."
+    },
+    {
+      "year": 1971,
+      "title": "First Space Station",
+      "description": "The Soviet Union launches Salyut 1, the world's first space station, beginning the era of long-duration space habitation."
+    },
+    {
+      "year": 1976,
+      "title": "First Mars Landing",
+      "description": "NASA's Viking 1 successfully lands on Mars, becoming the first spacecraft to operate on the Red Planet and send back images."
+    },
+    {
+      "year": 1977,
+      "title": "Voyager Missions Launch",
+      "description": "NASA launches Voyager 1 and Voyager 2 to explore the outer planets, with both eventually entering interstellar space."
+    },
+    {
+      "year": 1981,
+      "title": "First Space Shuttle Flight",
+      "description": "NASA's Space Shuttle Columbia launches on STS-1, marking the first flight of a reusable spacecraft."
+    },
+    {
+      "year": 1986,
+      "title": "Mir Space Station Launched",
+      "description": "The Soviet Union launches Mir, the first modular space station, enabling long-term human presence in space until 2001."
+    },
+    {
+      "year": 1986,
+      "title": "Challenger Disaster",
+      "description": "Space Shuttle Challenger explodes 73 seconds after launch, killing all seven crew members, including teacher Christa McAuliffe, and halting the shuttle program for over two years."
+    },
+    {
+      "year": 1990,
+      "title": "Hubble Space Telescope Launched",
+      "description": "The Hubble Space Telescope is deployed, revolutionizing astronomy with unprecedented views of distant galaxies and nebulae."
+    },
+    {
+      "year": 1997,
+      "title": "Cassini-Huygens Launches",
+      "description": "NASA launches the Cassini-Huygens mission to study Saturn and its moon Titan, providing detailed data about the ringed planet."
+    },
+    {
+      "year": 2000,
+      "title": "ISS Becomes Continuously Inhabited",
+      "description": "The first long-term crew arrives at the International Space Station, beginning continuous human presence in space."
+    },
+    {
+      "year": 2003,
+      "title": "China's First Human Spaceflight",
+      "description": "China launches Yang Liwei aboard Shenzhou 5, becoming the third country to independently send a human into space."
+    },
+    {
+      "year": 2003,
+      "title": "Columbia Disaster",
+      "description": "Space Shuttle Columbia breaks apart during re-entry, killing all seven astronauts and leading to the retirement of the Space Shuttle program."
+    },
+    {
+      "year": 2004,
+      "title": "Spirit and Opportunity Land on Mars",
+      "description": "NASA's twin rovers Spirit and Opportunity land on Mars, beginning extended missions to explore the planet's geology and search for signs of water."
+    },
+    {
+      "year": 2007,
+      "title": "China's First Lunar Mission",
+      "description": "China launches Chang'e 1, its first lunar orbiter, beginning China's ambitious Moon exploration program."
+    },
+    {
+      "year": 2008,
+      "title": "SpaceX's First Orbital Success",
+      "description": "SpaceX's Falcon 1 becomes the first privately developed liquid-fueled rocket to reach Earth orbit, revolutionizing commercial spaceflight."
+    },
+    {
+      "year": 2012,
+      "title": "SpaceX Dragon Docks with ISS",
+      "description": "SpaceX's Dragon becomes the first commercial spacecraft to dock with the International Space Station, marking a new era of private spaceflight."
+    },
+    {
+      "year": 2013,
+      "title": "China's First Moon Landing",
+      "description": "China's Chang'e 3 successfully lands on the Moon, deploying the Yutu rover and making China the third country to achieve a soft lunar landing."
+    },
+    {
+      "year": 2014,
+      "title": "India's Mars Orbiter Mission",
+      "description": "India's ISRO successfully places Mangalyaan into Mars orbit on its first attempt, making India the first Asian nation to reach Mars orbit and the first country to succeed on its maiden interplanetary mission."
+    },
+    {
+      "year": 2014,
+      "title": "Rosetta's Comet Landing",
+      "description": "ESA's Rosetta mission orbits comet 67P, with the Philae lander achieving the first soft landing on a comet."
+    },
+    {
+      "year": 2015,
+      "title": "New Horizons Pluto Flyby",
+      "description": "NASA's New Horizons spacecraft performs the first flyby of Pluto, revealing its complex geology and atmosphere."
+    },
+    {
+      "year": 2015,
+      "title": "SpaceX's First Rocket Landing",
+      "description": "SpaceX achieves the first successful vertical landing of an orbital-class rocket (Falcon 9), demonstrating reusable rocket technology and dramatically reducing launch costs."
+    },
+    {
+      "year": 2019,
+      "title": "China's Far Side Moon Landing",
+      "description": "China's Chang'e-4 achieves the first soft landing on the Moon's far side, deploying the Yutu-2 rover."
+    },
+    {
+      "year": 2020,
+      "title": "SpaceX Returns Human Spaceflight to US",
+      "description": "SpaceX's Crew Dragon successfully transports NASA astronauts to the ISS, marking the first crewed orbital launch from U.S. soil since 2011 and the first by a private company."
+    },
+    {
+      "year": 2021,
+      "title": "First Powered Flight on Mars",
+      "description": "NASA's Ingenuity helicopter achieves the first controlled, powered flight on another planet during the Perseverance rover mission."
+    },
+    {
+      "year": 2021,
+      "title": "James Webb Space Telescope Launched",
+      "description": "The James Webb Space Telescope is successfully launched, designed to study the universe's earliest galaxies and stars with unprecedented infrared capabilities."
+    },
+    {
+      "year": 2021,
+      "title": "China's Tiangong Space Station Operational",
+      "description": "China launches the core module of its Tiangong space station, establishing an independent permanent presence in orbit."
+    },
+    {
+      "year": 2022,
+      "title": "Artemis I Mission",
+      "description": "NASA's Artemis I mission successfully launches, testing the Space Launch System and Orion spacecraft for future Moon missions."
+    },
+    {
+      "year": 2023,
+      "title": "India's Chandrayaan-3 Moon Landing",
+      "description": "India's Chandrayaan-3 successfully lands near the Moon's south pole, making India the fourth country to achieve a soft lunar landing and the first to land in this region."
+    },
+    {
+      "year": 2024,
+      "title": "SpaceX Starship Booster Tower Catch",
+      "description": "SpaceX achieves the first successful tower catch of a Super Heavy booster using mechanical arms during Starship's fifth integrated flight test, advancing reusable rocket technology."
+    },
+    {
+      "year": 2025,
+      "title": "China Sets Launch Record and Advances Reusability",
+      "description": "China conducts over 80 orbital launches in a single year, setting a national record, while testing reusable rocket technology with maiden flights of Zhuque-3 and Long March 12A."
+    }
+  ]
+}
