@@ -425,20 +425,43 @@ class GameProvider extends ChangeNotifier {
     final Event eventToPlace = _state.unplacedEvent!;
     final int correctYear = eventToPlace.year;
 
-    // Determine correct position based on year
-    int correctIndex = _state.placedEvents.length;
+    // Determine correct position range based on year
+    // If events have the same year, any position within that year group is correct
+    int correctIndexStart = _state.placedEvents.length;
+    int correctIndexEnd = _state.placedEvents.length;
+    
+    // Find positions of events with the same year
+    final List<int> sameYearIndices = [];
     for (int i = 0; i < _state.placedEvents.length; i++) {
-      if (correctYear < _state.placedEvents[i].year) {
-        correctIndex = i;
-        break;
+      if (_state.placedEvents[i].year == correctYear) {
+        sameYearIndices.add(i);
+      }
+    }
+    
+    if (sameYearIndices.isNotEmpty) {
+      // If there are same-year events, can be placed anywhere in that range
+      correctIndexStart = sameYearIndices.first;
+      correctIndexEnd = sameYearIndices.last + 1; // Can be placed after the last same-year event
+    } else {
+      // No same-year events yet, find where it should go based on year ordering
+      for (int i = 0; i < _state.placedEvents.length; i++) {
+        if (correctYear < _state.placedEvents[i].year) {
+          correctIndexStart = i;
+          correctIndexEnd = i;
+          break;
+        }
+      }
+      // If no later year found, it goes at the end
+      if (correctIndexStart == _state.placedEvents.length) {
+        correctIndexEnd = _state.placedEvents.length;
       }
     }
 
     // Convert position to index
     int placedIndex = position ?? _state.placedEvents.length;
 
-    // Check if placement is correct
-    final bool isCorrect = placedIndex == correctIndex;
+    // Check if placement is correct (within the valid range for this year)
+    final bool isCorrect = placedIndex >= correctIndexStart && placedIndex <= correctIndexEnd;
 
     // Find the index of this event in the placeable events (excluding the anchor)
     // roundEvents[0] is the anchor, so placeable events start at index 1
@@ -468,7 +491,7 @@ class GameProvider extends ChangeNotifier {
         isIncorrect: false,
       );
 
-      newPlacedEvents.insert(correctIndex, placedEvent);
+      newPlacedEvents.insert(placedIndex, placedEvent);
 
       // Update progress for this placed card (eventIndex is the index in placeable events)
       if (eventIndex != -1 && eventIndex < newProgress.length) {
