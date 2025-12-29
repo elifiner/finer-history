@@ -231,17 +231,23 @@ class GameProvider extends ChangeNotifier {
     // roundProgress tracks the placeable events (excluding the anchor)
     // roundProgress[i] corresponds to roundEvents[i+1] (since roundEvents[0] is the anchor)
     final List<Event> incorrectEvents = [];
+    final Set<String> seenEventIds = {}; // Track seen event IDs to prevent duplicates
+    
     for (int i = 0; i < _state.roundProgress.length; i++) {
       if (_state.roundProgress[i] == RoundProgressStatus.incorrect) {
         // Find the corresponding event in roundEvents (index i+1 because 0 is anchor)
         final int roundEventIndex = i + 1;
         if (roundEventIndex < _state.roundEvents.length) {
           final Event incorrectEvent = _state.roundEvents[roundEventIndex];
-          final Event originalEvent = _state.allEvents.firstWhere(
-            (e) => e.id == incorrectEvent.id,
-            orElse: () => incorrectEvent,
-          );
-          incorrectEvents.add(originalEvent);
+          // Only add if we haven't seen this event ID before
+          if (!seenEventIds.contains(incorrectEvent.id)) {
+            final Event originalEvent = _state.allEvents.firstWhere(
+              (e) => e.id == incorrectEvent.id,
+              orElse: () => incorrectEvent,
+            );
+            incorrectEvents.add(originalEvent);
+            seenEventIds.add(incorrectEvent.id);
+          }
         }
       }
     }
@@ -283,14 +289,23 @@ class GameProvider extends ChangeNotifier {
       sourceEvents = _state.allEvents;
     }
 
+    // Deduplicate sourceEvents by event ID to prevent duplicates in rounds
+    final Map<String, Event> uniqueEvents = {};
+    for (final event in sourceEvents) {
+      if (!uniqueEvents.containsKey(event.id)) {
+        uniqueEvents[event.id] = event;
+      }
+    }
+    final List<Event> deduplicatedEvents = uniqueEvents.values.toList();
+
     // Shuffle and select events (cardsPerRound to place + 1 pre-placed anchor)
     // If we have fewer than required total, use what we have
-    sourceEvents.shuffle();
+    deduplicatedEvents.shuffle();
     final int targetCount = _totalCardsPerRound;
-    final int eventsToTake = sourceEvents.length < targetCount
-        ? sourceEvents.length
+    final int eventsToTake = deduplicatedEvents.length < targetCount
+        ? deduplicatedEvents.length
         : targetCount;
-    final List<Event> roundEvents = sourceEvents.take(eventsToTake).toList();
+    final List<Event> roundEvents = deduplicatedEvents.take(eventsToTake).toList();
 
     // Pre-place the first event (this is the anchor, not counted in progress)
     final Event firstEvent = roundEvents[0].copyWith(
