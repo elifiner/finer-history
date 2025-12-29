@@ -31,110 +31,123 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
-    Widget cardContent = Card(
-      elevation: isPreview ? 4 : 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-        side: BorderSide(
-          color: _getBorderColor(colorScheme),
-          width: isPlaced ? 3 : 2,
+
+    Widget cardContent = ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 600, minWidth: 200),
+      child: Card(
+        elevation: isPreview ? 4 : 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(
+            color: _getBorderColor(colorScheme),
+            width: isPlaced ? 3 : 2,
+          ),
         ),
-      ),
-      color: _getBackgroundColor(),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Stack(
-          children: [
-            // Year badge (for placed cards) or Place button (for preview cards)
-            // Both positioned at the same location
-            if (isPlaced && (isCorrect || isIncorrect))
-              Positioned(
-                top: 0,
-                right: 0,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: _getBadgeColor(colorScheme),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Text(
-                    YearFormatter.formatCompact(event.year),
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ),
-            if (!isPlaced && isPreview && onPlace != null)
-              Positioned(
-                top: 0,
-                right: 0,
-                child: GestureDetector(
-                  onTap: () {
-                    HapticFeedback.lightImpact();
-                    onPlace?.call();
-                  },
+        color: _getBackgroundColor(),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Stack(
+            children: [
+              // Year badge (for placed cards) or Place button (for preview cards)
+              // Both positioned at the same location
+              if (isPlaced && (isCorrect || isIncorrect))
+                Positioned(
+                  top: 0,
+                  right: 0,
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 6,
+                      horizontal: 8,
+                      vertical: 4,
                     ),
-                  decoration: BoxDecoration(
-                    color: colorScheme.primary,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                    child: const Text(
-                      'Place here',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
+                    decoration: BoxDecoration(
+                      color: _getBadgeColor(colorScheme),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      YearFormatter.formatCompact(event.year),
+                      style: const TextStyle(
                         color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
                       ),
                     ),
                   ),
                 ),
-              ),
-            // Content with padding on the right to avoid overlap with button/year
-            Padding(
-              padding: const EdgeInsets.only(right: 90),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    event.title,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: isPlaced ? Colors.white : Colors.black87,
+              if (!isPlaced && isPreview && onPlace != null)
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: GestureDetector(
+                    onTap: () {
+                      HapticFeedback.lightImpact();
+                      onPlace?.call();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: colorScheme.primary,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: const Text(
+                        'Place here',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 6),
-                  Text(
-                    event.description,
-                    style: TextStyle(
-                      fontSize: 13,
-                      height: 1.4,
-                      color: isPlaced ? Colors.white.withValues(alpha: 0.9) : Colors.black87,
+                ),
+              // Content with padding on the right to avoid overlap with button/year
+              Padding(
+                padding: const EdgeInsets.only(right: 90),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      event.title,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: isPlaced ? Colors.white : Colors.black87,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                ],
-              ),
-            ),
-            // Drag handle indicator (bottom right) for draggable cards
-            if (!isPlaced)
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: Icon(
-                  Icons.drag_handle,
-                  color: colorScheme.onSurface.withValues(alpha: 0.4),
-                  size: 20,
+                    const SizedBox(height: 6),
+                    Text(
+                      event.description,
+                      style: TextStyle(
+                        fontSize: 13,
+                        height: 1.4,
+                        color: isPlaced
+                            ? Colors.white.withValues(alpha: 0.9)
+                            : Colors.black87,
+                      ),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
               ),
-          ],
+              // Drag handle indicator (bottom right) for draggable cards
+              if (!isPlaced)
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Icon(
+                    Icons.drag_handle,
+                    color: colorScheme.onSurface.withValues(alpha: 0.4),
+                    size: 20,
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
@@ -149,34 +162,43 @@ class EventCard extends StatelessWidget {
 
     // Make all unplaced cards draggable (including preview cards)
     if (!isPlaced) {
-      return Draggable<Event>(
-        data: event,
-        feedback: Material(
-          elevation: 8,
-          borderRadius: BorderRadius.circular(8),
-          child: Transform.scale(
-            scale: 1.05,
+      return LayoutBuilder(
+        builder: (context, constraints) {
+          // Get the actual width constraint from parent
+          final double cardWidth = constraints.maxWidth.isFinite
+              ? constraints.maxWidth
+              : 600;
+
+          return Draggable<Event>(
+            data: event,
+            feedback: SizedBox(
+              width: cardWidth,
+              child: Material(
+                elevation: 8,
+                borderRadius: BorderRadius.circular(8),
+                child: Transform.scale(
+                  scale: 1.05,
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.grabbing,
+                    child: cardContent,
+                  ),
+                ),
+              ),
+            ),
+            childWhenDragging: Opacity(opacity: 0.5, child: cardContent),
+            onDragStarted: () {
+              HapticFeedback.mediumImpact();
+              onDragStart?.call();
+            },
+            onDragEnd: (_) {
+              onDragEnd?.call();
+            },
             child: MouseRegion(
-              cursor: SystemMouseCursors.grabbing,
+              cursor: SystemMouseCursors.grab,
               child: cardContent,
             ),
-          ),
-        ),
-        childWhenDragging: Opacity(
-          opacity: 0.5,
-          child: cardContent,
-        ),
-        onDragStarted: () {
-          HapticFeedback.mediumImpact();
-          onDragStart?.call();
+          );
         },
-        onDragEnd: (_) {
-          onDragEnd?.call();
-        },
-        child: MouseRegion(
-          cursor: SystemMouseCursors.grab,
-          child: cardContent,
-        ),
       );
     }
 
@@ -214,4 +236,3 @@ class EventCard extends StatelessWidget {
     return colorScheme.surfaceContainerHighest;
   }
 }
-
